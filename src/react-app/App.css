@@ -1,13 +1,8 @@
 /* =========================================================
-   App.css — Property Portfolio (Final Refined Luxury)
+   Property Portfolio — Final Refined Luxury
    ========================================================= */
 
-/* Fonts */
-@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800&family=Cormorant+Garamond:wght@400;500;600;700&display=swap");
-
-/* ================================
-   THEME TOKENS
-================================ */
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Cormorant+Garamond:wght@400;600&display=swap");
 
 :root {
   --font-serif: "Playfair Display", serif;
@@ -24,14 +19,10 @@
   --accent: #6d5dfc;
   --accent-soft: rgba(109, 93, 252, 0.12);
 
-  --radius-sm: 10px;
   --radius-md: 14px;
   --radius-lg: 20px;
 
-  --shadow-sm: 0 6px 18px rgba(0, 0, 0, 0.08);
   --shadow-md: 0 18px 44px rgba(0, 0, 0, 0.14);
-
-  color-scheme: light;
 }
 
 html[data-theme="dark"] {
@@ -42,23 +33,6 @@ html[data-theme="dark"] {
   --text-primary: #f5f3f0;
   --text-secondary: #a89f98;
   --header-color: #e9d8a6;
-
-  --accent-soft: rgba(109, 93, 252, 0.25);
-
-  --shadow-sm: 0 8px 22px rgba(0, 0, 0, 0.5);
-  --shadow-md: 0 20px 48px rgba(0, 0, 0, 0.6);
-
-  color-scheme: dark;
-}
-
-/* ================================
-   BASE + LUXURY BACKGROUND
-================================ */
-
-html,
-body,
-#root {
-  height: 100%;
 }
 
 body {
@@ -66,96 +40,35 @@ body {
   font-family: var(--font-body);
   background: var(--bg-page);
   color: var(--text-primary);
-  line-height: 1.65;
-  font-size: 17px;
-  position: relative;
 }
 
-/* Purple luxury bubbles */
 body::before {
   content: "";
   position: fixed;
   inset: 0;
   z-index: -1;
-  pointer-events: none;
   background:
-    radial-gradient(600px 600px at 12% 18%, rgba(109,93,252,0.08), transparent 65%),
-    radial-gradient(520px 520px at 88% 22%, rgba(124,58,237,0.06), transparent 65%),
-    radial-gradient(640px 640px at 50% 90%, rgba(236,72,153,0.06), transparent 70%);
+    radial-gradient(600px 600px at 15% 20%, rgba(109,93,252,0.1), transparent 65%),
+    radial-gradient(600px 600px at 85% 30%, rgba(236,72,153,0.08), transparent 65%);
 }
 
-html[data-theme="dark"] body::before {
-  background:
-    radial-gradient(600px 600px at 12% 18%, rgba(109,93,252,0.22), transparent 65%),
-    radial-gradient(520px 520px at 88% 22%, rgba(99,102,241,0.18), transparent 65%),
-    radial-gradient(640px 640px at 50% 90%, rgba(244,114,182,0.16), transparent 70%);
-}
-
-/* ================================
-   PAGE LAYOUT
-================================ */
-
+/* Layout */
 .pp-page {
   max-width: 1200px;
-  margin: 0 auto;
+  margin: auto;
   padding: 28px 20px 60px;
 }
 
 .pp-top {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
-  gap: 24px;
   margin-bottom: 40px;
 }
 
 .pp-title {
   font-family: var(--font-serif);
   font-size: 3rem;
-  font-weight: 800;
-  color: var(--header-color);
-  margin-bottom: 6px;
 }
-
-.pp-subtitle {
-  color: var(--text-secondary);
-  font-size: 1.15rem;
-}
-
-.pp-top-right {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-/* ================================
-   BUTTONS
-================================ */
-
-.pp-btn {
-  border-radius: 999px;
-  padding: 9px 16px;
-  font-family: var(--font-body);
-  font-weight: 700;
-  background: var(--accent-soft);
-  border: 1px solid transparent;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.pp-btn:hover {
-  box-shadow: var(--shadow-sm);
-  transform: translateY(-1px);
-}
-
-.pp-btn-primary {
-  background: linear-gradient(135deg, #6d5dfc, #8b5cf6);
-  color: #fff;
-}
-
-/* ================================
-   GRID + CARDS
-================================ */
 
 .pp-grid {
   display: grid;
@@ -168,23 +81,12 @@ html[data-theme="dark"] body::before {
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-md);
   overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
-.pp-card:hover {
-  transform: translateY(-4px);
-}
-
-/* ================================
-   HERO
-================================ */
-
+/* Hero */
 .pp-hero {
   position: relative;
   height: 220px;
-  overflow: hidden;
 }
 
 .pp-hero img {
@@ -193,28 +95,16 @@ html[data-theme="dark"] body::before {
   object-fit: cover;
 }
 
-.pp-hero::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to bottom, rgba(0,0,0,0.05), rgba(0,0,0,0.45));
-}
-
-.pp-hero-actions {
+.pp-like {
   position: absolute;
   top: 12px;
   right: 12px;
-  z-index: 1;
-}
-
-.pp-like {
-  background: rgba(0,0,0,0.55);
+  background: rgba(0,0,0,0.6);
   color: white;
   border-radius: 50%;
   width: 36px;
   height: 36px;
   border: none;
-  cursor: pointer;
   font-size: 18px;
 }
 
@@ -222,12 +112,9 @@ html[data-theme="dark"] body::before {
   background: linear-gradient(135deg, #ec4899, #fb7185);
 }
 
-/* ================================
-   CARD BODY
-================================ */
-
+/* Card */
 .pp-card-body {
-  padding: 18px 20px 22px;
+  padding: 18px;
   display: flex;
   flex-direction: column;
   gap: 14px;
@@ -235,20 +122,20 @@ html[data-theme="dark"] body::before {
 
 .pp-card-title {
   font-family: var(--font-serif);
-  font-size: 1.45rem;
-  font-weight: 700;
+  font-size: 1.4rem;
 }
 
-.pp-meta {
-  color: var(--text-secondary);
-  font-size: 0.95rem;
-  font-weight: 600;
+.pp-title-link {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(109,93,252,0.3);
 }
 
-/* ================================
-   STATS
-================================ */
+.pp-title-link:hover {
+  color: var(--accent);
+}
 
+/* Stats */
 .pp-stats {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -257,120 +144,48 @@ html[data-theme="dark"] body::before {
 
 .pp-stat {
   background: var(--bg-soft);
+  padding: 10px;
   border-radius: var(--radius-md);
-  padding: 10px 12px;
 }
 
 .pp-stat-label {
   font-size: 0.7rem;
-  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--text-secondary);
-  margin-bottom: 4px;
-  font-weight: 700;
 }
 
 .pp-stat-value {
   font-family: var(--font-serif);
   font-weight: 800;
-  font-size: 1.15rem;
 }
 
-/* ================================
-   ROI
-================================ */
+/* Stars */
+.pp-stars {
+  display: flex;
+  gap: 6px;
+}
 
-.pp-roi {
-  background: linear-gradient(135deg, #fff7fb, #fdf2f8);
-  border-left: 3px solid rgba(236,72,153,0.35);
-  padding: 12px 14px;
+.pp-star {
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  font-size: 18px;
   border-radius: 8px;
-  font-size: 0.95rem;
+  background: var(--bg-soft);
+  color: #9ca3af;
+  border: 1px solid rgba(0,0,0,0.12);
+  cursor: pointer;
 }
 
-/* ================================
-   ACTIONS
-================================ */
+.pp-star.is-on {
+  color: #f59e0b;
+  background: #fff7ed;
+  border-color: #fed7aa;
+}
 
 .pp-actions {
   display: flex;
   gap: 10px;
   margin-top: auto;
-}
-
-/* ================================
-   RESPONSIVE
-================================ */
-
-@media (max-width: 768px) {
-  .pp-title {
-    font-size: 2.4rem;
-  }
-
-  .pp-stats {
-    grid-template-columns: 1fr;
-  }
-
-  .pp-top {
-    flex-direction: column;
-  }
-}
-/* ================================
-   STAR RATING — FINAL FIX
-================================ */
-
-.pp-stars {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  margin-top: 8px;
-}
-
-.pp-star {
-  all: unset;
-  width: 34px;
-  height: 34px;
-  display: grid;
-  place-items: center;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 18px;
-  font-weight: 900;
-  line-height: 1;
-  color: rgba(107, 114, 128, 0.7); /* gray-500 */
-  background: var(--bg-soft);
-  border: 1px solid rgba(0, 0, 0, 0.12);
-  transition: transform 120ms ease, color 120ms ease, background 120ms ease;
-}
-
-.pp-star:hover {
-  transform: translateY(-1px);
-}
-
-.pp-star.is-on {
-  color: #f59e0b; /* amber-500 */
-  background: #fff7ed;
-  border-color: #fed7aa;
-}
-
-html[data-theme="dark"] .pp-star {
-  background: rgba(255, 255, 255, 0.06);
-  border-color: rgba(255, 255, 255, 0.18);
-  color: rgba(226, 232, 240, 0.5);
-}
-
-html[data-theme="dark"] .pp-star.is-on {
-  color: #fbbf24;
-  background: rgba(245, 158, 11, 0.18);
-  border-color: rgba(254, 215, 170, 0.35);
-}
-
-.pp-star-clear {
-  margin-left: 10px;
-  background: transparent;
-  border: none;
-  font-size: 12px;
-  font-weight: 700;
-  color: #e11d48;
-  cursor: pointer;
 }
