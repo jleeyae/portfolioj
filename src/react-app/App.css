@@ -1,7 +1,9 @@
-/* Luxurious fonts */
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Cormorant+Garamond:wght@300;400;500&display=swap');
-  /* Import luxury fonts */
+/* Import luxury fonts once */
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Cormorant+Garamond:wght@300;400;500;600&display=swap');
+
+/* ============================================
+   CSS VARIABLES - LIGHT & DARK THEMES
+   ============================================ */
 :root {
   --bg: #f6f8ff;
   --panel: #ffffff;
@@ -15,9 +17,14 @@
   --greenBg: #eaf9ef;
   --greenBorder: #16a34a;
 
-  /* stars */
+  /* Stars */
   --starFilled: #f5b301;
   --starEmpty: rgba(15, 23, 42, 0.35);
+  
+  /* Luxury colors - LIGHT MODE */
+  --headerColor: #1B4332; /* Deep forest green */
+  --regionColor: #1F2937; /* Dark charcoal */
+  --bodyText: #374151; /* Medium gray */
 }
 
 :root[data-theme="dark"] {
@@ -33,206 +40,153 @@
   --greenBg: rgba(22, 163, 74, 0.18);
   --greenBorder: #22c55e;
 
+  /* Stars */
+  --starFilled: #f5b301;
+  --starEmpty: rgba(226, 232, 240, 0.35);
+  
+  /* Luxury colors - DARK MODE */
+  --headerColor: #D4AF37; /* Luxurious gold */
+  --regionColor: #FFFFFF; /* White */
+  --bodyText: #E0E0E0; /* Soft white */
+}
 
-/* Main header - distinctive luxury color */
-.header, .main-header, h1 {
+/* ============================================
+   TYPOGRAPHY - LUXURY SIZING
+   ============================================ */
+
+/* Main header "Property Portfolio" */
+.pp-title {
   font-family: 'Playfair Display', serif;
   font-size: 3.2rem;
   font-weight: 700;
   letter-spacing: 1px;
-  color: #1B4332; /* Deep forest green */
-  /* Alternative colors:
-     #2C3E50 - Sophisticated navy
-     #6B2737 - Rich burgundy
-     #3D2817 - Warm espresso brown
-     #1A4D2E - Hunter green
-  */
+  color: var(--headerColor);
+  line-height: 1.2;
+  margin: 0;
 }
 
 /* Header subtitle */
-.header-subtitle, .tagline {
+.pp-subtitle {
   font-family: 'Cormorant Garamond', serif;
   font-size: 1.4rem;
-  color: #6B7280; /* Muted gray */
+  color: var(--muted);
   letter-spacing: 0.5px;
   font-weight: 400;
+  margin: 6px 0 0 0;
 }
 
-/* Region titles - bigger, stays dark */
-.region-title, h2 {
+/* Region titles like "Hill Country" */
+.pp-region-title {
   font-family: 'Playfair Display', serif;
   font-size: 3rem;
   font-weight: 600;
   letter-spacing: 0.8px;
-  color: #1F2937; /* Dark charcoal for body sections */
-  margin-bottom: 35px;
+  color: var(--regionColor);
+  margin: 0;
 }
 
-/* Property addresses - larger and readable */
-.property-address, .property-card h3 {
+/* Property addresses */
+.pp-card-title {
   font-family: 'Playfair Display', serif;
   font-size: 1.6rem;
-  font-weight: 500;
-  color: #111827;
+  font-weight: 600;
   letter-spacing: 0.3px;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 
 /* Property details (beds, baths, sqft) */
-.property-specs, .property-details {
+.pp-meta {
   font-family: 'Cormorant Garamond', serif;
   font-size: 1.3rem;
-  color: #4B5563;
+  color: var(--muted);
   letter-spacing: 0.3px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
 }
 
-/* Property titles like "Lake & Wine Night" */
-.property-name, .listing-title {
+/* Property vibe titles like "Lake & Wine Night" */
+.pp-vibe-title {
   font-family: 'Playfair Display', serif;
   font-size: 1.8rem;
-  font-weight: 600;
-  color: #111827;
+  font-weight: 700;
+  margin-bottom: 6px;
 }
 
 /* Property descriptions */
-.property-description, .description-text {
+.pp-vibe-blurb {
   font-family: 'Cormorant Garamond', serif;
   font-size: 1.25rem;
   line-height: 1.7;
-  color: #374151;
+  color: var(--muted);
 }
 
-/* Price labels and values */
-.price-label {
-  font-size: 1.1rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  color: #6B7280;
-}
-
-.price-value {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #111827;
-}
-
-/* Body text - bigger default */
-body, p {
+/* ROI notes */
+.pp-roi {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 1.2rem;
-  line-height: 1.7;
-  color: #374151;
-}
-
-/* ROI Notes box text */
-.roi-note, .note-text {
   font-size: 1.15rem;
   line-height: 1.6;
-}
-/* Main header - distinctive color */
-.header, .main-header, h1.property-portfolio-title {
-  font-family: 'Playfair Display', serif;
-  font-size: 3rem;
-  font-weight: 700;
-  letter-spacing: 1px;
-  color: #D4AF37; /* Luxurious gold */
-  /* Alternative colors:
-     #E8D7C3 - Champagne gold
-     #C9A961 - Muted gold
-     #8B7355 - Bronze
-     #B8860B - Dark goldenrod
-  */
+  margin-top: 12px;
+  padding: 12px 12px;
+  border-radius: 12px;
+  background: var(--greenBg);
+  border-left: 4px solid var(--greenBorder);
 }
 
-/* Header subtitle */
-.header-subtitle, .tagline {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.3rem;
-  color: #A0A0A0; /* Softer gray for subtitle */
-  letter-spacing: 0.5px;
+/* Price labels */
+.pp-stat-label {
+  font-size: 1.1rem;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  font-weight: 800;
 }
 
-/* Region titles - bigger and bold */
-.region-title, h2 {
-  font-family: 'Playfair Display', serif;
-  font-size: 2.8rem;
-  font-weight: 600;
-  letter-spacing: 1px;
-  color: #FFFFFF; /* Keep body text white */
-  margin-bottom: 30px;
-}
-
-/* Property addresses/titles - larger */
-.property-title, .property-card h3 {
-  font-family: 'Playfair Display', serif;
+/* Price values */
+.pp-stat-value {
+  margin-top: 6px;
   font-size: 1.5rem;
-  font-weight: 500;
-  color: #FFFFFF;
+  font-weight: 900;
 }
 
-/* Property details (beds, baths, sqft) */
-.property-details, .property-specs {
-  font-size: 1.2rem;
-  color: #CCCCCC;
-}
-
-/* Body text - bigger and readable */
-body, p, .description {
+/* Body text default */
+body {
   font-family: 'Cormorant Garamond', serif;
   font-size: 1.2rem;
   line-height: 1.7;
-  color: #E0E0E0; /* Slightly softer white for body */
+  color: var(--bodyText);
 }
 
-/* Price text - make it prominent */
-.price {
-  font-size: 1.4rem;
-  font-weight: 600;
-  color: #FFFFFF;
+/* Region count */
+.pp-region-count {
+  color: var(--muted);
+  font-size: 1.1rem;
 }
-  /* stars */
-  --starFilled: #f5b301;
-  --starEmpty: rgba(226, 232, 240, 0.35);
-}
-/* More spread out grid */
+
+/* ============================================
+   LAYOUT - MORE SPREAD OUT
+   ============================================ */
 .pp-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
   gap: 40px;
-  padding: 40px 60px; /* Add breathing room around the grid */
-  max-width: 1600px; /* Optional: limit max width for better proportions */
+  padding: 40px 60px;
+  max-width: 1600px;
   margin: 0 auto;
 }
 
-/* Region titles - make them elegant */
-.region-title, h1, h2 {
-  font-family: 'Playfair Display', serif;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  font-size: 2.5rem;
-}
-
-/* Property titles/addresses */
-.property-title, .property-card h3 {
-  font-family: 'Playfair Display', serif;
-  font-weight: 500;
-  letter-spacing: 0.3px;
-}
-
-/* Body text - refined and readable */
-body, .property-description, p {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.1rem;
-  line-height: 1.6;
-  letter-spacing: 0.3px;
-}
-
-/* Property cards - add more spacing */
-.property-card {
+.pp-card {
   padding: 24px;
-  margin-bottom: 20px;
+  overflow: hidden;
+  border-radius: 18px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
 }
+
+/* ============================================
+   BASE STYLES (UNCHANGED FROM ORIGINAL)
+   ============================================ */
 .pp-page {
   min-height: 100vh;
   background: var(--bg);
@@ -256,16 +210,6 @@ body, .property-description, p {
 .pp-top-left {
   min-width: 260px;
 }
-.pp-title {
-  font-size: 22px;
-  line-height: 1.2;
-  margin: 0;
-}
-.pp-subtitle {
-  margin: 6px 0 0 0;
-  color: var(--muted);
-  font-size: 13px;
-}
 
 .pp-top-right {
   display: flex;
@@ -279,10 +223,12 @@ body, .property-description, p {
   display: grid;
   gap: 6px;
 }
+
 .pp-label {
   font-size: 11px;
   color: var(--muted);
 }
+
 .pp-select {
   height: 38px;
   padding: 0 10px;
@@ -302,9 +248,11 @@ body, .property-description, p {
   cursor: pointer;
   font-weight: 600;
 }
+
 .pp-btn:hover {
   filter: brightness(0.98);
 }
+
 .pp-btn-primary {
   border-color: transparent;
   background: var(--primary);
@@ -338,34 +286,13 @@ body, .property-description, p {
   gap: 10px;
   margin: 14px 2px;
 }
-.pp-region-title {
-  margin: 0;
-  font-size: 18px;
-}
-.pp-region-count {
-  color: var(--muted);
-  font-size: 12px;
-}
-
-.pp-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
-  gap: 22px;
-}
-
-.pp-card {
-  overflow: hidden;
-  border-radius: 18px;
-  background: var(--panel);
-  border: 1px solid var(--border);
-  box-shadow: var(--shadow);
-}
 
 .pp-hero {
   position: relative;
   height: 190px;
   background: linear-gradient(120deg, #6d6efc, #7a4fb5);
 }
+
 .pp-hero img {
   width: 100%;
   height: 100%;
@@ -377,6 +304,7 @@ body, .property-description, p {
   position: absolute;
   top: 12px;
   right: 12px;
+  pointer-events: none;
 }
 
 .pp-like {
@@ -387,25 +315,11 @@ body, .property-description, p {
   background: rgba(255, 255, 255, 0.92);
   cursor: pointer;
   font-size: 18px;
+  pointer-events: auto;
 }
 
 .pp-card-body {
   padding: 18px 18px 16px 18px;
-}
-
-.pp-card-title {
-  font-size: 14.5px;
-  font-weight: 800;
-  margin-bottom: 8px;
-}
-
-.pp-meta {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-  color: var(--muted);
-  font-size: 12px;
-  margin-bottom: 12px;
 }
 
 .pp-stats {
@@ -420,27 +334,6 @@ body, .property-description, p {
 .pp-stat {
   text-align: center;
 }
-.pp-stat-label {
-  font-size: 10px;
-  letter-spacing: 0.08em;
-  color: var(--muted);
-  font-weight: 800;
-}
-.pp-stat-value {
-  margin-top: 6px;
-  font-size: 13px;
-  font-weight: 900;
-}
-
-.pp-roi {
-  margin-top: 12px;
-  padding: 12px 12px;
-  border-radius: 12px;
-  background: var(--greenBg);
-  border-left: 4px solid var(--greenBorder);
-  font-size: 12.5px;
-  line-height: 1.35;
-}
 
 .pp-vibe {
   margin-top: 12px;
@@ -450,21 +343,12 @@ body, .property-description, p {
   background: color-mix(in srgb, var(--panel) 92%, var(--bg));
 }
 
-.pp-vibe-title {
-  font-weight: 900;
-  margin-bottom: 6px;
-}
-.pp-vibe-blurb {
-  color: var(--muted);
-  font-size: 12.5px;
-}
-
-/* ---- STAR RATING (clean + clickable) ---- */
 .pp-vibe,
 .pp-vibe * {
   pointer-events: auto;
 }
 
+/* Star rating */
 .pp-stars {
   display: flex;
   align-items: center;
@@ -532,6 +416,7 @@ body, .property-description, p {
   font-weight: 800;
   font-size: 13px;
 }
+
 .pp-linkbtn-primary {
   background: var(--primary);
   color: var(--primaryText);
@@ -572,6 +457,7 @@ body, .property-description, p {
   font-size: 16px;
   font-weight: 900;
 }
+
 .pp-modal-sub {
   margin-top: 6px;
   color: var(--muted);
@@ -596,6 +482,7 @@ body, .property-description, p {
   font-weight: 800;
   font-size: 12px;
 }
+
 .pp-tab.active {
   background: color-mix(in srgb, var(--primary) 20%, var(--panel));
   border-color: color-mix(in srgb, var(--primary) 55%, var(--border));
@@ -643,6 +530,3 @@ body, .property-description, p {
   font-weight: 700;
   font-size: 12.5px;
 }
-.pp-hero-actions { pointer-events: none; }
-.pp-like { pointer-events: auto; }
-
