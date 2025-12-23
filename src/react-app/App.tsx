@@ -182,6 +182,34 @@ function pmtMonthly(principal: number, annualRate: number, years: number) {
   // standard amortization payment
   return (principal * r) / (1 - Math.pow(1 + r, -n));
 }
+function estimatePaymentRange(price: number) {
+  const downPct = 0.2;
+  const rateMin = 0.0625;
+  const rateMax = 0.0725;
+  const years = 30;
+
+  const loan = price * (1 - downPct);
+  const n = years * 12;
+
+  const pmt = (rate: number) => {
+    const r = rate / 12;
+    return (loan * r) / (1 - Math.pow(1 + r, -n));
+  };
+
+  const taxMonthly = (price * 0.01) / 12;
+  const insMonthly = (price * 0.0035) / 12;
+
+  const min = Math.round(pmt(rateMin) + taxMonthly + insMonthly);
+  const max = Math.round(pmt(rateMax) + taxMonthly + insMonthly);
+
+  return {
+    monthlyIncomeMin: min,
+    monthlyIncomeMax: max,
+    annualIncomeMin: min * 12,
+    annualIncomeMax: max * 12,
+  };
+}
+
 export default function App() {
   const [homes, setHomes] = useState<Home[]>([]);
   const [regionFilter, setRegionFilter] = useState<string>("All regions");
@@ -356,108 +384,76 @@ function applyJSONReplace() {
   }
 }
   function applyCSVImport() {
-    const rows = parseCSVorTSV(csvText);
-    if (rows.length === 0) {
-      setReport("No rows found. Make sure there is a header row + at least one data row.");
-      return;
-    }
-const price = num(r.price ?? r.Price ?? "") as any;
-const calc = typeof price === "number" ? estimatePaymentRange(price) : undefined;
+  const rows = parseCSVorTSV(csvText);
+  if (rows.length === 0) {
+    setReport("No rows found. Make sure there is a header row + at least one data row.");
+    return;
+  }
 
-const patch: Home = {
-  id,
-  title,
-  region,
-  beds: num(r.beds ?? r.Beds ?? "") as any,
-  baths: num(r.baths ?? r.Baths ?? "") as any,
-  sqft: num(r.sqft ?? r.Sqft ?? r.SQFT ?? "") as any,
-  price,
+  const byId = new Map<string, Home>(homes.map((h) => [h.id, h]));
+  let updated = 0;
+  let added = 0;
+  let skipped = 0;
 
-  monthlyIncomeMin: calc?.monthlyIncomeMin,
-  monthlyIncomeMax: calc?.monthlyIncomeMax,
-  annualIncomeMin: calc?.annualIncomeMin,
-  annualIncomeMax: calc?.annualIncomeMax,
-
-  roiNotes: (r.roiNotes ?? r.ROINotes ?? r.roi_notes ?? "").trim() || undefined,
-  vibeTitle: (r.vibeTitle ?? r.vibe_title ?? "").trim() || undefined,
-  vibeBlurb: (r.vibeBlurb ?? r.vibe_blurb ?? "").trim() || undefined,
-  mapUrl: (r.mapUrl ?? r.map_url ?? "").trim() || undefined,
-  redfinUrl: (r.redfinUrl ?? r.redfin_url ?? "").trim() || undefined,
-  homeImageUrl: (r.homeImageUrl ?? r.imageUrl ?? r.heroImageUrl ?? "").trim() || undefined,
-};
-
-  const min = payment(0.065);
-  const max = payment(0.075);
-
-  const round100 = (x: number) => Math.round(x / 100) * 100;
-  const monthlyMin = round100(min);
-  const monthlyMax = round100(max);
-
-  return {
-    monthlyIncomeMin: monthlyMin,
-    monthlyIncomeMax: monthlyMax,
-    annualIncomeMin: monthlyMin * 12,
-    annualIncomeMax: monthlyMax * 12,
+  const num = (v: string) => {
+    const t = (v ?? "").trim();
+    if (!t) return undefined;
+    const n = Number(t.replace(/[$,]/g, ""));
+    return Number.isFinite(n) ? n : undefined;
   };
-}
-    const byId = new Map<string, Home>(homes.map((h) => [h.id, h]));
-    let updated = 0;
-    let added = 0;
-    let skipped = 0;
 
-    const num = (v: string) => {
-      const t = (v ?? "").trim();
-      if (!t) return undefined;
-      const n = Number(t.replace(/[$,]/g, ""));
-      return Number.isFinite(n) ? n : undefined;
+  for (const r of rows) {
+    const id = (r.id || r.ID || r.Id || "").trim();
+    const title = (r.title || r.Title || "").trim();
+    const region = (r.region || r.Region || "Uncategorized").trim();
+
+    if (!id || !title) {
+      skipped++;
+      continue;
+    }
+
+    const price = num(r.price ?? r.Price ?? "");
+    const calc = typeof price === "number" ? estimatePaymentRange(price) : undefined;
+
+    const patch: Home = {
+      id,
+      title,
+      region,
+      beds: num(r.beds ?? r.Beds ?? "") as any,
+      baths: num(r.baths ?? r.Baths ?? "") as any,
+      sqft: num(r.sqft ?? r.Sqft ?? r.SQFT ?? "") as any,
+      price,
+
+      // always recalc monthly/annual from price
+      monthlyIncomeMin: calc?.monthlyIncomeMin,
+      monthlyIncomeMax: calc?.monthlyIncomeMax,
+      annualIncomeMin: calc?.annualIncomeMin,
+      annualIncomeMax: calc?.annualIncomeMax,
+
+      roiNotes: (r.roiNotes ?? r.ROINotes ?? r.roi_notes ?? "").trim() || undefined,
+      vibeTitle: (r.vibeTitle ?? r.vibe_title ?? "").trim() || undefined,
+      vibeBlurb: (r.vibeBlurb ?? r.vibe_blurb ?? "").trim() || undefined,
+      mapUrl: (r.mapUrl ?? r.map_url ?? "").trim() || undefined,
+      redfinUrl: (r.redfinUrl ?? r.redfin_url ?? "").trim() || undefined,
+      homeImageUrl: (r.homeImageUrl ?? r.imageUrl ?? r.heroImageUrl ?? "").trim() || undefined,
     };
 
-    for (const r of rows) {
-      const id = (r.id || r.ID || r.Id || "").trim();
-      const title = (r.title || r.Title || "").trim();
-      const region = (r.region || r.Region || "Uncategorized").trim();
-
-      if (!id || !title) {
-        skipped++;
-        continue;
-      }
-
-      const patch: Home = {
-        id,
-        title,
-        region,
-        beds: num(r.beds ?? r.Beds ?? "") as any,
-        baths: num(r.baths ?? r.Baths ?? "") as any,
-        sqft: num(r.sqft ?? r.Sqft ?? r.SQFT ?? "") as any,
-        price: num(r.price ?? r.Price ?? "") as any,
-        monthlyIncomeMin: num(r.monthlyIncomeMin ?? "") as any,
-        monthlyIncomeMax: num(r.monthlyIncomeMax ?? "") as any,
-        annualIncomeMin: num(r.annualIncomeMin ?? "") as any,
-        annualIncomeMax: num(r.annualIncomeMax ?? "") as any,
-        roiNotes: (r.roiNotes ?? r.ROINotes ?? r.roi_notes ?? "").trim() || undefined,
-        vibeTitle: (r.vibeTitle ?? r.vibe_title ?? "").trim() || undefined,
-        vibeBlurb: (r.vibeBlurb ?? r.vibe_blurb ?? "").trim() || undefined,
-        mapUrl: (r.mapUrl ?? r.map_url ?? "").trim() || undefined,
-        redfinUrl: (r.redfinUrl ?? r.redfin_url ?? "").trim() || undefined,
-        homeImageUrl: (r.homeImageUrl ?? r.imageUrl ?? r.heroImageUrl ?? "").trim() || undefined,
-      };
-
-      const existing = byId.get(id);
-      if (existing) {
-        byId.set(id, { ...existing, ...patch });
-        updated++;
-      } else {
-        byId.set(id, patch);
-        added++;
-      }
+    const existing = byId.get(id);
+    if (existing) {
+      byId.set(id, { ...existing, ...patch });
+      updated++;
+    } else {
+      byId.set(id, patch);
+      added++;
     }
-
-    const next = Array.from(byId.values());
-    applyHomes(
-      next,
-      `CSV import done. Updated: ${updated}, Added: ${added}, Skipped: ${skipped}. Total: ${next.length}.`
-    );
   }
+
+  const next = Array.from(byId.values());
+  applyHomes(
+    next,
+    `CSV import done. Updated: ${updated}, Added: ${added}, Skipped: ${skipped}. Total: ${next.length}.`
+  );
+}
 
   function applyHeroImport() {
     const lines = heroesText
