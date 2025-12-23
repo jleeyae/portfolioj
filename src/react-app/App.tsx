@@ -182,31 +182,6 @@ function pmtMonthly(principal: number, annualRate: number, years: number) {
   // standard amortization payment
   return (principal * r) / (1 - Math.pow(1 + r, -n));
 }
-
-function estimatePaymentRange(price: number) {
-  const a = FIN_ASSUMPTIONS;
-  const down = price * a.downPaymentPct;
-  const loan = Math.max(0, price - down);
-
-  const taxMonthly = (price * a.taxRateAnnual) / 12;
-  const insMonthly = (price * a.insuranceRateAnnual) / 12;
-  const hoa = a.hoaMonthly;
-
-  const baseMin = pmtMonthly(loan, a.rateMin, a.termYears) + taxMonthly + insMonthly + hoa;
-  const baseMax = pmtMonthly(loan, a.rateMax, a.termYears) + taxMonthly + insMonthly + hoa;
-
-  // round to nice whole dollars
-  const monthlyIncomeMin = Math.round(baseMin);
-  const monthlyIncomeMax = Math.round(baseMax);
-
-  return {
-    monthlyIncomeMin,
-    monthlyIncomeMax,
-    annualIncomeMin: monthlyIncomeMin * 12,
-    annualIncomeMax: monthlyIncomeMax * 12,
-  };
-}
-
 export default function App() {
   const [homes, setHomes] = useState<Home[]>([]);
   const [regionFilter, setRegionFilter] = useState<string>("All regions");
