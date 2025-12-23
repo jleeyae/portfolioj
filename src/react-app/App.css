@@ -1,5 +1,7 @@
 /* Luxurious fonts */
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Cormorant+Garamond:wght@300;400;500&display=swap');
+  /* Import luxury fonts */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Cormorant+Garamond:wght@300;400;500;600&display=swap');
 :root {
   --bg: #f6f8ff;
   --panel: #ffffff;
@@ -30,7 +32,104 @@
 
   --greenBg: rgba(22, 163, 74, 0.18);
   --greenBorder: #22c55e;
-  
+
+
+/* Main header - distinctive luxury color */
+.header, .main-header, h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 3.2rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #1B4332; /* Deep forest green */
+  /* Alternative colors:
+     #2C3E50 - Sophisticated navy
+     #6B2737 - Rich burgundy
+     #3D2817 - Warm espresso brown
+     #1A4D2E - Hunter green
+  */
+}
+
+/* Header subtitle */
+.header-subtitle, .tagline {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.4rem;
+  color: #6B7280; /* Muted gray */
+  letter-spacing: 0.5px;
+  font-weight: 400;
+}
+
+/* Region titles - bigger, stays dark */
+.region-title, h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 3rem;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  color: #1F2937; /* Dark charcoal for body sections */
+  margin-bottom: 35px;
+}
+
+/* Property addresses - larger and readable */
+.property-address, .property-card h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem;
+  font-weight: 500;
+  color: #111827;
+  letter-spacing: 0.3px;
+  margin-bottom: 10px;
+}
+
+/* Property details (beds, baths, sqft) */
+.property-specs, .property-details {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.3rem;
+  color: #4B5563;
+  letter-spacing: 0.3px;
+}
+
+/* Property titles like "Lake & Wine Night" */
+.property-name, .listing-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #111827;
+}
+
+/* Property descriptions */
+.property-description, .description-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.25rem;
+  line-height: 1.7;
+  color: #374151;
+}
+
+/* Price labels and values */
+.price-label {
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #6B7280;
+}
+
+.price-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #111827;
+}
+
+/* Body text - bigger default */
+body, p {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.2rem;
+  line-height: 1.7;
+  color: #374151;
+}
+
+/* ROI Notes box text */
+.roi-note, .note-text {
+  font-size: 1.15rem;
+  line-height: 1.6;
+}
 /* Main header - distinctive color */
 .header, .main-header, h1.property-portfolio-title {
   font-family: 'Playfair Display', serif;
