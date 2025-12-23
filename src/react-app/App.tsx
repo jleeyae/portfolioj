@@ -10,9 +10,6 @@ type Home = {
   id: string;
   region: string;
   title: string;
-  beds?: number;
-  baths?: number;
-  sqft?: number;
   price?: number;
   monthlyIncomeMin?: number;
   monthlyIncomeMax?: number;
@@ -34,71 +31,14 @@ const LS_HOMES = "pp.homes.v1";
 const LS_THEME = "pp.theme.v1";
 const LS_RATINGS = "pp.ratings.v1";
 const LS_FAVORITES = "pp.favorites.v1";
-const LS_HERO_OVERRIDES = "pp.heroOverrides.v1";
-
-/* ================================
-   RATINGS
-================================ */
-
-function loadRatings(): Record<string, number> {
-  try {
-    const raw = localStorage.getItem(LS_RATINGS);
-    return raw ? JSON.parse(raw) : {};
-  } catch {
-    return {};
-  }
-}
-
-function saveRatings(ratings: Record<string, number>) {
-  localStorage.setItem(LS_RATINGS, JSON.stringify(ratings));
-}
-
-/* ================================
-   DEFAULT HOMES (SAMPLE)
-================================ */
-
-const DEFAULT_HOMES: Home[] = [
-  {
-    id: "lakehurst-loop",
-    region: "Hill Country",
-    title: "19813 & 19817 Lakehurst Loop, Spicewood, TX",
-    price: 6550000,
-    monthlyIncomeMin: 12000,
-    monthlyIncomeMax: 16000,
-    annualIncomeMin: 144000,
-    annualIncomeMax: 192000,
-    roiNotes: "Lakefront Hill Country luxury with gated appeal.",
-    vibeTitle: "Lake & Wine Night",
-    vibeBlurb: "Dock-to-dinner energy.",
-    mapUrl:
-      "https://www.google.com/maps/search/?api=1&query=19813+Lakehurst+Loop+Spicewood+TX",
-    redfinUrl: "https://www.redfin.com/",
-    homeImageUrl:
-      "https://photos.zillowstatic.com/fp/20f5b7b63b700d484db70e0c98234a5c-p_f.jpg",
-  },
-  {
-    id: "bee-creek",
-    region: "Hill Country",
-    title: "3507 Bee Creek Rd, Spicewood, TX",
-    price: 1299000,
-    monthlyIncomeMin: 4500,
-    monthlyIncomeMax: 6500,
-    annualIncomeMin: 54000,
-    annualIncomeMax: 78000,
-    vibeTitle: "Wine Country Escape",
-    vibeBlurb: "Relaxed hill country vibes.",
-    mapUrl:
-      "https://www.google.com/maps/search/?api=1&query=3507+Bee+Creek+Rd+Spicewood+TX",
-    redfinUrl: "https://www.redfin.com/",
-  },
-];
+const LS_COLLAPSE = "pp.regions.collapsed.v1";
 
 /* ================================
    HELPERS
 ================================ */
 
 function formatMoney(n?: number) {
-  if (n == null) return "—";
+  if (n == null || Number.isNaN(n)) return "—";
   if (n >= 1_000_000) return `$${(n / 1_000_000).toFixed(2)}M`;
   return `$${Math.round(n).toLocaleString()}`;
 }
@@ -118,56 +58,78 @@ export default function App() {
   const [isDark, setIsDark] = useState(false);
   const [ratings, setRatings] = useState<Record<string, number>>({});
   const [favorites, setFavorites] = useState<string[]>([]);
-  const heroOverridesRef = useRef<Record<string, string>>({});
+  const [shortlistOnly, setShortlistOnly] = useState(false);
 
-  /* BOOT */
+  const [collapsed, setCollapsed] = useState<Record<string, boolean>>({});
+  const [manageOpen, setManageOpen] = useState(false);
+  const [manageJSON, setManageJSON] = useState("");
+
+  const previousJSONRef = useRef("");
+
+  /* ================================
+     BOOT
+  ================================ */
+
   useEffect(() => {
-    const dark = localStorage.getItem(LS_THEME) === "dark";
-    setIsDark(dark);
-    document.documentElement.dataset.theme = dark ? "dark" : "light";
-
-    setRatings(loadRatings());
-
-    const fav = localStorage.getItem(LS_FAVORITES);
-    if (fav) setFavorites(JSON.parse(fav));
-
     const savedHomes = localStorage.getItem(LS_HOMES);
-    setHomes(savedHomes ? JSON.parse(savedHomes) : DEFAULT_HOMES);
+    if (savedHomes) {
+      setHomes(JSON.parse(savedHomes));
+      previousJSONRef.current = savedHomes;
+      setManageJSON(savedHomes);
+    }
 
-    const savedHeroes = localStorage.getItem(LS_HERO_OVERRIDES);
-    if (savedHeroes) heroOverridesRef.current = JSON.parse(savedHeroes);
+    const theme = localStorage.getItem(LS_THEME);
+    if (theme === "dark") {
+      setIsDark(true);
+      document.documentElement.dataset.theme = "dark";
+    }
+
+    const r = localStorage.getItem(LS_RATINGS);
+    if (r) setRatings(JSON.parse(r));
+
+    const f = localStorage.getItem(LS_FAVORITES);
+    if (f) setFavorites(JSON.parse(f));
+
+    const c = localStorage.getItem(LS_COLLAPSE);
+    if (c) setCollapsed(JSON.parse(c));
   }, []);
+
+  useEffect(() => {
+    localStorage.setItem(LS_HOMES, JSON.stringify(homes));
+  }, [homes]);
 
   useEffect(() => {
     localStorage.setItem(LS_FAVORITES, JSON.stringify(favorites));
   }, [favorites]);
 
-  /* DERIVED */
+  useEffect(() => {
+    localStorage.setItem(LS_COLLAPSE, JSON.stringify(collapsed));
+  }, [collapsed]);
+
+  /* ================================
+     DERIVED
+  ================================ */
+
   const grouped = useMemo(() => {
     const map = new Map<string, Home[]>();
     homes.forEach((h) => {
+      if (shortlistOnly && !favorites.includes(h.id)) return;
       const r = h.region || "Uncategorized";
       if (!map.has(r)) map.set(r, []);
       map.get(r)!.push(h);
     });
     return Array.from(map.entries());
-  }, [homes]);
+  }, [homes, favorites, shortlistOnly]);
 
-  /* ACTIONS */
+  /* ================================
+     ACTIONS
+  ================================ */
+
   function toggleTheme() {
     const next = !isDark;
     setIsDark(next);
     document.documentElement.dataset.theme = next ? "dark" : "light";
     localStorage.setItem(LS_THEME, next ? "dark" : "light");
-  }
-
-  function setRating(id: string, value: number) {
-    const v = Math.max(0, Math.min(5, Math.round(value)));
-    setRatings((prev) => {
-      const next = { ...prev, [id]: v };
-      saveRatings(next);
-      return next;
-    });
   }
 
   function toggleFavorite(id: string) {
@@ -176,136 +138,191 @@ export default function App() {
     );
   }
 
-  function heroFor(h: Home) {
-    return (
-      heroOverridesRef.current[h.id] ||
-      h.homeImageUrl ||
-      `https://picsum.photos/seed/${encodeURIComponent(h.id)}/1200/700`
-    );
+  function setRating(id: string, value: number) {
+    const v = Math.max(0, Math.min(5, Math.round(value)));
+    setRatings((prev) => {
+      const next = { ...prev, [id]: v };
+      localStorage.setItem(LS_RATINGS, JSON.stringify(next));
+      return next;
+    });
   }
 
-  /* RENDER */
+  function toggleRegion(region: string) {
+    setCollapsed((prev) => ({ ...prev, [region]: !prev[region] }));
+  }
+
+  function applyManageJSON() {
+    try {
+      const parsed = JSON.parse(manageJSON);
+      if (!Array.isArray(parsed)) return;
+      setHomes(parsed);
+      previousJSONRef.current = manageJSON;
+      setManageOpen(false);
+    } catch {
+      alert("Invalid JSON");
+    }
+  }
+
+  /* ================================
+     RENDER
+  ================================ */
+
   return (
     <div className="pp-page">
-      <header className="pp-top">
-        <div>
-          <h1 className="pp-title">Property Portfolio</h1>
-          <p className="pp-subtitle">
-            A family space for vibes, math, and decisions.
-          </p>
-        </div>
+      {/* ===== HEADER ===== */}
+      <header className="pp-atlas-header">
+        <h1 className="pp-atlas-title">Property Atlas</h1>
+        <p className="pp-atlas-sub">
+          A living map of places, prices, and possibilities
+        </p>
 
-        <div className="pp-top-right">
+        <div className="pp-atlas-actions">
           <button className="pp-btn" onClick={toggleTheme}>
             {isDark ? "Light Mode" : "Dark Mode"}
           </button>
+
+          <button
+            className={`pp-btn ${shortlistOnly ? "pp-btn-primary" : ""}`}
+            onClick={() => setShortlistOnly((v) => !v)}
+          >
+            {shortlistOnly ? "Viewing Shortlist" : "Shortlist Only"}
+          </button>
+
+          <button className="pp-btn" onClick={() => setManageOpen(true)}>
+            Manage Homes
+          </button>
+
           <button className="pp-btn pp-btn-primary" onClick={() => window.print()}>
-            Print Storybook PDF
+            Print PDF
           </button>
         </div>
       </header>
 
+      {/* ===== REGIONS ===== */}
       <main>
-        {grouped.map(([region, list]) => (
-          <section key={region} className="pp-region">
-            <h2 className="pp-region-title">{region}</h2>
+        {grouped.map(([region, list]) => {
+          const isClosed = collapsed[region];
+          return (
+            <section key={region} className="pp-region">
+              <button
+                className="pp-region-header"
+                onClick={() => toggleRegion(region)}
+              >
+                <span>{region}</span>
+                <span className="pp-region-meta">
+                  {list.length} homes {isClosed ? "▸" : "▾"}
+                </span>
+              </button>
 
-            <div className="pp-grid">
-              {list.map((h) => (
-                <article key={h.id} className="pp-card">
-                  <div className="pp-hero">
-                    <img src={heroFor(h)} alt={h.title} />
-                    <div className="pp-hero-actions">
-                      <button
-                        className={`pp-like ${
-                          favorites.includes(h.id) ? "is-on" : ""
-                        }`}
-                        onClick={() => toggleFavorite(h.id)}
-                      >
-                        {favorites.includes(h.id) ? "♥" : "♡"}
-                      </button>
-                    </div>
-                  </div>
+              <div
+                className={`pp-region-body ${isClosed ? "collapsed" : ""}`}
+              >
+                <div className="pp-grid">
+                  {list.map((h) => (
+                    <article key={h.id} className="pp-card">
+                      <div className="pp-hero">
+                        {h.homeImageUrl && (
+                          <img src={h.homeImageUrl} alt={h.title} />
+                        )}
+                        <button
+                          className={`pp-like ${
+                            favorites.includes(h.id) ? "is-on" : ""
+                          }`}
+                          onClick={() => toggleFavorite(h.id)}
+                        >
+                          ♥
+                        </button>
+                      </div>
 
-                  <div className="pp-card-body">
-                    <div className="pp-card-title">
-                      {h.redfinUrl ? (
+                      <div className="pp-card-body">
                         <a
+                          className="pp-card-title"
                           href={h.redfinUrl}
                           target="_blank"
                           rel="noreferrer"
-                          className="pp-title-link"
                         >
                           {h.title}
                         </a>
-                      ) : (
-                        h.title
-                      )}
-                    </div>
 
-                    <div className="pp-stats">
-                      <div className="pp-stat">
-                        <div className="pp-stat-label">PRICE</div>
-                        <div className="pp-stat-value">
-                          {formatMoney(h.price)}
+                        <div className="pp-stats">
+                          <div>
+                            <div className="pp-stat-label">PRICE</div>
+                            <div>{formatMoney(h.price)}</div>
+                          </div>
+                          <div>
+                            <div className="pp-stat-label">MONTHLY</div>
+                            <div>
+                              {formatRange(
+                                h.monthlyIncomeMin,
+                                h.monthlyIncomeMax
+                              )}
+                            </div>
+                          </div>
+                          <div>
+                            <div className="pp-stat-label">ANNUAL</div>
+                            <div>
+                              {formatRange(
+                                h.annualIncomeMin,
+                                h.annualIncomeMax
+                              )}
+                            </div>
+                          </div>
                         </div>
-                      </div>
-                      <div className="pp-stat">
-                        <div className="pp-stat-label">MONTHLY</div>
-                        <div className="pp-stat-value">
-                          {formatRange(
-                            h.monthlyIncomeMin,
-                            h.monthlyIncomeMax
-                          )}
-                        </div>
-                      </div>
-                      <div className="pp-stat">
-                        <div className="pp-stat-label">ANNUAL</div>
-                        <div className="pp-stat-value">
-                          {formatRange(
-                            h.annualIncomeMin,
-                            h.annualIncomeMax
-                          )}
-                        </div>
-                      </div>
-                    </div>
 
-                    {h.roiNotes && (
-                      <div className="pp-roi">
-                        <strong>ROI Notes:</strong> {h.roiNotes}
-                      </div>
-                    )}
-
-                    {(h.vibeTitle || h.vibeBlurb) && (
-                      <div className="pp-vibe">
-                        <div className="pp-vibe-title">{h.vibeTitle}</div>
-                        <div className="pp-vibe-blurb">{h.vibeBlurb}</div>
                         <StarRating
                           value={ratings[h.id] ?? 0}
                           onChange={(v) => setRating(h.id, v)}
                         />
-                      </div>
-                    )}
 
-                    <div className="pp-actions">
-                      {h.mapUrl && (
-                        <a href={h.mapUrl} target="_blank" rel="noreferrer">
-                          Open in Maps
-                        </a>
-                      )}
-                      {h.redfinUrl && (
-                        <a href={h.redfinUrl} target="_blank" rel="noreferrer">
-                          Open in Redfin
-                        </a>
-                      )}
-                    </div>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </section>
-        ))}
+                        <div className="pp-actions">
+                          {h.mapUrl && (
+                            <a href={h.mapUrl} target="_blank" rel="noreferrer">
+                              Maps
+                            </a>
+                          )}
+                          {h.redfinUrl && (
+                            <a href={h.redfinUrl} target="_blank" rel="noreferrer">
+                              Redfin
+                            </a>
+                          )}
+                        </div>
+                      </div>
+                    </article>
+                  ))}
+                </div>
+              </div>
+            </section>
+          );
+        })}
       </main>
+
+      {/* ===== MANAGE MODAL ===== */}
+      {manageOpen && (
+        <div className="pp-modal-backdrop" onClick={() => setManageOpen(false)}>
+          <div
+            className="pp-modal"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <h2>Manage Homes</h2>
+            <p>Paste, edit, and replace your homes JSON</p>
+
+            <textarea
+              className="pp-textarea"
+              value={manageJSON}
+              onChange={(e) => setManageJSON(e.target.value)}
+            />
+
+            <div className="pp-modal-actions">
+              <button className="pp-btn" onClick={() => setManageOpen(false)}>
+                Cancel
+              </button>
+              <button className="pp-btn pp-btn-primary" onClick={applyManageJSON}>
+                Apply JSON
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

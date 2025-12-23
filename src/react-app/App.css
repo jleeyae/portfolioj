@@ -189,3 +189,148 @@ body::before {
   gap: 10px;
   margin-top: auto;
 }
+/* ================================
+   CREATIVE HEADER
+================================ */
+
+.pp-header-hero {
+  padding: 72px 20px 56px;
+  margin-bottom: 48px;
+  background:
+    radial-gradient(800px 400px at 10% 10%, rgba(109,93,252,0.18), transparent),
+    radial-gradient(600px 300px at 90% 20%, rgba(236,72,153,0.16), transparent);
+}
+
+.pp-header-inner {
+  max-width: 1200px;
+  margin: auto;
+}
+
+.pp-header-title {
+  font-family: var(--font-serif);
+  font-size: 3.4rem;
+  margin: 0;
+}
+
+.pp-header-sub {
+  color: var(--text-secondary);
+  font-size: 1.25rem;
+  margin-top: 8px;
+}
+
+.pp-header-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+/* ================================
+   COLLAPSIBLE REGIONS
+================================ */
+
+.pp-region-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-serif);
+  font-size: 1.8rem;
+  background: transparent;
+  border: none;
+  padding: 12px 4px;
+  cursor: pointer;
+}
+
+.pp-region-header:hover {
+  color: var(--accent);
+}
+
+.pp-region-meta {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+/* ================================
+   MANAGE MODAL
+================================ */
+
+.pp-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  display: grid;
+  place-items: center;
+  z-index: 100;
+}
+
+.pp-modal {
+  background: var(--bg-card);
+  padding: 24px;
+  border-radius: 16px;
+  width: min(720px, 90vw);
+  box-shadow: var(--shadow-md);
+}
+
+.pp-textarea {
+  width: 100%;
+  min-height: 140px;
+  margin-bottom: 16px;
+  padding: 10px;
+  font-family: monospace;
+}
+
+
+/* ================================
+   COLLAPSIBLE REGIONS
+================================ */
+
+.pp-region-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-serif);
+  font-size: 1.8rem;
+  background: transparent;
+  border: none;
+  padding: 12px 4px;
+  cursor: pointer;
+}
+
+.pp-region-header:hover {
+  color: var(--accent);
+}
+
+.pp-region-meta {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+/* ================================
+   MANAGE MODAL
+================================ */
+
+.pp-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  display: grid;
+  place-items: center;
+  z-index: 100;
+}
+
+.pp-modal {
+  background: var(--bg-card);
+  padding: 24px;
+  border-radius: 16px;
+  width: min(720px, 90vw);
+  box-shadow: var(--shadow-md);
+}
+
+.pp-textarea {
+  width: 100%;
+  min-height: 140px;
+  margin-bottom: 16px;
+  padding: 10px;
+  font-family: monospace;
+}
