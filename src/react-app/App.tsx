@@ -288,28 +288,86 @@ setRatings(loaded);
         setReport("JSON must be an array of homes.");
         return;
       }
+    const price = x.price != null ? Number(x.price) : undefined;
+
+    const carry = price != null && Number.isFinite(price)
+      ? estimatePaymentRange(price)
+      : {};
+      return {
+        id: String(x.id ?? slug(String(x.title ?? ""))),
+        region: String(x.region ?? "Uncategorized"),
+        title: String(x.title ?? ""),
+        beds: x.beds != null ? Number(x.beds) : undefined,
+        baths: x.baths != null ? Number(x.baths) : undefined,
+        sqft: x.sqft != null ? Number(x.sqft) : undefined,
+        price,
+        // If user already provided monthly/annual, keep theirs. Otherwise fill.
+        monthlyIncomeMin: x.monthlyIncomeMin != null ? Number(x.monthlyIncomeMin) : (carry as any).monthlyIncomeMin,
+        monthlyIncomeMax: x.monthlyIncomeMax != null ? Number(x.monthlyIncomeMax) : (carry as any).monthlyIncomeMax,
+        annualIncomeMin: x.annualIncomeMin != null ? Number(x.annualIncomeMin) : (carry as any).annualIncomeMin,
+        annualIncomeMax: x.annualIncomeMax != null ? Number(x.annualIncomeMax) : (carry as any).annualIncomeMax,
+        roiNotes: x.roiNotes ? String(x.roiNotes) : undefined,
+        vibeTitle: x.vibeTitle ? String(x.vibeTitle) : undefined,
+        vibeBlurb: x.vibeBlurb ? String(x.vibeBlurb) : undefined,
+        mapUrl: x.mapUrl ? String(x.mapUrl) : undefined,
+        redfinUrl: x.redfinUrl ? String(x.redfinUrl) : undefined,
+        homeImageUrl: x.homeImageUrl ? String(x.homeImageUrl) : undefined,
+      };
+
 
       const cleaned: Home[] = parsed
         .filter((x) => x && typeof x === "object")
-        .map((x: any) => ({
-          id: String(x.id ?? slug(String(x.title ?? ""))),
-          region: String(x.region ?? "Uncategorized"),
-          title: String(x.title ?? ""),
-          beds: x.beds != null ? Number(x.beds) : undefined,
-          baths: x.baths != null ? Number(x.baths) : undefined,
-          sqft: x.sqft != null ? Number(x.sqft) : undefined,
-          price: x.price != null ? Number(x.price) : undefined,
-          monthlyIncomeMin: x.monthlyIncomeMin != null ? Number(x.monthlyIncomeMin) : undefined,
-          monthlyIncomeMax: x.monthlyIncomeMax != null ? Number(x.monthlyIncomeMax) : undefined,
-          annualIncomeMin: x.annualIncomeMin != null ? Number(x.annualIncomeMin) : undefined,
-          annualIncomeMax: x.annualIncomeMax != null ? Number(x.annualIncomeMax) : undefined,
-          roiNotes: x.roiNotes ? String(x.roiNotes) : undefined,
-          vibeTitle: x.vibeTitle ? String(x.vibeTitle) : undefined,
-          vibeBlurb: x.vibeBlurb ? String(x.vibeBlurb) : undefined,
-          mapUrl: x.mapUrl ? String(x.mapUrl) : undefined,
-          redfinUrl: x.redfinUrl ? String(x.redfinUrl) : undefined,
-          homeImageUrl: x.homeImageUrl ? String(x.homeImageUrl) : undefined,
-        }))
+      .map((x: any) => {
+  const price =
+    x.price != null && Number.isFinite(Number(x.price))
+      ? Number(x.price)
+      : undefined;
+
+  const carry =
+    price != null
+      ? estimatePaymentRange(price)
+      : {};
+
+  return {
+    id: String(x.id ?? slug(String(x.title ?? ""))),
+    region: String(x.region ?? "Uncategorized"),
+    title: String(x.title ?? ""),
+
+    beds: x.beds != null ? Number(x.beds) : undefined,
+    baths: x.baths != null ? Number(x.baths) : undefined,
+    sqft: x.sqft != null ? Number(x.sqft) : undefined,
+    price,
+
+    // Preserve user-entered values if present; otherwise auto-calc
+    monthlyIncomeMin:
+      x.monthlyIncomeMin != null
+        ? Number(x.monthlyIncomeMin)
+        : (carry as any).monthlyIncomeMin,
+
+    monthlyIncomeMax:
+      x.monthlyIncomeMax != null
+        ? Number(x.monthlyIncomeMax)
+        : (carry as any).monthlyIncomeMax,
+
+    annualIncomeMin:
+      x.annualIncomeMin != null
+        ? Number(x.annualIncomeMin)
+        : (carry as any).annualIncomeMin,
+
+    annualIncomeMax:
+      x.annualIncomeMax != null
+        ? Number(x.annualIncomeMax)
+        : (carry as any).annualIncomeMax,
+
+    roiNotes: x.roiNotes ? String(x.roiNotes) : undefined,
+    vibeTitle: x.vibeTitle ? String(x.vibeTitle) : undefined,
+    vibeBlurb: x.vibeBlurb ? String(x.vibeBlurb) : undefined,
+    mapUrl: x.mapUrl ? String(x.mapUrl) : undefined,
+    redfinUrl: x.redfinUrl ? String(x.redfinUrl) : undefined,
+    homeImageUrl: x.homeImageUrl ? String(x.homeImageUrl) : undefined,
+  };
+})
+
         .filter((h) => h.id && h.region && h.title);
 
       if (cleaned.length === 0) {
@@ -329,7 +387,31 @@ setRatings(loaded);
       setReport("No rows found. Make sure there is a header row + at least one data row.");
       return;
     }
+function estimatePaymentRange(price: number) {
+  // Estimated MONTHLY principal+interest on a 30yr fixed
+  // Assumptions: 25% down (75% loan), 6.5%–7.5% rate range
+  const loan = price * 0.75;
+  const n = 360;
 
+  const payment = (rate: number) => {
+    const r = rate / 12;
+    return (loan * r) / (1 - Math.pow(1 + r, -n));
+  };
+
+  const min = payment(0.065);
+  const max = payment(0.075);
+
+  const round100 = (x: number) => Math.round(x / 100) * 100;
+  const monthlyMin = round100(min);
+  const monthlyMax = round100(max);
+
+  return {
+    monthlyIncomeMin: monthlyMin,
+    monthlyIncomeMax: monthlyMax,
+    annualIncomeMin: monthlyMin * 12,
+    annualIncomeMax: monthlyMax * 12,
+  };
+}
     const byId = new Map<string, Home>(homes.map((h) => [h.id, h]));
     let updated = 0;
     let added = 0;
