@@ -1,3 +1,5 @@
+/* Luxurious fonts */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Cormorant+Garamond:wght@300;400;500&display=swap');
 :root {
   --bg: #f6f8ff;
   --panel: #ffffff;
@@ -42,9 +44,6 @@
   max-width: 1600px; /* Optional: limit max width for better proportions */
   margin: 0 auto;
 }
-
-/* Luxurious fonts */
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Cormorant+Garamond:wght@300;400;500&display=swap');
 
 /* Region titles - make them elegant */
 .region-title, h1, h2 {
