@@ -1,3 +1,20 @@
+# Property Portfolio
+
+This repo powers a simple property portfolio UI with a built-in bulk importer so you can add/replace homes quickly.
+
+## Updating homes (the easy way)
+
+Run the app, then click **Manage homes** in the top bar.
+
+You can:
+- **Replace everything** by pasting a JSON array (required fields: `id`, `region`, `title`).
+- **Paste CSV/TSV** to add/update by `id`.
+- **Bulk hero images** with lines like `id | https://...jpg`.
+
+Your changes are saved in the browser (localStorage). Use the **Export** tab to copy JSON and commit it permanently.
+
+---
+
 # React + Vite + Hono + Cloudflare Workers
 
 [![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/cloudflare/templates/tree/main/vite-react-template)
