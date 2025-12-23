@@ -121,14 +121,6 @@ function formatRange(min?: number, max?: number) {
   return formatMoney(min ?? max);
 }
 
-function slug(s: string) {
-  return s.toLowerCase().trim().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
-}
-
-function looksLikeImageUrl(url: string) {
-  return /^https?:\/\/.+\.(png|jpe?g|webp|gif)(\?.*)?$/i.test(url.trim());
-}
-
 /* ================================
    APP
 ================================ */
@@ -137,19 +129,8 @@ export default function App() {
   const [homes, setHomes] = useState<Home[]>([]);
   const [regionFilter, setRegionFilter] = useState("All regions");
   const [isDark, setIsDark] = useState(false);
-
   const [ratings, setRatings] = useState<Record<string, number>>({});
   const [favorites, setFavorites] = useState<string[]>([]);
-
-  const [isManageOpen, setIsManageOpen] = useState(false);
-  const [manageTab, setManageTab] =
-    useState<"json" | "csv" | "heroes" | "export">("json");
-
-  const [jsonText, setJsonText] = useState("");
-  const [csvText, setCsvText] = useState("");
-  const [heroesText, setHeroesText] = useState("");
-  const [report, setReport] = useState("");
-
   const heroOverridesRef = useRef<Record<string, string>>({});
 
   /* ================================
@@ -157,8 +138,7 @@ export default function App() {
   ================================ */
 
   useEffect(() => {
-    const savedTheme = localStorage.getItem(LS_THEME);
-    const dark = savedTheme === "dark";
+    const dark = localStorage.getItem(LS_THEME) === "dark";
     setIsDark(dark);
     document.documentElement.dataset.theme = dark ? "dark" : "light";
 
@@ -167,19 +147,12 @@ export default function App() {
     const fav = localStorage.getItem(LS_FAVORITES);
     if (fav) setFavorites(JSON.parse(fav));
 
-    const savedRegion = localStorage.getItem(LS_REGION);
-    if (savedRegion) setRegionFilter(savedRegion);
-
     const savedHomes = localStorage.getItem(LS_HOMES);
     setHomes(savedHomes ? JSON.parse(savedHomes) : DEFAULT_HOMES);
 
     const savedHeroes = localStorage.getItem(LS_HERO_OVERRIDES);
     if (savedHeroes) heroOverridesRef.current = JSON.parse(savedHeroes);
   }, []);
-
-  useEffect(() => {
-    localStorage.setItem(LS_REGION, regionFilter);
-  }, [regionFilter]);
 
   useEffect(() => {
     localStorage.setItem(LS_FAVORITES, JSON.stringify(favorites));
@@ -243,15 +216,6 @@ export default function App() {
     );
   }
 
-  function openManage(tab: typeof manageTab) {
-    setManageTab(tab);
-    setJsonText(JSON.stringify(homes, null, 2));
-    setCsvText("");
-    setHeroesText("");
-    setReport("");
-    setIsManageOpen(true);
-  }
-
   /* ================================
      RENDER
   ================================ */
@@ -261,9 +225,7 @@ export default function App() {
       <header className="pp-top">
         <div>
           <h1 className="pp-title">Property Portfolio</h1>
-          <p className="pp-subtitle">
-            A family space for vibes, math, and decisions.
-          </p>
+          <p className="pp-subtitle">A family space for vibes, math, and decisions.</p>
         </div>
 
         <div className="pp-top-right">
@@ -282,10 +244,6 @@ export default function App() {
 
           <button className="pp-btn pp-btn-primary" onClick={() => window.print()}>
             Print Storybook PDF
-          </button>
-
-          <button className="pp-btn" onClick={() => openManage("json")}>
-            Manage homes
           </button>
         </div>
       </header>
@@ -315,10 +273,41 @@ export default function App() {
                   <div className="pp-card-body">
                     <div className="pp-card-title">{h.title}</div>
 
-                    <StarRating
-                      value={ratings[h.id] ?? 0}
-                      onChange={(v) => setRating(h.id, v)}
-                    />
+                    <div className="pp-stats">
+                      <div className="pp-stat">
+                        <div className="pp-stat-label">PRICE</div>
+                        <div className="pp-stat-value">{formatMoney(h.price)}</div>
+                      </div>
+                      <div className="pp-stat">
+                        <div className="pp-stat-label">MONTHLY</div>
+                        <div className="pp-stat-value">
+                          {formatRange(h.monthlyIncomeMin, h.monthlyIncomeMax)}
+                        </div>
+                      </div>
+                      <div className="pp-stat">
+                        <div className="pp-stat-label">ANNUAL</div>
+                        <div className="pp-stat-value">
+                          {formatRange(h.annualIncomeMin, h.annualIncomeMax)}
+                        </div>
+                      </div>
+                    </div>
+
+                    {h.roiNotes && (
+                      <div className="pp-roi">
+                        <strong>ROI Notes:</strong> {h.roiNotes}
+                      </div>
+                    )}
+
+                    {(h.vibeTitle || h.vibeBlurb) && (
+                      <div className="pp-vibe">
+                        <div className="pp-vibe-title">{h.vibeTitle}</div>
+                        <div className="pp-vibe-blurb">{h.vibeBlurb}</div>
+                        <StarRating
+                          value={ratings[h.id] ?? 0}
+                          onChange={(v) => setRating(h.id, v)}
+                        />
+                      </div>
+                    )}
 
                     <div className="pp-actions">
                       <a href={h.mapUrl} target="_blank" rel="noreferrer">
