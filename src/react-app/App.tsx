@@ -328,8 +328,7 @@ setRatings(loaded);
     localStorage.setItem(LS_HOMES, JSON.stringify(nextHomes));
     setReport(note);
   }
-
-  function applyJSONReplace() {
+function applyJSONReplace() {
   try {
     const parsed = JSON.parse(jsonText);
     if (!Array.isArray(parsed)) {
@@ -338,12 +337,12 @@ setRatings(loaded);
     }
 
     const cleaned: Home[] = parsed
-      .filter((x) => x && typeof x === "object")
+      .filter((x: any) => x && typeof x === "object")
       .map((x: any) => {
         const price =
           x.price != null && Number.isFinite(Number(x.price)) ? Number(x.price) : undefined;
 
-        const calc = price != null ? estimatePaymentRange(price) : undefined;
+        const carry = price != null ? estimatePaymentRange(price) : undefined;
 
         return {
           id: String(x.id ?? slug(String(x.title ?? ""))),
@@ -355,11 +354,11 @@ setRatings(loaded);
           sqft: x.sqft != null ? Number(x.sqft) : undefined,
           price,
 
-          // Always recalc from price (so Manage Homes tool becomes "price-driven")
-          monthlyIncomeMin: calc?.monthlyIncomeMin,
-          monthlyIncomeMax: calc?.monthlyIncomeMax,
-          annualIncomeMin: calc?.annualIncomeMin,
-          annualIncomeMax: calc?.annualIncomeMax,
+          // Always recalc "we'd pay" based on listing price (if price exists)
+          monthlyIncomeMin: carry?.monthlyIncomeMin,
+          monthlyIncomeMax: carry?.monthlyIncomeMax,
+          annualIncomeMin: carry?.annualIncomeMin,
+          annualIncomeMax: carry?.annualIncomeMax,
 
           roiNotes: x.roiNotes ? String(x.roiNotes) : undefined,
           vibeTitle: x.vibeTitle ? String(x.vibeTitle) : undefined,
@@ -381,74 +380,6 @@ setRatings(loaded);
     setReport(`JSON parse error: ${e?.message ?? String(e)}`);
   }
 }
-
-
-      const cleaned: Home[] = parsed
-        .filter((x) => x && typeof x === "object")
-      .map((x: any) => {
-  const price =
-    x.price != null && Number.isFinite(Number(x.price))
-      ? Number(x.price)
-      : undefined;
-
-  const carry =
-    price != null
-      ? estimatePaymentRange(price)
-      : {};
-
-  return {
-    id: String(x.id ?? slug(String(x.title ?? ""))),
-    region: String(x.region ?? "Uncategorized"),
-    title: String(x.title ?? ""),
-
-    beds: x.beds != null ? Number(x.beds) : undefined,
-    baths: x.baths != null ? Number(x.baths) : undefined,
-    sqft: x.sqft != null ? Number(x.sqft) : undefined,
-    price,
-
-    // Preserve user-entered values if present; otherwise auto-calc
-    monthlyIncomeMin:
-      x.monthlyIncomeMin != null
-        ? Number(x.monthlyIncomeMin)
-        : (carry as any).monthlyIncomeMin,
-
-    monthlyIncomeMax:
-      x.monthlyIncomeMax != null
-        ? Number(x.monthlyIncomeMax)
-        : (carry as any).monthlyIncomeMax,
-
-    annualIncomeMin:
-      x.annualIncomeMin != null
-        ? Number(x.annualIncomeMin)
-        : (carry as any).annualIncomeMin,
-
-    annualIncomeMax:
-      x.annualIncomeMax != null
-        ? Number(x.annualIncomeMax)
-        : (carry as any).annualIncomeMax,
-
-    roiNotes: x.roiNotes ? String(x.roiNotes) : undefined,
-    vibeTitle: x.vibeTitle ? String(x.vibeTitle) : undefined,
-    vibeBlurb: x.vibeBlurb ? String(x.vibeBlurb) : undefined,
-    mapUrl: x.mapUrl ? String(x.mapUrl) : undefined,
-    redfinUrl: x.redfinUrl ? String(x.redfinUrl) : undefined,
-    homeImageUrl: x.homeImageUrl ? String(x.homeImageUrl) : undefined,
-  };
-})
-
-        .filter((h) => h.id && h.region && h.title);
-
-      if (cleaned.length === 0) {
-        setReport("No valid homes found. Each home needs at least: id + title.");
-        return;
-      }
-
-      applyHomes(cleaned, `Replaced homes with JSON: ${cleaned.length} homes saved.`);
-    } catch (e: any) {
-      setReport(`JSON parse error: ${e?.message ?? String(e)}`);
-    }
-  }
-
   function applyCSVImport() {
     const rows = parseCSVorTSV(csvText);
     if (rows.length === 0) {
