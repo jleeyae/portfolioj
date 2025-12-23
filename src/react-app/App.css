@@ -446,4 +446,44 @@
 }
 .pp-hero-actions { pointer-events: none; }
 .pp-like { pointer-events: auto; }
+/* More spread out grid */
+.pp-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 40px;
+  padding: 40px 60px; /* Add breathing room around the grid */
+  max-width: 1600px; /* Optional: limit max width for better proportions */
+  margin: 0 auto;
+}
 
+/* Luxurious fonts */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Cormorant+Garamond:wght@300;400;500&display=swap');
+
+/* Region titles - make them elegant */
+.region-title, h1, h2 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  font-size: 2.5rem;
+}
+
+/* Property titles/addresses */
+.property-title, .property-card h3 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+}
+
+/* Body text - refined and readable */
+body, .property-description, p {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  letter-spacing: 0.3px;
+}
+
+/* Property cards - add more spacing */
+.property-card {
+  padding: 24px;
+  margin-bottom: 20px;
+}
