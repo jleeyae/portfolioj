@@ -30,7 +30,68 @@
 
   --greenBg: rgba(22, 163, 74, 0.18);
   --greenBorder: #22c55e;
+  
+/* Main header - distinctive color */
+.header, .main-header, h1.property-portfolio-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 3rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #D4AF37; /* Luxurious gold */
+  /* Alternative colors:
+     #E8D7C3 - Champagne gold
+     #C9A961 - Muted gold
+     #8B7355 - Bronze
+     #B8860B - Dark goldenrod
+  */
+}
 
+/* Header subtitle */
+.header-subtitle, .tagline {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.3rem;
+  color: #A0A0A0; /* Softer gray for subtitle */
+  letter-spacing: 0.5px;
+}
+
+/* Region titles - bigger and bold */
+.region-title, h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.8rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: #FFFFFF; /* Keep body text white */
+  margin-bottom: 30px;
+}
+
+/* Property addresses/titles - larger */
+.property-title, .property-card h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #FFFFFF;
+}
+
+/* Property details (beds, baths, sqft) */
+.property-details, .property-specs {
+  font-size: 1.2rem;
+  color: #CCCCCC;
+}
+
+/* Body text - bigger and readable */
+body, p, .description {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.2rem;
+  line-height: 1.7;
+  color: #E0E0E0; /* Slightly softer white for body */
+}
+
+/* Price text - make it prominent */
+.price {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #FFFFFF;
+}
   /* stars */
   --starFilled: #f5b301;
   --starEmpty: rgba(226, 232, 240, 0.35);

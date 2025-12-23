@@ -158,6 +158,54 @@ function parseCSVorTSV(text: string): Array<Record<string, string>> {
   }
   return rows;
 }
+// ---- PAYMENT ESTIMATOR (monthly/annual "we'd pay") ----
+// Assumptions (tweak anytime):
+// - 20% down
+// - 30-year fixed mortgage
+// - rate range to show min/max
+// - property tax + insurance estimated as % of purchase price
+const FIN_ASSUMPTIONS = {
+  downPaymentPct: 0.20,
+  termYears: 30,
+  rateMin: 0.0625, // 6.25%
+  rateMax: 0.0725, // 7.25%
+  taxRateAnnual: 0.010, // 1.0%/yr (rough)
+  insuranceRateAnnual: 0.0035, // 0.35%/yr (rough)
+  hoaMonthly: 0, // set if you want a baseline HOA
+};
+
+function pmtMonthly(principal: number, annualRate: number, years: number) {
+  const r = annualRate / 12;
+  const n = years * 12;
+  if (!Number.isFinite(principal) || principal <= 0) return 0;
+  if (!Number.isFinite(r) || r <= 0) return principal / n;
+  // standard amortization payment
+  return (principal * r) / (1 - Math.pow(1 + r, -n));
+}
+
+function estimatePaymentRange(price: number) {
+  const a = FIN_ASSUMPTIONS;
+  const down = price * a.downPaymentPct;
+  const loan = Math.max(0, price - down);
+
+  const taxMonthly = (price * a.taxRateAnnual) / 12;
+  const insMonthly = (price * a.insuranceRateAnnual) / 12;
+  const hoa = a.hoaMonthly;
+
+  const baseMin = pmtMonthly(loan, a.rateMin, a.termYears) + taxMonthly + insMonthly + hoa;
+  const baseMax = pmtMonthly(loan, a.rateMax, a.termYears) + taxMonthly + insMonthly + hoa;
+
+  // round to nice whole dollars
+  const monthlyIncomeMin = Math.round(baseMin);
+  const monthlyIncomeMax = Math.round(baseMax);
+
+  return {
+    monthlyIncomeMin,
+    monthlyIncomeMax,
+    annualIncomeMin: monthlyIncomeMin * 12,
+    annualIncomeMax: monthlyIncomeMax * 12,
+  };
+}
 
 export default function App() {
   const [homes, setHomes] = useState<Home[]>([]);
