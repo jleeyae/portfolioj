@@ -21,15 +21,15 @@
   --text-secondary: #6b6460;
   --header-color: #2c1810;
 
-  --accent: #4f46e5;
-  --accent-soft: #eef2ff;
+  --accent: #6d5dfc;
+  --accent-soft: rgba(109, 93, 252, 0.12);
 
   --radius-sm: 10px;
   --radius-md: 14px;
-  --radius-lg: 18px;
+  --radius-lg: 20px;
 
   --shadow-sm: 0 6px 18px rgba(0, 0, 0, 0.08);
-  --shadow-md: 0 14px 30px rgba(0, 0, 0, 0.12);
+  --shadow-md: 0 18px 44px rgba(0, 0, 0, 0.14);
 
   color-scheme: light;
 }
@@ -41,18 +41,18 @@ html[data-theme="dark"] {
 
   --text-primary: #f5f3f0;
   --text-secondary: #a89f98;
-  --header-color: #d4af37;
+  --header-color: #e9d8a6;
 
-  --accent-soft: rgba(79, 70, 229, 0.2);
+  --accent-soft: rgba(109, 93, 252, 0.25);
 
   --shadow-sm: 0 8px 22px rgba(0, 0, 0, 0.5);
-  --shadow-md: 0 16px 36px rgba(0, 0, 0, 0.6);
+  --shadow-md: 0 20px 48px rgba(0, 0, 0, 0.6);
 
   color-scheme: dark;
 }
 
 /* ================================
-   BASE + BACKGROUND TEXTURE
+   BASE + LUXURY BACKGROUND
 ================================ */
 
 html,
@@ -71,7 +71,7 @@ body {
   position: relative;
 }
 
-/* subtle premium background bubbles */
+/* Purple luxury bubbles */
 body::before {
   content: "";
   position: fixed;
@@ -79,26 +79,16 @@ body::before {
   z-index: -1;
   pointer-events: none;
   background:
-    radial-gradient(480px 480px at 12% 18%, rgba(79,70,229,0.06), transparent 60%),
-    radial-gradient(520px 520px at 88% 22%, rgba(37,99,235,0.05), transparent 65%),
-    radial-gradient(620px 620px at 50% 88%, rgba(236,72,153,0.05), transparent 70%);
+    radial-gradient(600px 600px at 12% 18%, rgba(109,93,252,0.08), transparent 65%),
+    radial-gradient(520px 520px at 88% 22%, rgba(124,58,237,0.06), transparent 65%),
+    radial-gradient(640px 640px at 50% 90%, rgba(236,72,153,0.06), transparent 70%);
 }
 
 html[data-theme="dark"] body::before {
   background:
-    radial-gradient(480px 480px at 12% 18%, rgba(99,102,241,0.18), transparent 60%),
-    radial-gradient(520px 520px at 88% 22%, rgba(56,189,248,0.12), transparent 65%),
-    radial-gradient(620px 620px at 50% 88%, rgba(244,114,182,0.12), transparent 70%);
-}
-
-a {
-  color: var(--accent);
-  text-decoration: none;
-  font-weight: 600;
-}
-
-a:hover {
-  text-decoration: underline;
+    radial-gradient(600px 600px at 12% 18%, rgba(109,93,252,0.22), transparent 65%),
+    radial-gradient(520px 520px at 88% 22%, rgba(99,102,241,0.18), transparent 65%),
+    radial-gradient(640px 640px at 50% 90%, rgba(244,114,182,0.16), transparent 70%);
 }
 
 /* ================================
@@ -116,7 +106,7 @@ a:hover {
   justify-content: space-between;
   align-items: flex-start;
   gap: 24px;
-  margin-bottom: 36px;
+  margin-bottom: 40px;
 }
 
 .pp-title {
@@ -144,49 +134,23 @@ a:hover {
 
 .pp-btn {
   border-radius: 999px;
-  padding: 8px 14px;
+  padding: 9px 16px;
   font-family: var(--font-body);
   font-weight: 700;
   background: var(--accent-soft);
   border: 1px solid transparent;
   cursor: pointer;
-}
-
-.pp-btn-primary {
-  background: var(--accent);
-  color: #fff;
+  transition: all 0.2s ease;
 }
 
 .pp-btn:hover {
   box-shadow: var(--shadow-sm);
+  transform: translateY(-1px);
 }
 
-/* ================================
-   REGIONS
-================================ */
-
-.pp-region {
-  margin-top: 56px;
-}
-
-.pp-region-head {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-  padding-bottom: 10px;
-  margin-bottom: 24px;
-}
-
-.pp-region-title {
-  font-family: var(--font-serif);
-  font-size: 2.2rem;
-  font-weight: 700;
-}
-
-.pp-region-count {
-  color: var(--text-secondary);
-  font-weight: 600;
+.pp-btn-primary {
+  background: linear-gradient(135deg, #6d5dfc, #8b5cf6);
+  color: #fff;
 }
 
 /* ================================
@@ -196,7 +160,7 @@ a:hover {
 .pp-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-  gap: 22px;
+  gap: 24px;
 }
 
 .pp-card {
@@ -210,12 +174,11 @@ a:hover {
 }
 
 .pp-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 18px 44px rgba(0,0,0,0.16);
+  transform: translateY(-4px);
 }
 
 /* ================================
-   HERO IMAGE
+   HERO
 ================================ */
 
 .pp-hero {
@@ -234,7 +197,7 @@ a:hover {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(to bottom, rgba(0,0,0,0.05), rgba(0,0,0,0.35));
+  background: linear-gradient(to bottom, rgba(0,0,0,0.05), rgba(0,0,0,0.45));
 }
 
 .pp-hero-actions {
@@ -246,12 +209,17 @@ a:hover {
 
 .pp-like {
   background: rgba(0,0,0,0.55);
-  color: #fff;
+  color: white;
   border-radius: 50%;
-  width: 34px;
-  height: 34px;
+  width: 36px;
+  height: 36px;
   border: none;
   cursor: pointer;
+  font-size: 18px;
+}
+
+.pp-like.is-on {
+  background: linear-gradient(135deg, #ec4899, #fb7185);
 }
 
 /* ================================
@@ -259,7 +227,7 @@ a:hover {
 ================================ */
 
 .pp-card-body {
-  padding: 16px 18px 20px;
+  padding: 18px 20px 22px;
   display: flex;
   flex-direction: column;
   gap: 14px;
@@ -272,11 +240,9 @@ a:hover {
 }
 
 .pp-meta {
-  display: flex;
-  gap: 8px;
   color: var(--text-secondary);
-  font-weight: 600;
   font-size: 0.95rem;
+  font-weight: 600;
 }
 
 /* ================================
@@ -297,7 +263,7 @@ a:hover {
 
 .pp-stat-label {
   font-size: 0.7rem;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--text-secondary);
   margin-bottom: 4px;
@@ -311,7 +277,7 @@ a:hover {
 }
 
 /* ================================
-   ROI NOTES
+   ROI
 ================================ */
 
 .pp-roi {
@@ -322,55 +288,6 @@ a:hover {
   font-size: 0.95rem;
 }
 
-html[data-theme="dark"] .pp-roi {
-  background: rgba(236,72,153,0.12);
-}
-
-/* ================================
-   VIBE + STARS
-================================ */
-
-.pp-vibe-title {
-  font-family: var(--font-serif);
-  font-weight: 700;
-}
-
-.pp-vibe-blurb {
-  color: var(--text-secondary);
-  font-size: 1rem;
-}
-
-.pp-stars {
-  display: flex;
-  gap: 6px;
-  margin-top: 6px;
-}
-
-.pp-star {
-  background: var(--bg-soft);
-  border: 1px solid rgba(0,0,0,0.12);
-  border-radius: 8px;
-  width: 34px;
-  height: 34px;
-  font-size: 1rem;
-  font-weight: 900;
-  cursor: pointer;
-  color: #9ca3af;
-}
-
-.pp-star.is-on {
-  background: #fff7ed;
-  border-color: #fed7aa;
-  color: #f59e0b;
-}
-
-.pp-star-clear {
-  background: transparent;
-  border: none;
-  color: #e11d48;
-  font-weight: 700;
-}
-
 /* ================================
    ACTIONS
 ================================ */
@@ -379,14 +296,6 @@ html[data-theme="dark"] .pp-roi {
   display: flex;
   gap: 10px;
   margin-top: auto;
-}
-
-.pp-linkbtn {
-  font-weight: 700;
-}
-
-.pp-linkbtn-primary {
-  color: var(--accent);
 }
 
 /* ================================
@@ -404,21 +313,5 @@ html[data-theme="dark"] .pp-roi {
 
   .pp-top {
     flex-direction: column;
-  }
-}
-
-/* ================================
-   PRINT
-================================ */
-
-@media print {
-  .pp-btn,
-  .pp-top-right {
-    display: none !important;
-  }
-
-  .pp-card {
-    break-inside: avoid;
-    box-shadow: none;
   }
 }

@@ -2,6 +2,10 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 import "./App.css";
 import { StarRating } from "./components/StarRating";
 
+/* ================================
+   TYPES
+================================ */
+
 type Home = {
   id: string;
   region: string;
@@ -22,11 +26,20 @@ type Home = {
   homeImageUrl?: string;
 };
 
+/* ================================
+   STORAGE KEYS
+================================ */
+
 const LS_HOMES = "pp.homes.v1";
 const LS_REGION = "pp.region.v1";
 const LS_HERO_OVERRIDES = "pp.heroOverrides.v1";
 const LS_THEME = "pp.theme.v1";
 const LS_RATINGS = "pp.ratings.v1";
+const LS_FAVORITES = "pp.favorites.v1";
+
+/* ================================
+   RATINGS
+================================ */
 
 function loadRatings(): Record<string, number> {
   try {
@@ -36,9 +49,14 @@ function loadRatings(): Record<string, number> {
   } catch {}
   return {};
 }
+
 function saveRatings(ratings: Record<string, number>) {
   localStorage.setItem(LS_RATINGS, JSON.stringify(ratings));
 }
+
+/* ================================
+   DEFAULT DATA
+================================ */
 
 const DEFAULT_HOMES: Home[] = [
   {
@@ -60,7 +78,8 @@ const DEFAULT_HOMES: Home[] = [
     mapUrl:
       "https://www.google.com/maps/search/?api=1&query=19813%20Lakehurst%20Loop%20Spicewood%20TX",
     redfinUrl: "https://www.redfin.com/",
-    homeImageUrl: "https://photos.zillowstatic.com/fp/20f5b7b63b700d484db70e0c98234a5c-p_f.jpg",
+    homeImageUrl:
+      "https://photos.zillowstatic.com/fp/20f5b7b63b700d484db70e0c98234a5c-p_f.jpg",
   },
   {
     id: "bee-creek-3507",
@@ -84,8 +103,12 @@ const DEFAULT_HOMES: Home[] = [
   },
 ];
 
+/* ================================
+   HELPERS
+================================ */
+
 function formatMoney(n?: number) {
-  if (n === undefined || n === null || Number.isNaN(n)) return "—";
+  if (n == null || Number.isNaN(n)) return "—";
   const abs = Math.abs(n);
   if (abs >= 1_000_000) return `$${(n / 1_000_000).toFixed(2)}M`;
   if (abs >= 1_000) return `$${Math.round(n).toLocaleString()}`;
@@ -99,131 +122,103 @@ function formatRange(min?: number, max?: number) {
 }
 
 function slug(s: string) {
-  return s
-    .toLowerCase()
-    .trim()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/(^-|-$)/g, "");
+  return s.toLowerCase().trim().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
 }
 
 function looksLikeImageUrl(url: string) {
-  return /^https?:\/\/.+/i.test(url) && /\.(png|jpe?g|webp|gif)(\?.*)?$/i.test(url.trim());
+  return /^https?:\/\/.+\.(png|jpe?g|webp|gif)(\?.*)?$/i.test(url.trim());
 }
 
-function parseCSVorTSV(text: string): Array<Record<string, string>> {
-  const trimmed = text.trim();
-  if (!trimmed) return [];
-
-  const lines = trimmed.split(/\r?\n/).filter(Boolean);
-  if (lines.length < 2) return [];
-
-  const delimiter = lines[0].includes("\t") ? "\t" : ",";
-
-  const splitLine = (line: string) => {
-    if (delimiter === "\t") return line.split("\t").map((x) => x.trim());
-    const out: string[] = [];
-    let cur = "";
-    let inQuotes = false;
-    for (let i = 0; i < line.length; i++) {
-      const ch = line[i];
-      if (ch === '"' && line[i + 1] === '"') {
-        cur += '"';
-        i++;
-        continue;
-      }
-      if (ch === '"') {
-        inQuotes = !inQuotes;
-        continue;
-      }
-      if (ch === delimiter && !inQuotes) {
-        out.push(cur.trim());
-        cur = "";
-      } else {
-        cur += ch;
-      }
-    }
-    out.push(cur.trim());
-    return out;
-  };
-
-  const headers = splitLine(lines[0]).map((h) => h.trim());
-  const rows: Array<Record<string, string>> = [];
-  for (let i = 1; i < lines.length; i++) {
-    const cols = splitLine(lines[i]);
-    const row: Record<string, string> = {};
-    headers.forEach((h, idx) => {
-      row[h] = (cols[idx] ?? "").trim();
-    });
-    rows.push(row);
-  }
-  return rows;
-}
-// ---- PAYMENT ESTIMATOR (monthly/annual "we'd pay") ----
-// Assumptions (tweak anytime):
-// - 20% down
-// - 30-year fixed mortgage
-// - rate range to show min/max
-// - property tax + insurance estimated as % of purchase price
-const FIN_ASSUMPTIONS = {
-  downPaymentPct: 0.20,
-  termYears: 30,
-  rateMin: 0.0625, // 6.25%
-  rateMax: 0.0725, // 7.25%
-  taxRateAnnual: 0.010, // 1.0%/yr (rough)
-  insuranceRateAnnual: 0.0035, // 0.35%/yr (rough)
-  hoaMonthly: 0, // set if you want a baseline HOA
-};
-
-function pmtMonthly(principal: number, annualRate: number, years: number) {
-  const r = annualRate / 12;
-  const n = years * 12;
-  if (!Number.isFinite(principal) || principal <= 0) return 0;
-  if (!Number.isFinite(r) || r <= 0) return principal / n;
-  // standard amortization payment
-  return (principal * r) / (1 - Math.pow(1 + r, -n));
-}
-function estimatePaymentRange(price: number) {
-  const downPct = 0.2;
-  const rateMin = 0.0625;
-  const rateMax = 0.0725;
-  const years = 30;
-
-  const loan = price * (1 - downPct);
-  const n = years * 12;
-
-  const pmt = (rate: number) => {
-    const r = rate / 12;
-    return (loan * r) / (1 - Math.pow(1 + r, -n));
-  };
-
-  const taxMonthly = (price * 0.01) / 12;
-  const insMonthly = (price * 0.0035) / 12;
-
-  const min = Math.round(pmt(rateMin) + taxMonthly + insMonthly);
-  const max = Math.round(pmt(rateMax) + taxMonthly + insMonthly);
-
-  return {
-    monthlyIncomeMin: min,
-    monthlyIncomeMax: max,
-    annualIncomeMin: min * 12,
-    annualIncomeMax: max * 12,
-  };
-}
+/* ================================
+   APP
+================================ */
 
 export default function App() {
   const [homes, setHomes] = useState<Home[]>([]);
-  const [regionFilter, setRegionFilter] = useState<string>("All regions");
-  const [isDark, setIsDark] = useState<boolean>(false);
+  const [regionFilter, setRegionFilter] = useState("All regions");
+  const [isDark, setIsDark] = useState(false);
+
   const [ratings, setRatings] = useState<Record<string, number>>({});
+  const [favorites, setFavorites] = useState<string[]>([]);
 
   const [isManageOpen, setIsManageOpen] = useState(false);
-  const [manageTab, setManageTab] = useState<"json" | "csv" | "heroes" | "export">("json");
+  const [manageTab, setManageTab] =
+    useState<"json" | "csv" | "heroes" | "export">("json");
+
   const [jsonText, setJsonText] = useState("");
   const [csvText, setCsvText] = useState("");
   const [heroesText, setHeroesText] = useState("");
-  const [report, setReport] = useState<string>("");
+  const [report, setReport] = useState("");
 
   const heroOverridesRef = useRef<Record<string, string>>({});
+
+  /* ================================
+     BOOTSTRAP
+  ================================ */
+
+  useEffect(() => {
+    const savedTheme = localStorage.getItem(LS_THEME);
+    const dark = savedTheme === "dark";
+    setIsDark(dark);
+    document.documentElement.dataset.theme = dark ? "dark" : "light";
+
+    setRatings(loadRatings());
+
+    const fav = localStorage.getItem(LS_FAVORITES);
+    if (fav) setFavorites(JSON.parse(fav));
+
+    const savedRegion = localStorage.getItem(LS_REGION);
+    if (savedRegion) setRegionFilter(savedRegion);
+
+    const savedHomes = localStorage.getItem(LS_HOMES);
+    setHomes(savedHomes ? JSON.parse(savedHomes) : DEFAULT_HOMES);
+
+    const savedHeroes = localStorage.getItem(LS_HERO_OVERRIDES);
+    if (savedHeroes) heroOverridesRef.current = JSON.parse(savedHeroes);
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem(LS_REGION, regionFilter);
+  }, [regionFilter]);
+
+  useEffect(() => {
+    localStorage.setItem(LS_FAVORITES, JSON.stringify(favorites));
+  }, [favorites]);
+
+  /* ================================
+     DERIVED
+  ================================ */
+
+  const regions = useMemo(() => {
+    const s = new Set<string>();
+    homes.forEach((h) => s.add(h.region || "Uncategorized"));
+    return ["All regions", ...Array.from(s).sort()];
+  }, [homes]);
+
+  const grouped = useMemo(() => {
+    const map = new Map<string, Home[]>();
+    homes
+      .filter((h) =>
+        regionFilter === "All regions" ? true : h.region === regionFilter
+      )
+      .forEach((h) => {
+        const r = h.region || "Uncategorized";
+        if (!map.has(r)) map.set(r, []);
+        map.get(r)!.push(h);
+      });
+    return Array.from(map.entries());
+  }, [homes, regionFilter]);
+
+  /* ================================
+     ACTIONS
+  ================================ */
+
+  function toggleTheme() {
+    const next = !isDark;
+    setIsDark(next);
+    document.documentElement.dataset.theme = next ? "dark" : "light";
+    localStorage.setItem(LS_THEME, next ? "dark" : "light");
+  }
 
   function setRating(id: string, value: number) {
     const v = Math.max(0, Math.min(5, Math.round(value)));
@@ -234,294 +229,52 @@ export default function App() {
     });
   }
 
-  // Load persisted state on boot
-  useEffect(() => {
-    const savedTheme = localStorage.getItem(LS_THEME);
-    const nextDark = savedTheme === "dark";
-    setIsDark(nextDark);
-    document.documentElement.dataset.theme = nextDark ? "dark" : "light";
-
-const loaded = loadRatings();
-for (const k of Object.keys(loaded)) {
-  loaded[k] = Math.max(0, Math.min(5, Math.round(Number(loaded[k]) || 0)));
-}
-setRatings(loaded);
-
-    const savedRegion = localStorage.getItem(LS_REGION);
-    if (savedRegion) setRegionFilter(savedRegion);
-
-    const savedHomes = localStorage.getItem(LS_HOMES);
-    let initialHomes: Home[] = DEFAULT_HOMES;
-    if (savedHomes) {
-      try {
-        const parsed = JSON.parse(savedHomes);
-        if (Array.isArray(parsed)) initialHomes = parsed;
-      } catch {}
-    }
-    setHomes(initialHomes);
-
-    const savedHeroes = localStorage.getItem(LS_HERO_OVERRIDES);
-    if (savedHeroes) {
-      try {
-        const parsed = JSON.parse(savedHeroes);
-        if (parsed && typeof parsed === "object") heroOverridesRef.current = parsed;
-      } catch {}
-    }
-  }, []);
-
-  // Persist region
-  useEffect(() => {
-    localStorage.setItem(LS_REGION, regionFilter);
-  }, [regionFilter]);
-
-  const regions = useMemo(() => {
-    const s = new Set<string>();
-    homes.forEach((h) => s.add(h.region || "Uncategorized"));
-    return ["All regions", ...Array.from(s).sort((a, b) => a.localeCompare(b))];
-  }, [homes]);
-
-  const filteredHomes = useMemo(() => {
-    if (regionFilter === "All regions") return homes;
-    return homes.filter((h) => (h.region || "Uncategorized") === regionFilter);
-  }, [homes, regionFilter]);
-
-  const grouped = useMemo(() => {
-    const map = new Map<string, Home[]>();
-    filteredHomes.forEach((h) => {
-      const r = h.region || "Uncategorized";
-      if (!map.has(r)) map.set(r, []);
-      map.get(r)!.push(h);
-    });
-    const out = Array.from(map.entries()).sort(([a], [b]) => a.localeCompare(b));
-    out.forEach(([, list]) => list.sort((x, y) => x.title.localeCompare(y.title)));
-    return out;
-  }, [filteredHomes]);
-
-  function toggleTheme() {
-    const next = !isDark;
-    setIsDark(next);
-    document.documentElement.dataset.theme = next ? "dark" : "light";
-    localStorage.setItem(LS_THEME, next ? "dark" : "light");
+  function toggleFavorite(id: string) {
+    setFavorites((prev) =>
+      prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]
+    );
   }
 
   function heroFor(h: Home) {
-    const overrides = heroOverridesRef.current || {};
-    const override = overrides[h.id];
-    if (override) return override;
-    if (h.homeImageUrl) return h.homeImageUrl;
-
-    const seed = encodeURIComponent(h.id || h.title || "home");
-    return `https://picsum.photos/seed/${seed}/1200/700`;
+    return (
+      heroOverridesRef.current[h.id] ||
+      h.homeImageUrl ||
+      `https://picsum.photos/seed/${encodeURIComponent(h.id)}/1200/700`
+    );
   }
 
-  function openManage(tab?: typeof manageTab) {
-    setReport("");
-    if (tab) setManageTab(tab);
-
+  function openManage(tab: typeof manageTab) {
+    setManageTab(tab);
     setJsonText(JSON.stringify(homes, null, 2));
-    setCsvText(
-      "id,region,title,beds,baths,sqft,price,monthlyIncomeMin,monthlyIncomeMax,annualIncomeMin,annualIncomeMax,homeImageUrl,mapUrl,redfinUrl,roiNotes,vibeTitle,vibeBlurb\n"
-    );
+    setCsvText("");
     setHeroesText("");
+    setReport("");
     setIsManageOpen(true);
   }
 
-  function applyHomes(nextHomes: Home[], note: string) {
-    setHomes(nextHomes);
-    localStorage.setItem(LS_HOMES, JSON.stringify(nextHomes));
-    setReport(note);
-  }
-function applyJSONReplace() {
-  try {
-    const parsed = JSON.parse(jsonText);
-    if (!Array.isArray(parsed)) {
-      setReport("JSON must be an array of homes.");
-      return;
-    }
-
-    const cleaned: Home[] = parsed
-      .filter((x: any) => x && typeof x === "object")
-      .map((x: any) => {
-        const price =
-          x.price != null && Number.isFinite(Number(x.price)) ? Number(x.price) : undefined;
-
-        const carry = price != null ? estimatePaymentRange(price) : undefined;
-
-        return {
-          id: String(x.id ?? slug(String(x.title ?? ""))),
-          region: String(x.region ?? "Uncategorized"),
-          title: String(x.title ?? ""),
-
-          beds: x.beds != null ? Number(x.beds) : undefined,
-          baths: x.baths != null ? Number(x.baths) : undefined,
-          sqft: x.sqft != null ? Number(x.sqft) : undefined,
-          price,
-
-          // Always recalc "we'd pay" based on listing price (if price exists)
-          monthlyIncomeMin: carry?.monthlyIncomeMin,
-          monthlyIncomeMax: carry?.monthlyIncomeMax,
-          annualIncomeMin: carry?.annualIncomeMin,
-          annualIncomeMax: carry?.annualIncomeMax,
-
-          roiNotes: x.roiNotes ? String(x.roiNotes) : undefined,
-          vibeTitle: x.vibeTitle ? String(x.vibeTitle) : undefined,
-          vibeBlurb: x.vibeBlurb ? String(x.vibeBlurb) : undefined,
-          mapUrl: x.mapUrl ? String(x.mapUrl) : undefined,
-          redfinUrl: x.redfinUrl ? String(x.redfinUrl) : undefined,
-          homeImageUrl: x.homeImageUrl ? String(x.homeImageUrl) : undefined,
-        };
-      })
-      .filter((h) => h.id && h.region && h.title);
-
-    if (cleaned.length === 0) {
-      setReport("No valid homes found. Each home needs at least: id + title.");
-      return;
-    }
-
-    applyHomes(cleaned, `Replaced homes with JSON: ${cleaned.length} homes saved.`);
-  } catch (e: any) {
-    setReport(`JSON parse error: ${e?.message ?? String(e)}`);
-  }
-}
-  function applyCSVImport() {
-  const rows = parseCSVorTSV(csvText);
-  if (rows.length === 0) {
-    setReport("No rows found. Make sure there is a header row + at least one data row.");
-    return;
-  }
-
-  const byId = new Map<string, Home>(homes.map((h) => [h.id, h]));
-  let updated = 0;
-  let added = 0;
-  let skipped = 0;
-
-  const num = (v: string) => {
-    const t = (v ?? "").trim();
-    if (!t) return undefined;
-    const n = Number(t.replace(/[$,]/g, ""));
-    return Number.isFinite(n) ? n : undefined;
-  };
-
-  for (const r of rows) {
-    const id = (r.id || r.ID || r.Id || "").trim();
-    const title = (r.title || r.Title || "").trim();
-    const region = (r.region || r.Region || "Uncategorized").trim();
-
-    if (!id || !title) {
-      skipped++;
-      continue;
-    }
-
-    const price = num(r.price ?? r.Price ?? "");
-    const calc = typeof price === "number" ? estimatePaymentRange(price) : undefined;
-
-    const patch: Home = {
-      id,
-      title,
-      region,
-      beds: num(r.beds ?? r.Beds ?? "") as any,
-      baths: num(r.baths ?? r.Baths ?? "") as any,
-      sqft: num(r.sqft ?? r.Sqft ?? r.SQFT ?? "") as any,
-      price,
-
-      // always recalc monthly/annual from price
-      monthlyIncomeMin: calc?.monthlyIncomeMin,
-      monthlyIncomeMax: calc?.monthlyIncomeMax,
-      annualIncomeMin: calc?.annualIncomeMin,
-      annualIncomeMax: calc?.annualIncomeMax,
-
-      roiNotes: (r.roiNotes ?? r.ROINotes ?? r.roi_notes ?? "").trim() || undefined,
-      vibeTitle: (r.vibeTitle ?? r.vibe_title ?? "").trim() || undefined,
-      vibeBlurb: (r.vibeBlurb ?? r.vibe_blurb ?? "").trim() || undefined,
-      mapUrl: (r.mapUrl ?? r.map_url ?? "").trim() || undefined,
-      redfinUrl: (r.redfinUrl ?? r.redfin_url ?? "").trim() || undefined,
-      homeImageUrl: (r.homeImageUrl ?? r.imageUrl ?? r.heroImageUrl ?? "").trim() || undefined,
-    };
-
-    const existing = byId.get(id);
-    if (existing) {
-      byId.set(id, { ...existing, ...patch });
-      updated++;
-    } else {
-      byId.set(id, patch);
-      added++;
-    }
-  }
-
-  const next = Array.from(byId.values());
-  applyHomes(
-    next,
-    `CSV import done. Updated: ${updated}, Added: ${added}, Skipped: ${skipped}. Total: ${next.length}.`
-  );
-}
-
-  function applyHeroImport() {
-    const lines = heroesText
-      .split(/\r?\n/)
-      .map((l) => l.trim())
-      .filter(Boolean);
-
-    if (lines.length === 0) {
-      setReport("No lines found. Paste: id | https://...jpg");
-      return;
-    }
-
-    const overrides = { ...(heroOverridesRef.current || {}) };
-    let saved = 0;
-    let bad = 0;
-
-    for (const line of lines) {
-      const parts = line.split(/\s*(\||,|:|\t)\s*/);
-      const id = (parts[0] ?? "").trim();
-      const url = (parts[2] ?? parts[1] ?? "").trim();
-      if (!id || !url || !looksLikeImageUrl(url)) {
-        bad++;
-        continue;
-      }
-      overrides[id] = url;
-      saved++;
-    }
-
-    heroOverridesRef.current = overrides;
-    localStorage.setItem(LS_HERO_OVERRIDES, JSON.stringify(overrides));
-    setReport(`Hero import done. Saved: ${saved}, Skipped: ${bad}.`);
-  }
-
-  function clearLocalEdits() {
-    localStorage.removeItem(LS_HOMES);
-    localStorage.removeItem(LS_HERO_OVERRIDES);
-    heroOverridesRef.current = {};
-    setRatings({});
-    setHomes(DEFAULT_HOMES);
-    setReport("Cleared local edits. Back to DEFAULT_HOMES.");
-  }
+  /* ================================
+     RENDER
+  ================================ */
 
   return (
     <div className="pp-page">
       <header className="pp-top">
-        <div className="pp-top-left">
+        <div>
           <h1 className="pp-title">Property Portfolio</h1>
-          <p className="pp-subtitle">A family space for vibes, math, and decisions.</p>
+          <p className="pp-subtitle">
+            A family space for vibes, math, and decisions.
+          </p>
         </div>
 
         <div className="pp-top-right">
-          <div className="pp-control">
-            <label className="pp-label" htmlFor="region">
-              Region
-            </label>
-            <select
-              id="region"
-              className="pp-select"
-              value={regionFilter}
-              onChange={(e) => setRegionFilter(e.target.value)}
-            >
-              {regions.map((r) => (
-                <option key={r} value={r}>
-                  {r}
-                </option>
-              ))}
-            </select>
-          </div>
+          <select
+            value={regionFilter}
+            onChange={(e) => setRegionFilter(e.target.value)}
+          >
+            {regions.map((r) => (
+              <option key={r}>{r}</option>
+            ))}
+          </select>
 
           <button className="pp-btn" onClick={toggleTheme}>
             {isDark ? "Light Mode" : "Dark Mode"}
@@ -537,265 +290,51 @@ function applyJSONReplace() {
         </div>
       </header>
 
-      <main className="pp-main">
-        {homes.length === 0 ? (
-          <div className="pp-empty">
-            <h2>No homes yet</h2>
-            <p>Click “Manage homes” to paste JSON or import CSV.</p>
-            <button className="pp-btn pp-btn-primary" onClick={() => openManage("json")}>
-              Add homes
-            </button>
-          </div>
-        ) : (
-          grouped.map(([region, list]) => (
-            <section key={region} className="pp-region" id={`region-${slug(region)}`}>
-              <div className="pp-region-head">
-                <h2 className="pp-region-title">{region}</h2>
-                <div className="pp-region-count">{list.length} homes</div>
-              </div>
+      <main>
+        {grouped.map(([region, list]) => (
+          <section key={region} className="pp-region">
+            <h2>{region}</h2>
 
-              <div className="pp-grid">
-                {list.map((h) => (
-                  <article key={h.id} className="pp-card">
-                    <div className="pp-hero">
-                      <img src={heroFor(h)} alt={h.title} loading="lazy" />
-                      <div className="pp-hero-actions">
-                        <button
-                          className="pp-like"
-                          title="Favorite (placeholder)"
-                          onClick={() => alert("Favorites can be added next 🙂")}
-                        >
-                          ♡
-                        </button>
-                      </div>
+            <div className="pp-grid">
+              {list.map((h) => (
+                <article key={h.id} className="pp-card">
+                  <div className="pp-hero">
+                    <img src={heroFor(h)} alt={h.title} />
+                    <div className="pp-hero-actions">
+                      <button
+                        className={`pp-like ${
+                          favorites.includes(h.id) ? "is-on" : ""
+                        }`}
+                        onClick={() => toggleFavorite(h.id)}
+                      >
+                        {favorites.includes(h.id) ? "♥" : "♡"}
+                      </button>
                     </div>
+                  </div>
 
-                    <div className="pp-card-body">
-                      <div className="pp-card-title">{h.title}</div>
+                  <div className="pp-card-body">
+                    <div className="pp-card-title">{h.title}</div>
 
-                      <div className="pp-meta">
-                        <span>{h.beds != null ? `${h.beds} bd` : "— bd"}</span>
-                        <span>•</span>
-                        <span>{h.baths != null ? `${h.baths} ba` : "— ba"}</span>
-                        <span>•</span>
-                        <span>{h.sqft != null ? `${h.sqft.toLocaleString()} sqft` : "— sqft"}</span>
-                      </div>
+                    <StarRating
+                      value={ratings[h.id] ?? 0}
+                      onChange={(v) => setRating(h.id, v)}
+                    />
 
-                      <div className="pp-stats">
-                        <div className="pp-stat">
-                          <div className="pp-stat-label">PRICE</div>
-                          <div className="pp-stat-value">{formatMoney(h.price)}</div>
-                        </div>
-                        <div className="pp-stat">
-                          <div className="pp-stat-label">MONTHLY</div>
-                          <div className="pp-stat-value">
-                            {formatRange(h.monthlyIncomeMin, h.monthlyIncomeMax)}
-                          </div>
-                        </div>
-                        <div className="pp-stat">
-                          <div className="pp-stat-label">ANNUAL</div>
-                          <div className="pp-stat-value">
-                            {formatRange(h.annualIncomeMin, h.annualIncomeMax)}
-                          </div>
-                        </div>
-                      </div>
-
-                      {h.roiNotes ? (
-                        <div className="pp-roi">
-                          <strong>ROI Notes:</strong> {h.roiNotes}
-                        </div>
-                      ) : null}
-
-                      {(h.vibeTitle || h.vibeBlurb) && (
-                        <div className="pp-vibe">
-                          <div className="pp-vibe-title">{h.vibeTitle ?? "Vibe"}</div>
-                          <div className="pp-vibe-blurb">{h.vibeBlurb ?? ""}</div>
-
-						<StarRating value={ratings[h.id] ?? 0} onChange={(v) => setRating(h.id, v)} />
-                        </div>
-                      )}
-
-                      <div className="pp-actions">
-                        <a className="pp-linkbtn" href={h.mapUrl || "#"} target="_blank" rel="noreferrer">
-                          Open in Maps
-                        </a>
-                        <a
-                          className="pp-linkbtn pp-linkbtn-primary"
-                          href={h.redfinUrl || "#"}
-                          target="_blank"
-                          rel="noreferrer"
-                        >
-                          Open in Redfin
-                        </a>
-                      </div>
-
-                      {/* ID removed from visible UI */}
+                    <div className="pp-actions">
+                      <a href={h.mapUrl} target="_blank" rel="noreferrer">
+                        Open in Maps
+                      </a>
+                      <a href={h.redfinUrl} target="_blank" rel="noreferrer">
+                        Open in Redfin
+                      </a>
                     </div>
-                  </article>
-                ))}
-              </div>
-            </section>
-          ))
-        )}
+                  </div>
+                </article>
+              ))}
+            </div>
+          </section>
+        ))}
       </main>
-
-      {isManageOpen && (
-        <div className="pp-modal-backdrop" onMouseDown={() => setIsManageOpen(false)}>
-          <div className="pp-modal" onMouseDown={(e) => e.stopPropagation()}>
-            <div className="pp-modal-head">
-              <div>
-                <div className="pp-modal-title">Manage homes</div>
-                <div className="pp-modal-sub">
-                  Updates save to your browser (localStorage). Use Export to commit into your repo later.
-                </div>
-              </div>
-              <button className="pp-btn" onClick={() => setIsManageOpen(false)}>
-                Close
-              </button>
-            </div>
-
-            <div className="pp-tabs">
-              <button
-                className={`pp-tab ${manageTab === "json" ? "active" : ""}`}
-                onClick={() => setManageTab("json")}
-              >
-                Paste JSON (replace)
-              </button>
-              <button
-                className={`pp-tab ${manageTab === "csv" ? "active" : ""}`}
-                onClick={() => setManageTab("csv")}
-              >
-                CSV/TSV (add or update)
-              </button>
-              <button
-                className={`pp-tab ${manageTab === "heroes" ? "active" : ""}`}
-                onClick={() => setManageTab("heroes")}
-              >
-                Hero images
-              </button>
-              <button
-                className={`pp-tab ${manageTab === "export" ? "active" : ""}`}
-                onClick={() => setManageTab("export")}
-              >
-                Export
-              </button>
-            </div>
-
-            <div className="pp-modal-body">
-              {manageTab === "json" && (
-                <>
-                  <p className="pp-help">
-                    Paste an array of homes. Must include at least <code>id</code> + <code>title</code>.
-                  </p>
-                  <textarea
-                    className="pp-textarea"
-                    value={jsonText}
-                    onChange={(e) => setJsonText(e.target.value)}
-                    spellCheck={false}
-                  />
-                  <div className="pp-row">
-                    <button className="pp-btn pp-btn-primary" onClick={applyJSONReplace}>
-                      Replace homes
-                    </button>
-                    <button className="pp-btn" onClick={clearLocalEdits}>
-                      Reset to defaults
-                    </button>
-                  </div>
-                </>
-              )}
-
-              {manageTab === "csv" && (
-                <>
-                  <p className="pp-help">
-                    Paste CSV or TSV with headers. Required: <code>id</code>, <code>title</code>.
-                  </p>
-                  <textarea
-                    className="pp-textarea"
-                    value={csvText}
-                    onChange={(e) => setCsvText(e.target.value)}
-                    spellCheck={false}
-                  />
-                  <div className="pp-row">
-                    <button className="pp-btn pp-btn-primary" onClick={applyCSVImport}>
-                      Import CSV/TSV
-                    </button>
-                    <button
-                      className="pp-btn"
-                      onClick={() => {
-                        const sample = homes
-                          .slice(0, 12)
-                          .map((h) => `${h.id}\t${h.region}\t${h.title}`)
-                          .join("\n");
-                        navigator.clipboard.writeText(sample);
-                        setReport("Copied sample ids/regions/titles to clipboard.");
-                      }}
-                    >
-                      Copy ID cheat-sheet
-                    </button>
-                  </div>
-                </>
-              )}
-
-              {manageTab === "heroes" && (
-                <>
-                  <p className="pp-help">
-                    Paste lines like: <code>lakehurst-loop | https://...jpg</code> (direct image URLs).
-                  </p>
-                  <textarea
-                    className="pp-textarea"
-                    value={heroesText}
-                    onChange={(e) => setHeroesText(e.target.value)}
-                    spellCheck={false}
-                  />
-                  <div className="pp-row">
-                    <button className="pp-btn pp-btn-primary" onClick={applyHeroImport}>
-                      Apply hero images
-                    </button>
-                    <button
-                      className="pp-btn"
-                      onClick={() => {
-                        localStorage.removeItem(LS_HERO_OVERRIDES);
-                        heroOverridesRef.current = {};
-                        setReport("Cleared hero overrides.");
-                      }}
-                    >
-                      Clear hero overrides
-                    </button>
-                  </div>
-                </>
-              )}
-
-              {manageTab === "export" && (
-                <>
-                  <p className="pp-help">Copy your current homes JSON.</p>
-                  <textarea
-                    className="pp-textarea"
-                    value={JSON.stringify(homes, null, 2)}
-                    readOnly
-                    spellCheck={false}
-                  />
-                  <div className="pp-row">
-                    <button
-                      className="pp-btn pp-btn-primary"
-                      onClick={() => {
-                        navigator.clipboard.writeText(JSON.stringify(homes, null, 2));
-                        setReport("Copied homes JSON to clipboard.");
-                      }}
-                    >
-                      Copy to clipboard
-                    </button>
-                    <button className="pp-btn" onClick={clearLocalEdits}>
-                      Reset to defaults
-                    </button>
-                  </div>
-                </>
-              )}
-
-              {report && <div className="pp-report">{report}</div>}
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 }
