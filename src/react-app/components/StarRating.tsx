@@ -6,7 +6,7 @@ export default function StarRating() {
 
   return (
     <div className="pp-stars">
-      {[1,2,3,4,5].map(n => (
+      {[1, 2, 3, 4, 5].map(n => (
         <span
           key={n}
           className={n <= (hover || value) ? "on" : ""}

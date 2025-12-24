@@ -3,7 +3,7 @@
   --card:#fff;
   --text:#5a4634;
   --muted:#9a8a77;
-  --pill:#9b744a;
+  --pill:#9b744ac0;
   --divider:#d7c3a3;
   --shadow:0 20px 60px rgba(0,0,0,.15);
 }
@@ -65,7 +65,7 @@ body {
   color:#fff;
   border:none;
   padding:12px 28px;
-  font-size:16px;
+  font-size:17px;
   border-radius:999px;
   box-shadow:var(--shadow);
   cursor:pointer;
@@ -84,16 +84,22 @@ body {
 .chevron.open { transform:rotate(-135deg); }
 
 .pp-carousel {
-  display:flex;
-  gap:32px;
-  overflow-x:auto;
-  padding:10px 0 30px;
-  scroll-snap-type:x mandatory;
-  justify-content:center;
+  display: flex;
+  gap: 48px;
+
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+
+  /* 🔑 THIS FIXES IT */
+  padding-left: calc(50vw - 400px);
+  padding-right: calc(50vw - 400px);
+
+  padding-top: 20px;
+  padding-bottom: 36px;
 }
 
 .pp-card {
-  flex:0 0 560px;
+  flex: 0 0 800px;
   background:var(--card);
   border-radius:20px;
   box-shadow:var(--shadow);
@@ -102,7 +108,7 @@ body {
 }
 
 .pp-image-wrap {
-  height:280px;
+  height:340px; /* +21% image height */
   overflow:hidden;
   cursor:zoom-in;
 }
@@ -120,7 +126,8 @@ body {
 }
 
 .pp-card-body {
-  padding:18px 22px;
+  padding: 26px 30px;
+  font-size: 1.08rem;
 }
 
 .pp-card-body a {
@@ -134,12 +141,12 @@ body {
 .pp-stats {
   display:grid;
   grid-template-columns:repeat(3,1fr);
-  gap:14px;
+  gap:20;
   margin-bottom:12px;
 }
 
 .pp-stats label {
-  font-size:11px;
+  font-size:16x;
   color:var(--muted);
   margin-bottom:6px;
   display:block;
@@ -175,4 +182,153 @@ body {
   max-width:90%;
   max-height:90%;
   border-radius:12px;
+}
+/* ============================================
+   REGION PILL HOVER — PREMIUM LIFT + GLOW
+   ============================================ */
+
+.pp-region-pill {
+  position: relative;
+  transition:
+    transform 220ms cubic-bezier(.2,.8,.2,1),
+    box-shadow 220ms cubic-bezier(.2,.8,.2,1),
+    background 220ms ease,
+    color 220ms ease;
+}
+
+.pp-region-pill:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 6px 18px rgba(160,120,70,0.35),
+    inset 0 0 0 1px rgba(255,255,255,0.15);
+}
+
+/* Gold shimmer sweep */
+.pp-region-pill::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    120deg,
+    transparent 30%,
+    rgba(255,255,255,0.18) 50%,
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity 180ms ease;
+  pointer-events: none;
+}
+
+.pp-region-pill:hover::after {
+  opacity: 1;
+}
+
+
+/* ============================================
+   HEADER HOVER — CINEMATIC SHEEN
+   ============================================ */
+
+.pp-header {
+  position: relative;
+  overflow: hidden;
+  transition: box-shadow 280ms ease;
+}
+
+.pp-header:hover {
+  box-shadow:
+    0 14px 40px rgba(0,0,0,0.35),
+    inset 0 -1px 0 rgba(255,255,255,0.06);
+}
+
+/* Soft moving light sweep */
+.pp-header::after {
+  content: "";
+  position: absolute;
+  top: -60%;
+  left: -40%;
+  width: 180%;
+  height: 220%;
+  background: radial-gradient(
+    circle at top left,
+    rgba(255,255,255,0.08),
+    transparent 55%
+  );
+  opacity: 0;
+  transition: opacity 300ms ease;
+  pointer-events: none;
+}
+
+.pp-header:hover::after {
+  opacity: 1;
+}
+
+
+/* ============================================
+   DARK MODE TUNING
+   ============================================ */
+
+[data-theme="dark"] .pp-region-pill:hover {
+  box-shadow:
+    0 8px 22px rgba(190,150,95,0.45),
+    inset 0 0 0 1px rgba(255,255,255,0.08);
+}
+
+[data-theme="dark"] .pp-header:hover {
+  box-shadow:
+    0 16px 48px rgba(0,0,0,0.55);
+}
+/* ======================================
+   HEADER — ABSOLUTE HOVER LOCK
+   (overrides all hover, pseudo, transitions)
+====================================== */
+
+/* Base header */
+.pp-header {
+  transition: none !important;
+  transform: none !important;
+  filter: none !important;
+  box-shadow: none !important;
+  animation: none !important;
+}
+
+/* Any hover state anywhere inside header */
+.pp-header:hover,
+.pp-header:hover *,
+.pp-header *:hover {
+  transition: none !important;
+  transform: none !important;
+  filter: none !important;
+  box-shadow: none !important;
+  animation: none !important;
+  background-position: initial !important;
+}
+
+/* Kill animated gradients / overlays */
+.pp-header::before,
+.pp-header::after,
+.pp-header:hover::before,
+.pp-header:hover::after {
+  content: none !important;
+  animation: none !important;
+  opacity: 1 !important;
+}
+
+/* Prevent scroll-linked or hover-linked effects */
+html:hover .pp-header,
+body:hover .pp-header {
+  transform: none !important;
+  filter: none !important;
+}
+.pp-carousel::-webkit-scrollbar {
+  height: 10px;
+}
+
+.pp-carousel::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.pp-carousel::-webkit-scrollbar-thumb {
+  background: var(--divider);
+  border-radius: 999px;
 }
