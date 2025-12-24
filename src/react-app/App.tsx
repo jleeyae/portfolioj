@@ -37,13 +37,23 @@ export default function App() {
   const [isDark, setIsDark] = useState(false);
   const [ratings, setRatings] = useState<Record<string, number>>({});
   const [collapsed, setCollapsed] = useState<Record<string, boolean>>({});
-  const [shortlistOnly, setShortlistOnly] = useState(false);
 
   useEffect(() => {
     fetch("/homes.json")
-      .then(r => r.json())
-      .then(setHomes);
+      .then((r) => {
+        if (!r.ok) throw new Error(`HTTP ${r.status}`);
+        return r.json();
+      })
+      .then((data: Home[]) => {
+        setHomes(data);
+      })
+      .catch((err) => {
+        console.error("Failed to load homes.json", err);
+        alert("Failed to load homes.json. Check JSON validity.");
+      });
+  }, []);
 
+  useEffect(() => {
     const t = localStorage.getItem(LS_THEME);
     if (t === "dark") {
       setIsDark(true);
@@ -59,10 +69,10 @@ export default function App() {
 
   useEffect(() => {
     if (!homes.length) return;
-    setCollapsed(prev => {
+    setCollapsed((prev) => {
       if (Object.keys(prev).length) return prev;
       const init: Record<string, boolean> = {};
-      homes.forEach(h => (init[h.region] = false));
+      homes.forEach((h) => (init[h.region] = true));
       return init;
     });
   }, [homes]);
@@ -71,9 +81,13 @@ export default function App() {
     localStorage.setItem(LS_COLLAPSE, JSON.stringify(collapsed));
   }, [collapsed]);
 
+  useEffect(() => {
+    localStorage.setItem(LS_RATINGS, JSON.stringify(ratings));
+  }, [ratings]);
+
   const grouped = useMemo(() => {
     const map = new Map<string, Home[]>();
-    homes.forEach(h => {
+    homes.forEach((h) => {
       if (!map.has(h.region)) map.set(h.region, []);
       map.get(h.region)!.push(h);
     });
@@ -88,33 +102,49 @@ export default function App() {
   }
 
   function setRating(id: string, value: number) {
-    const next = { ...ratings, [id]: value };
-    if (value === 0) delete next[id];
-    setRatings(next);
-    localStorage.setItem(LS_RATINGS, JSON.stringify(next));
+    const v = Math.max(0, Math.min(5, value));
+    setRatings((p) => {
+      const next = { ...p };
+      if (v === 0) delete next[id];
+      else next[id] = v;
+      return next;
+    });
   }
 
   function setAll(expand: boolean) {
+  setCollapsed(() => {
     const next: Record<string, boolean> = {};
-    grouped.forEach(([r]) => (next[r] = !expand));
-    setCollapsed(next);
-  }
+    grouped.forEach(([region]) => {
+      next[region] = !expand;
+    });
+    return next;
+  });
+}
 
   return (
     <div className="pp-page">
       <header className="pp-atlas-header">
         <div className="pp-atlas-title-wrap">
           <h1 className="pp-atlas-title">Property Atlas</h1>
-          <p className="pp-atlas-sub">A living map of places, prices, and possibilities</p>
+          <p className="pp-atlas-sub">
+            A living map of places, prices, and possibilities
+          </p>
         </div>
 
         <div className="pp-atlas-actions">
           <button className="pp-btn" onClick={toggleTheme}>
             {isDark ? "Light Mode" : "Dark Mode"}
           </button>
-          <button className="pp-btn" onClick={() => setAll(true)}>Expand All</button>
-          <button className="pp-btn" onClick={() => setAll(false)}>Collapse All</button>
-          <button className="pp-btn pp-btn-primary" onClick={() => window.print()}>
+          <button className="pp-btn" onClick={() => setAll(true)}>
+            Expand All
+          </button>
+          <button className="pp-btn" onClick={() => setAll(false)}>
+            Collapse All
+          </button>
+          <button
+            className="pp-btn pp-btn-primary"
+            onClick={() => window.print()}
+          >
             Print PDF
           </button>
         </div>
@@ -127,7 +157,9 @@ export default function App() {
             <section key={region} className="pp-region">
               <button
                 className="pp-region-header"
-                onClick={() => setCollapsed(p => ({ ...p, [region]: !p[region] }))}
+                onClick={() =>
+                  setCollapsed((p) => ({ ...p, [region]: !p[region] }))
+                }
               >
                 <span>{region}</span>
                 <span className={`pp-chevron ${isClosed ? "" : "open"}`} />
@@ -135,12 +167,27 @@ export default function App() {
 
               <div className={`pp-region-body ${isClosed ? "collapsed" : ""}`}>
                 <div className="pp-grid">
-                  {list.map(h => (
+                  {list.map((h) => (
                     <article key={h.id} className="pp-card">
-                      <div className="pp-map-preview">Map Preview</div>
+                      <div className="pp-map-preview">
+                        {h.homeImageUrl ? (
+                          <img
+                            src={h.homeImageUrl}
+                            alt={h.title}
+                            loading="lazy"
+                          />
+                        ) : (
+                          <span>Map Preview</span>
+                        )}
+                      </div>
 
                       <div className="pp-card-body">
-                        <a className="pp-card-title" href={h.redfinUrl} target="_blank">
+                        <a
+                          className="pp-card-title"
+                          href={h.redfinUrl}
+                          target="_blank"
+                          rel="noreferrer"
+                        >
                           {h.title}
                         </a>
 
@@ -151,17 +198,23 @@ export default function App() {
                           </div>
                           <div>
                             <div className="pp-stat-label">Monthly</div>
-                            {formatRange(h.monthlyIncomeMin, h.monthlyIncomeMax)}
+                            {formatRange(
+                              h.monthlyIncomeMin,
+                              h.monthlyIncomeMax
+                            )}
                           </div>
                           <div>
                             <div className="pp-stat-label">Annual</div>
-                            {formatRange(h.annualIncomeMin, h.annualIncomeMax)}
+                            {formatRange(
+                              h.annualIncomeMin,
+                              h.annualIncomeMax
+                            )}
                           </div>
                         </div>
 
                         <StarRating
                           value={ratings[h.id] ?? 0}
-                          onChange={v => setRating(h.id, v)}
+                          onChange={(v) => setRating(h.id, v)}
                         />
                       </div>
                     </article>

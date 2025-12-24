@@ -1,25 +1,29 @@
+import { useState } from "react";
+
 type Props = {
   value: number;
   onChange: (v: number) => void;
 };
 
 export function StarRating({ value, onChange }: Props) {
+  const [hover, setHover] = useState<number | null>(null);
+
   return (
-    <div className="pp-stars">
-      {[1, 2, 3, 4, 5].map(n => (
-        <button
-          key={n}
-          className={`pp-star ${value >= n ? "on" : ""}`}
-          onClick={() => onChange(n)}
-        >
-          ★
-        </button>
-      ))}
-      {value > 0 && (
-        <button className="pp-clear" onClick={() => onChange(0)}>
-          Clear
-        </button>
-      )}
+    <div className="star-row">
+      {[1,2,3,4,5].map(n => {
+        const filled = hover != null ? n <= hover : n <= value;
+        return (
+          <span
+            key={n}
+            className={`star ${filled ? "filled" : ""}`}
+            onMouseEnter={() => setHover(n)}
+            onMouseLeave={() => setHover(null)}
+            onClick={() => onChange(n)}
+          >
+            ★
+          </span>
+        );
+      })}
     </div>
   );
 }

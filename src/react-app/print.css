@@ -1,6 +1,21 @@
-* { box-sizing: border-box; }
-html, body { height: 100%; }
-body {
-  margin: 0;
-  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+@media print {
+  body {
+    background: #fff !important;
+    color: #000 !important;
+  }
+
+  .pp-atlas-header,
+  .pp-btn,
+  .pp-region-header {
+    display: none !important;
+  }
+
+  .pp-card {
+    box-shadow: none !important;
+    break-inside: avoid;
+  }
+
+  .pp-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
