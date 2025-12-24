@@ -1,73 +1,37 @@
-import { StarRating } from "./StarRating";
+import StarRating from "./StarRating";
 
-export type Home = {
-  id: string;
-  title: string;
-  price?: number;
-  monthlyIncomeMin?: number;
-  monthlyIncomeMax?: number;
-  annualIncomeMin?: number;
-  annualIncomeMax?: number;
-  redfinUrl?: string;
-  homeImageUrl?: string;
-};
-
-type Props = {
-  home: Home;
-  rating: number;
-  onRate: (v: number) => void;
-};
-
-export function HomeCard({ home, rating, onRate }: Props) {
+export default function HomeCard({ home, onImageClick }: any) {
   return (
     <article className="pp-card">
-      <div className="pp-image-frame">
-        {home.homeImageUrl ? (
-          <img
-            src={home.homeImageUrl}
-            alt={home.title}
-            loading="lazy"
-            className="pp-card-image"
-          />
-        ) : (
-          <div className="pp-image-skeleton" />
-        )}
+      <div className="pp-image-wrap" onClick={onImageClick}>
+        <img
+          src={home.homeImageUrl}
+          alt={home.title}
+          loading="lazy"
+        />
       </div>
 
       <div className="pp-card-body">
-        <a
-          href={home.redfinUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="pp-card-title"
-        >
+        <a href={home.redfinUrl} target="_blank" rel="noreferrer">
           {home.title}
         </a>
 
         <div className="pp-stats">
           <div>
             <label>Price</label>
-            <div>${home.price?.toLocaleString()}</div>
+            <span>$ {(home.price / 1_000_000).toFixed(2)}M</span>
           </div>
-
           <div>
             <label>Monthly</label>
-            <div>
-              ${home.monthlyIncomeMin?.toLocaleString()}–
-              {home.monthlyIncomeMax?.toLocaleString()}
-            </div>
+            <span>$ {home.monthlyIncomeMin?.toLocaleString()}</span>
           </div>
-
           <div>
             <label>Annual</label>
-            <div>
-              ${home.annualIncomeMin?.toLocaleString()}–
-              {home.annualIncomeMax?.toLocaleString()}
-            </div>
+            <span>$ {(home.annualIncomeMin / 1000).toFixed(0)}k</span>
           </div>
         </div>
 
-        <StarRating value={rating} onChange={onRate} />
+        <StarRating />
       </div>
     </article>
   );
