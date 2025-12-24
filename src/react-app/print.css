@@ -1,21 +1,5 @@
 @media print {
-  body {
-    background: #fff !important;
-    color: #000 !important;
-  }
-
-  .pp-atlas-header,
-  .pp-btn,
-  .pp-region-header {
-    display: none !important;
-  }
-
-  .pp-card {
-    box-shadow: none !important;
-    break-inside: avoid;
-  }
-
-  .pp-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
+  body { background: #fff; color: #000; }
+  .pp-actions, .pp-region-pill, .pp-stars { display: none !important; }
+  .pp-card { box-shadow: none; border: 1px solid #ccc; }
 }

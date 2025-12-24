@@ -1,29 +1,40 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-type Props = {
-  value: number;
-  onChange: (v: number) => void;
-};
+const LS_RATINGS = "pp.ratings.v1";
 
-export function StarRating({ value, onChange }: Props) {
-  const [hover, setHover] = useState<number | null>(null);
+export default function StarRating({ homeId }: { homeId: string }) {
+  const [value, setValue] = useState(0);
+  const [hover, setHover] = useState(0);
+
+  useEffect(() => {
+    const saved = localStorage.getItem(LS_RATINGS);
+    if (saved) {
+      const data = JSON.parse(saved);
+      setValue(data[homeId] ?? 0);
+    }
+  }, [homeId]);
+
+  function update(v: number) {
+    const saved = JSON.parse(localStorage.getItem(LS_RATINGS) || "{}");
+    if (v === 0) delete saved[homeId];
+    else saved[homeId] = v;
+    localStorage.setItem(LS_RATINGS, JSON.stringify(saved));
+    setValue(v);
+  }
 
   return (
-    <div className="star-row">
-      {[1,2,3,4,5].map(n => {
-        const filled = hover != null ? n <= hover : n <= value;
-        return (
-          <span
-            key={n}
-            className={`star ${filled ? "filled" : ""}`}
-            onMouseEnter={() => setHover(n)}
-            onMouseLeave={() => setHover(null)}
-            onClick={() => onChange(n)}
-          >
-            ★
-          </span>
-        );
-      })}
+    <div className="pp-stars">
+      {[1, 2, 3, 4, 5].map(i => (
+        <span
+          key={i}
+          className={`star ${(hover || value) >= i ? "filled" : ""}`}
+          onMouseEnter={() => setHover(i)}
+          onMouseLeave={() => setHover(0)}
+          onClick={() => update(i === value ? 0 : i)}
+        >
+          ★
+        </span>
+      ))}
     </div>
   );
 }
