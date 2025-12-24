@@ -1,73 +1,105 @@
-/* =========================================================
-   Property Portfolio — Final Refined Luxury
-   ========================================================= */
-
-@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Cormorant+Garamond:wght@400;600&display=swap");
-
 :root {
-  --font-serif: "Playfair Display", serif;
-  --font-body: "Cormorant Garamond", serif;
-
-  --bg-page: #faf9f7;
-  --bg-card: #ffffff;
-  --bg-soft: #f5f3f0;
-
-  --text-primary: #1a1614;
-  --text-secondary: #6b6460;
-  --header-color: #2c1810;
-
-  --accent: #6d5dfc;
-  --accent-soft: rgba(109, 93, 252, 0.12);
-
-  --radius-md: 14px;
-  --radius-lg: 20px;
-
-  --shadow-md: 0 18px 44px rgba(0, 0, 0, 0.14);
+  --bg-page: #f6f1e9;
+  --bg-card: #fffaf2;
+  --bg-bubble: #efe4d6;
+  --bg-header: linear-gradient(135deg, #8b6438, #c9a46b);
+  --text-primary: #1f1a14;
+  --text-secondary: #6a5c4b;
+  --accent: #b8894b;
+  --shadow: 0 20px 40px rgba(0,0,0,0.15);
 }
 
 html[data-theme="dark"] {
-  --bg-page: #0f0d0b;
-  --bg-card: #1a1614;
-  --bg-soft: #24201c;
-
-  --text-primary: #f5f3f0;
-  --text-secondary: #a89f98;
-  --header-color: #e9d8a6;
+  --bg-page: #0f0d0a;
+  --bg-card: #191510;
+  --bg-bubble: #2a2219;
+  --bg-header: linear-gradient(135deg, #3b2a16, #6b4c2a);
+  --text-primary: #f5efe6;
+  --text-secondary: #cbbba7;
+  --accent: #d1a96a;
 }
 
 body {
   margin: 0;
-  font-family: var(--font-body);
   background: var(--bg-page);
   color: var(--text-primary);
+  font-family: "Cormorant Garamond", serif;
 }
 
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  background:
-    radial-gradient(600px 600px at 15% 20%, rgba(109,93,252,0.1), transparent 65%),
-    radial-gradient(600px 600px at 85% 30%, rgba(236,72,153,0.08), transparent 65%);
+.pp-atlas-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  margin: 24px;
+  padding: 36px;
+  border-radius: 24px;
+  background: var(--bg-header);
+  box-shadow: var(--shadow);
 }
 
-/* Layout */
-.pp-page {
-  max-width: 1200px;
-  margin: auto;
-  padding: 28px 20px 60px;
-}
-
-.pp-top {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 40px;
-}
-
-.pp-title {
-  font-family: var(--font-serif);
+.pp-atlas-title {
   font-size: 3rem;
+  margin: 0;
+}
+
+.pp-atlas-sub {
+  margin-top: 6px;
+  color: var(--text-secondary);
+}
+
+.pp-atlas-actions {
+  margin-top: 20px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.pp-btn {
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: none;
+  background: rgba(255,255,255,0.18);
+  color: inherit;
+  cursor: pointer;
+}
+
+.pp-btn-primary {
+  background: var(--accent);
+  color: #fff;
+}
+
+.pp-region-header {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 18px;
+  border-radius: 999px;
+  background: var(--bg-bubble);
+  font-size: 1.6rem;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 16px;
+}
+
+.pp-chevron {
+  width: 10px;
+  height: 10px;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(45deg);
+  transition: transform 200ms ease;
+}
+
+.pp-chevron.open {
+  transform: rotate(-135deg);
+}
+
+.pp-region-body {
+  transition: grid-template-rows 300ms ease, opacity 200ms ease;
+}
+
+.pp-region-body.collapsed {
+  display: none;
 }
 
 .pp-grid {
@@ -78,259 +110,77 @@ body::before {
 
 .pp-card {
   background: var(--bg-card);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-md);
+  border-radius: 18px;
+  box-shadow: var(--shadow);
   overflow: hidden;
+  transition: transform 220ms ease, box-shadow 220ms ease;
 }
 
-/* Hero */
-.pp-hero {
-  position: relative;
-  height: 220px;
+.pp-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 26px 60px rgba(0,0,0,0.25);
 }
 
-.pp-hero img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+.pp-map-preview {
+  height: 160px;
+  background: linear-gradient(135deg, #6b4c2a, #a07a45);
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.12em;
 }
 
-.pp-like {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  background: rgba(0,0,0,0.6);
-  color: white;
-  border-radius: 50%;
-  width: 36px;
-  height: 36px;
-  border: none;
-  font-size: 18px;
-}
-
-.pp-like.is-on {
-  background: linear-gradient(135deg, #ec4899, #fb7185);
-}
-
-/* Card */
 .pp-card-body {
   padding: 18px;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
+  font-size: 1.15rem;
 }
 
 .pp-card-title {
-  font-family: var(--font-serif);
   font-size: 1.4rem;
-}
-
-.pp-title-link {
-  color: inherit;
   text-decoration: none;
-  border-bottom: 1px solid rgba(109,93,252,0.3);
+  color: inherit;
 }
 
-.pp-title-link:hover {
-  color: var(--accent);
-}
-
-/* Stats */
 .pp-stats {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  margin-top: 12px;
   gap: 10px;
 }
 
-.pp-stat {
-  background: var(--bg-soft);
-  padding: 10px;
-  border-radius: var(--radius-md);
-}
-
 .pp-stat-label {
-  font-size: 0.7rem;
-  text-transform: uppercase;
+  font-size: 0.75rem;
   color: var(--text-secondary);
+  text-transform: uppercase;
 }
 
-.pp-stat-value {
-  font-family: var(--font-serif);
-  font-weight: 800;
-}
-
-/* Stars */
 .pp-stars {
+  margin-top: 14px;
   display: flex;
+  align-items: center;
   gap: 6px;
 }
 
 .pp-star {
-  width: 34px;
-  height: 34px;
-  display: grid;
-  place-items: center;
-  font-size: 18px;
-  border-radius: 8px;
-  background: var(--bg-soft);
-  color: #9ca3af;
-  border: 1px solid rgba(0,0,0,0.12);
-  cursor: pointer;
-}
-
-.pp-star.is-on {
-  color: #f59e0b;
-  background: #fff7ed;
-  border-color: #fed7aa;
-}
-
-.pp-actions {
-  display: flex;
-  gap: 10px;
-  margin-top: auto;
-}
-/* ================================
-   CREATIVE HEADER
-================================ */
-
-.pp-header-hero {
-  padding: 72px 20px 56px;
-  margin-bottom: 48px;
-  background:
-    radial-gradient(800px 400px at 10% 10%, rgba(109,93,252,0.18), transparent),
-    radial-gradient(600px 300px at 90% 20%, rgba(236,72,153,0.16), transparent);
-}
-
-.pp-header-inner {
-  max-width: 1200px;
-  margin: auto;
-}
-
-.pp-header-title {
-  font-family: var(--font-serif);
-  font-size: 3.4rem;
-  margin: 0;
-}
-
-.pp-header-sub {
-  color: var(--text-secondary);
-  font-size: 1.25rem;
-  margin-top: 8px;
-}
-
-.pp-header-actions {
-  display: flex;
-  gap: 12px;
-  margin-top: 24px;
-}
-
-/* ================================
-   COLLAPSIBLE REGIONS
-================================ */
-
-.pp-region-header {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-family: var(--font-serif);
-  font-size: 1.8rem;
-  background: transparent;
+  background: none;
   border: none;
-  padding: 12px 4px;
+  font-size: 1.4rem;
+  color: #bbb;
   cursor: pointer;
 }
 
-.pp-region-header:hover {
+.pp-star.on {
   color: var(--accent);
 }
 
-.pp-region-meta {
-  font-size: 0.9rem;
-  color: var(--text-secondary);
-}
-
-/* ================================
-   MANAGE MODAL
-================================ */
-
-.pp-modal-backdrop {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.55);
-  display: grid;
-  place-items: center;
-  z-index: 100;
-}
-
-.pp-modal {
-  background: var(--bg-card);
-  padding: 24px;
-  border-radius: 16px;
-  width: min(720px, 90vw);
-  box-shadow: var(--shadow-md);
-}
-
-.pp-textarea {
-  width: 100%;
-  min-height: 140px;
-  margin-bottom: 16px;
-  padding: 10px;
-  font-family: monospace;
-}
-
-
-/* ================================
-   COLLAPSIBLE REGIONS
-================================ */
-
-.pp-region-header {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-family: var(--font-serif);
-  font-size: 1.8rem;
-  background: transparent;
+.pp-clear {
+  margin-left: 10px;
+  padding: 4px 10px;
+  border-radius: 999px;
   border: none;
-  padding: 12px 4px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 0.75rem;
   cursor: pointer;
-}
-
-.pp-region-header:hover {
-  color: var(--accent);
-}
-
-.pp-region-meta {
-  font-size: 0.9rem;
-  color: var(--text-secondary);
-}
-
-/* ================================
-   MANAGE MODAL
-================================ */
-
-.pp-modal-backdrop {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.55);
-  display: grid;
-  place-items: center;
-  z-index: 100;
-}
-
-.pp-modal {
-  background: var(--bg-card);
-  padding: 24px;
-  border-radius: 16px;
-  width: min(720px, 90vw);
-  box-shadow: var(--shadow-md);
-}
-
-.pp-textarea {
-  width: 100%;
-  min-height: 140px;
-  margin-bottom: 16px;
-  padding: 10px;
-  font-family: monospace;
 }
