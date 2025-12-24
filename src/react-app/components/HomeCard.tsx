@@ -1,7 +1,6 @@
-import { useState } from "react";
 import { StarRating } from "./StarRating";
 
-interface Home {
+export type Home = {
   id: string;
   title: string;
   price?: number;
@@ -11,31 +10,24 @@ interface Home {
   annualIncomeMax?: number;
   redfinUrl?: string;
   homeImageUrl?: string;
-}
+};
 
-interface HomeCardProps {
+type Props = {
   home: Home;
   rating: number;
   onRate: (v: number) => void;
-}
+};
 
-export function HomeCard({ home, rating, onRate }: HomeCardProps) {
-  const [hovered, setHovered] = useState(false);
-
+export function HomeCard({ home, rating, onRate }: Props) {
   return (
-    <article
-      className="pp-card"
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-    >
-      {/* IMAGE PARALLAX WRAPPER */}
+    <article className="pp-card">
       <div className="pp-image-frame">
         {home.homeImageUrl ? (
           <img
             src={home.homeImageUrl}
             alt={home.title}
             loading="lazy"
-            className={`pp-card-image ${hovered ? "is-hovered" : ""}`}
+            className="pp-card-image"
           />
         ) : (
           <div className="pp-image-skeleton" />
@@ -57,6 +49,7 @@ export function HomeCard({ home, rating, onRate }: HomeCardProps) {
             <label>Price</label>
             <div>${home.price?.toLocaleString()}</div>
           </div>
+
           <div>
             <label>Monthly</label>
             <div>
@@ -64,6 +57,7 @@ export function HomeCard({ home, rating, onRate }: HomeCardProps) {
               {home.monthlyIncomeMax?.toLocaleString()}
             </div>
           </div>
+
           <div>
             <label>Annual</label>
             <div>
