@@ -1,4 +1,16 @@
 [
+    {
+    "id": "ranchos-palos-verdes",
+    "region": "California · Ranchos Palos Verdes",
+    "title": "3300 Palos Verdes Dr W, Rancho Palos Verdes, CA 90275",
+    "price": 13880000,
+    "monthlyIncomeMin": 115960,
+    "monthlyIncomeMax": 115960,
+    "annualIncomeMin": 1391520,
+    "annualIncomeMax": 1391520,
+    "redfinUrl": "https://www.redfin.com/CA/Rancho-Palos-Verdes/3300-Palos-Verdes-Dr-W-90275/home/7744638",
+    "homeImageUrl": "https://ssl.cdn-redfin.com/photo/45/mbpaddedwide/938/genMid.WS25170938_38_0.webp"
+  },
   {
     "id": "Modjeska-canyon",
     "region": "California · Silverado",
