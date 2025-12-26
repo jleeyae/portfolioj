@@ -384,6 +384,18 @@
     "redfinUrl": "https://www.redfin.com/NY/Port-Washington/12-Sloanes-Ct-11050/home/20569389",
     "homeImageUrl": "https://ssl.cdn-redfin.com/photo/269/bigphoto/219/902219_6_0.webp"
   },
+      {
+    "id": "north-shore",
+    "region": "New York · Purchase",
+    "title": "2007 A/B Purchase St, Purchase, NY 10577",
+    "price": "4500000",
+    "monthlyIncomeMin": 55900,
+    "monthlyIncomeMax": 55900,
+    "annualIncomeMin": 670800,
+    "annualIncomeMax": 670800
+    "redfinUrl": "https://www.redfin.com/NY/Purchase/2007-A-B-Purchase-St-10577/home/195414621",
+    "homeImageUrl": "https://ssl.cdn-redfin.com/photo/269/bigphoto/181/848181_0.webp"
+  },
   {
     "id": "spirit-lake-austin",
     "region": "Texas · Austin",
