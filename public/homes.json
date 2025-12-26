@@ -8,7 +8,6 @@
     "monthlyIncomeMax": 108000,
     "annualIncomeMin": 1296000,
     "annualIncomeMax": 1296000,
-    "mapUrl": "https://www.google.com/maps/search/?api=1&query=1800+Triple+Creek+Ranch+Rd+Silverthorne+CO",
     "redfinUrl": "https://www.redfin.com/CO/Silverthorne/1800-Triple-Creek-Ranch-Rd-80498/home/186244388",
     "homeImageUrl": "https://ssl.cdn-redfin.com/photo/420/bigphoto/620/SS6370620_13_I.webp"
   },
@@ -21,7 +20,6 @@
     "monthlyIncomeMax": 16500,
     "annualIncomeMin": 192000,
     "annualIncomeMax": 198000,
-    "mapUrl": "https://www.google.com/maps/search/?api=1&query=2244+Johnson+Rd+Silverthorne+CO",
     "redfinUrl": "https://www.redfin.com/CO/Silverthorne/2244-Johnson-Rd-80498/home/77616059",
     "homeImageUrl": "https://ssl.cdn-redfin.com/photo/94/bigphoto/056/7787056_43_1.webp"
   },
@@ -34,7 +32,6 @@
   "monthlyIncomeMax": 86000,
   "annualIncomeMin": 1032000,
   "annualIncomeMax": 1032000,
-  "mapUrl": "https://www.google.com/maps/search/?api=1&query=6686+Jay+Rd+Boulder+CO",
   "redfinUrl": "https://www.redfin.com/CO/Boulder/6686-Jay-Rd-80301/home/35678469",
   "homeImageUrl": "https://ssl.cdn-redfin.com/photo/91/bigphoto/533/1043533_27_3.webp"
 },
@@ -48,7 +45,6 @@
     "monthlyIncomeMax": 64000,
     "annualIncomeMin": 768000,
     "annualIncomeMax": 768000,
-    "mapUrl": "https://www.google.com/maps/search/?api=1&query=250+Sallie+Barber+Rd+Breckenridge+CO",
     "redfinUrl": "https://www.redfin.com/CO/Breckenridge/250-Sallie-Barber-Rd-80424/home/77614431",
     "homeImageUrl": "https://ssl.cdn-redfin.com/photo/94/bigphoto/732/8325732_3_5.webp"
   },
@@ -61,7 +57,6 @@
     "monthlyIncomeMax": 31000,
     "annualIncomeMin": 372000,
     "annualIncomeMax": 372000,
-    "mapUrl": "https://www.google.com/maps/search/?api=1&query=320+Headlight+Dr+Breckenridge+CO",
     "redfinUrl": "https://www.redfin.com/CO/Breckenridge/320-Headlight-Dr-80424/home/194913922",
     "homeImageUrl": "https://ssl.cdn-redfin.com/photo/94/bigphoto/724/6499724_0.webp"
   },
@@ -74,7 +69,6 @@
     "monthlyIncomeMax": 15500,
     "annualIncomeMin": 186000,
     "annualIncomeMax": 186000,
-    "mapUrl": "https://www.google.com/maps/search/?api=1&query=7273+Lemon+Gulch+Way+Castle+Rock+CO",
     "redfinUrl": "https://www.redfin.com/CO/Castle-Rock/7273-Lemon-Gulch-Way-80108/home/196369947",
     "homeImageUrl": "https://ssl.cdn-redfin.com/photo/94/bigphoto/868/4499868_5_2.webp"
   },
@@ -87,7 +81,6 @@
     "monthlyIncomeMax": 39000,
     "annualIncomeMin": 468000,
     "annualIncomeMax": 468000,
-    "mapUrl": "https://www.google.com/maps/search/?api=1&query=12565+Picadilly+Road+Commerce+City+CO",
     "redfinUrl": "https://www.redfin.com/CO/Commerce-City/12565-Picadilly-Rd-80022/home/49765856",
     "homeImageUrl": "https://ssl.cdn-redfin.com/photo/94/bigphoto/695/9622695_1_0.webp"
   },
@@ -100,7 +93,6 @@
     "monthlyIncomeMax": 26500,
     "annualIncomeMin": 318000,
     "annualIncomeMax": 318000,
-    "mapUrl": "https://www.google.com/maps/search/?api=1&query=26271+Richmond+Hill+Road+Conifer+CO",
     "redfinUrl": "https://www.redfin.com/CO/Conifer/26271-Richmond-Hill-Rd-80433/home/96225935",
     "homeImageUrl": "https://ssl.cdn-redfin.com/photo/94/bigphoto/399/5342399_14_0.webp"
   },
@@ -113,7 +105,6 @@
     "monthlyIncomeMax": 17700,
     "annualIncomeMin": 212400,
     "annualIncomeMax": 212400,
-    "mapUrl": "https://www.google.com/maps/search/?api=1&query=26275+Richmond+Hill+Road+Conifer+CO",
     "redfinUrl": "https://www.redfin.com/CO/Conifer/26275-Richmond-Hill-Rd-80433/home/197555951",
     "homeImageUrl": "https://ssl.cdn-redfin.com/photo/94/bigphoto/860/2047860_12_2.webp"
   },
@@ -126,7 +117,6 @@
     "monthlyIncomeMax": 11100,
     "annualIncomeMin": 133200,
     "annualIncomeMax": 133200,
-    "mapUrl": "https://www.google.com/maps/search/?api=1&query=26269+Richmond+Hill+Road+Conifer+CO",
     "redfinUrl": "https://www.redfin.com/CO/Conifer/26269-Richmond-Hill-Rd-80433/home/194364466",
     "homeImageUrl": "https://ssl.cdn-redfin.com/photo/94/bigphoto/526/9627526_3_5.webp"
   },
@@ -139,7 +129,6 @@
     "monthlyIncomeMax": 13900,
     "annualIncomeMin": 166800,
     "annualIncomeMax": 166800,
-    "mapUrl": "https://www.google.com/maps/search/?api=1&query=2327+Deer+Ridge+Dr+Estes+Park+CO",
     "redfinUrl": "https://www.redfin.com/CO/Estes-Park/2327-Deer-Ridge-Dr-80517/home/34846782",
     "homeImageUrl": "https://ssl.cdn-redfin.com/photo/94/bigphoto/718/6675718_0.webp"
   },
@@ -152,7 +141,6 @@
     "monthlyIncomeMax": 17300,
     "annualIncomeMin": 207600,
     "annualIncomeMax": 207600,
-    "mapUrl": "https://www.google.com/maps/search/?api=1&query=32453+Upper+Bear+Creek+Road+Evergreen+CO",
     "redfinUrl": "https://www.redfin.com/CO/Evergreen/32453-Upper-Bear-Creek-Rd-80439/home/34554717",
     "homeImageUrl": "https://ssl.cdn-redfin.com/photo/94/bigphoto/452/9319452_2.webp"
   },
@@ -165,7 +153,6 @@
     "monthlyIncomeMax": 22000,
     "annualIncomeMin": 264000,
     "annualIncomeMax": 264000,
-    "mapUrl": "https://www.google.com/maps/search/?api=1&query=7497+Fox+Creek+Trail+Franktown+CO",
     "redfinUrl": "https://www.redfin.com/CO/Franktown/7497-Fox-Creek-Trl-80116/home/185747864",
     "homeImageUrl": "https://ssl.cdn-redfin.com/photo/94/bigphoto/917/1684917_0.webp"
   },
@@ -178,7 +165,6 @@
     "monthlyIncomeMax": 24200,
     "annualIncomeMin": 290400,
     "annualIncomeMax": 290400,
-    "mapUrl": "https://www.google.com/maps/search/?api=1&query=5881+Deer+Meadow+Trail+Golden+CO",
     "redfinUrl": "https://www.redfin.com/CO/Golden/5881-Deer-Meadow-Trl-80403/home/39996738",
     "homeImageUrl": "https://ssl.cdn-redfin.com/photo/94/bigphoto/495/1979495_1_K.webp"
   },
@@ -191,7 +177,6 @@
     "monthlyIncomeMax": 35500,
     "annualIncomeMin": 426000,
     "annualIncomeMax": 426000,
-    "mapUrl": "https://www.google.com/maps/search/?api=1&query=5188+Csh+County+Rd+40+Granby+CO",
     "redfinUrl": "https://www.redfin.com/CO/Unknown/5188-County-Road-40-80446/home/191106050",
     "homeImageUrl": "https://ssl.cdn-redfin.com/photo/535/bigphoto/558/24-558_90_3.webp"
   },
@@ -204,7 +189,6 @@
     "monthlyIncomeMax": 24800,
     "annualIncomeMin": 297600,
     "annualIncomeMax": 297600,
-    "mapUrl": "https://www.google.com/maps/search/?api=1&query=52899+US+HWY+40+Hot+Sulphur+Springs+CO",
     "redfinUrl": "https://www.redfin.com/CO/Hot-Sulphur-Springs/52899-US-Hwy-40-80451/home/199413123",
     "homeImageUrl": "https://ssl.cdn-redfin.com/photo/535/bigphoto/566/25-1566_81_0.webp"
   },
@@ -217,7 +201,6 @@
     "monthlyIncomeMax": 10200,
     "annualIncomeMin": 122400,
     "annualIncomeMax": 122400,
-    "mapUrl": "https://www.google.com/maps/search/?api=1&query=12550+Imboden+Road+Hudson+CO",
     "redfinUrl": "https://www.redfin.com/CO/Hudson/12550-Imboden-Rd-80642/home/190934117",
     "homeImageUrl": "https://ssl.cdn-redfin.com/photo/94/bigphoto/335/1697335_0.webp"
   },
@@ -230,7 +213,6 @@
     "monthlyIncomeMax": 20000,
     "annualIncomeMin": 240000,
     "annualIncomeMax": 240000,
-    "mapUrl": "https://www.google.com/maps/search/?api=1&query=23930+N+Highway+287+Livermore+CO",
     "redfinUrl": "https://www.redfin.com/CO/Livermore/23930-U-S-287-80536/home/178670483",
     "homeImageUrl": "https://ssl.cdn-redfin.com/photo/91/bigphoto/714/1043714_26_2.webp"
     },
@@ -243,7 +225,6 @@
     "monthlyIncomeMax": 16700,
     "annualIncomeMin": 200400,
     "annualIncomeMax": 200400,
-    "mapUrl": "https://www.google.com/maps/search/?api=1&query=10323+Mineral+Rd+Longmont+CO",
     "redfinUrl": "https://www.redfin.com/CO/Longmont/10323-Mineral-Rd-80504/home/145842107",
     "homeImageUrl": "https://ssl.cdn-redfin.com/photo/91/bigphoto/536/1043536_1_2.webp"
   },
@@ -256,7 +237,6 @@
     "monthlyIncomeMax": 16000,
     "annualIncomeMin": 192000,
     "annualIncomeMax": 192000,
-    "mapUrl": "https://www.google.com/maps/search/?api=1&query=15137+E+County+Line+Rd+Longmont+CO",
     "redfinUrl": "https://www.redfin.com/CO/Longmont/15137-E-County-Line-Rd-80504/home/52846459",
     "homeImageUrl": "https://ssl.cdn-redfin.com/photo/91/bigphoto/736/1038736_39_2.webp"
   },
@@ -269,7 +249,6 @@
     "monthlyIncomeMax": 17100,
     "annualIncomeMin": 205200,
     "annualIncomeMax": 205200,
-    "mapUrl": "https://www.google.com/maps/search/?api=1&query=796+Abrams+Way+Loveland+CO",
     "redfinUrl": "https://www.redfin.com/CO/Loveland/796-Abrams-Way-80537/home/39584347",
     "homeImageUrl": "https://ssl.cdn-redfin.com/photo/91/bigphoto/214/1040214_1_3.webp"
   },
@@ -282,7 +261,6 @@
     "monthlyIncomeMax": 10700,
     "annualIncomeMin": 128400,
     "annualIncomeMax": 128400,
-    "mapUrl": "https://www.google.com/maps/search/?api=1&query=Soaring+Eagle+Pass+Loveland+CO",
     "redfinUrl": "https://www.redfin.com/CO/Unknown/Soaring-Eagle-Pass-80538/home/40029935",
     "homeImageUrl": "https://ssl.cdn-redfin.com/photo/94/bigphoto/864/IR1024864_9_0.webp"
   },
@@ -295,7 +273,6 @@
     "monthlyIncomeMax": 11100,
     "annualIncomeMin": 133200,
     "annualIncomeMax": 133200,
-    "mapUrl": "https://www.google.com/maps/search/?api=1&query=8537+S+Doubleheader+Ranch+Rd+Morrison+CO",
     "redfinUrl": "https://www.redfin.com/CO/Morrison/8537-S-Doubleheader-Ranch-Rd-80465/home/34630135",
     "homeImageUrl": "https://ssl.cdn-redfin.com/photo/94/bigphoto/597/4617597_29_2.webp"
   },
@@ -308,7 +285,6 @@
     "monthlyIncomeMax": 18900,
     "annualIncomeMin": 226800,
     "annualIncomeMax": 226800,
-    "mapUrl": "https://www.google.com/maps/search/?api=1&query=810+N+Perry+Park+Road+Sedalia+CO",
     "redfinUrl": "https://www.redfin.com/CO/Sedalia/810-N-Perry-Park-Rd-80135/home/39506836",
     "homeImageUrl": "https://ssl.cdn-redfin.com/photo/94/bigphoto/624/6385624_42_0.webp"
   },
@@ -321,7 +297,6 @@
     "monthlyIncomeMax": 15400,
     "annualIncomeMin": 184800,
     "annualIncomeMax": 184800,
-    "mapUrl": "https://www.google.com/maps/search/?api=1&query=8236+County+Road+74+Windsor+CO",
     "redfinUrl": "https://www.redfin.com/CO/Windsor/8236-County-Road-74-80550/home/190541394",
     "homeImageUrl": "https://ssl.cdn-redfin.com/photo/91/bigphoto/731/1035731_3.webp"
   },
@@ -334,7 +309,6 @@
     "monthlyIncomeMax": 7400,
     "annualIncomeMin": 88800,
     "annualIncomeMax": 88800,
-    "mapUrl": "https://www.google.com/maps/search/?api=1&query=11881+County+Road+37+Fort+Lupton+CO",
     "redfinUrl": "https://www.redfin.com/CO/Fort-Lupton/11881-County-Road-37-80621/home/186109446",
     "homeImageUrl": "https://ssl.cdn-redfin.com/photo/94/bigphoto/647/6469647_18_2.webp"
   },
@@ -347,7 +321,6 @@
     "monthlyIncomeMax": 7500,
     "annualIncomeMin": 90000,
     "annualIncomeMax": 90000,
-    "mapUrl": "https://www.google.com/maps/search/?api=1&query=1150+S+County+Road+121+Bennett+CO",
     "redfinUrl": "https://www.redfin.com/CO/Bennett/1150-S-County-Road-121-80102/home/35025289",
     "homeImageUrl": "https://ssl.cdn-redfin.com/photo/94/bigphoto/587/2385587_0.webp"
   },
@@ -360,7 +333,6 @@
     "monthlyIncomeMax": 6200,
     "annualIncomeMin": 74400,
     "annualIncomeMax": 74400,
-    "mapUrl": "https://www.google.com/maps/search/?api=1&query=50950+E+Maplewood+Place+Bennett+CO",
     "redfinUrl": "https://www.redfin.com/CO/Bennett/50950-E-Maplewood-Pl-80102/home/171451024",
     "homeImageUrl": "https://ssl.cdn-redfin.com/photo/94/bigphoto/690/9112690_21_0.webp"
   },
@@ -373,7 +345,6 @@
     "monthlyIncomeMax": 5200,
     "annualIncomeMin": 62400,
     "annualIncomeMax": 62400,
-    "mapUrl": "https://www.google.com/maps/search/?api=1&query=48155+E+56th+Avenue+Bennett+CO",
     "redfinUrl": "https://www.redfin.com/CO/Bennett/48155-E-56th-Ave-80102/home/35008875",
     "homeImageUrl": "https://ssl.cdn-redfin.com/photo/94/bigphoto/149/4261149_4_0.webp"
   },
@@ -386,7 +357,6 @@
     "monthlyIncomeMax": 13900,
     "annualIncomeMin": 166800,
     "annualIncomeMax": 166800,
-    "mapUrl": "https://www.google.com/maps/search/?api=1&query=211+Hornbill+Drive+Manhasset+NY",
     "redfinUrl": "https://www.redfin.com/NY/Manhasset/211-Hornbill-Dr-11030/home/20570517",
     "homeImageUrl": "https://ssl.cdn-redfin.com/photo/269/bigphoto/219/902219_6_0.webp"
   },
@@ -399,7 +369,6 @@
     "monthlyIncomeMax": 25500,
     "annualIncomeMin": 306000,
     "annualIncomeMax": 306000,
-    "mapUrl": "<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d49719.18252108773!2d-73.68119598693478!3d40.82827359290272!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c28938cd6fdedb%3A0x560fee7a03b25145!2s512%20E%20Shore%20Rd%2C%20Kings%20Point%2C%20NY%2011024!5e0!3m2!1sen!2sus!4v1766763458644!5m2!1sen!2sus\" width=\"600\" height=\"450\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\" referrerpolicy=\"no-referrer-when-downgrade\"></iframe>",
     "redfinUrl": "https://www.redfin.com/NY/Great-Neck/512-E-Shore-Rd-11024/home/20583468",
     "homeImageUrl": "https://ssl.cdn-redfin.com/photo/269/bigphoto/184/900184_49_3.webp"
   },
@@ -412,7 +381,6 @@
     "monthlyIncomeMax": 13900,
     "annualIncomeMin": 166800,
     "annualIncomeMax": 166800,
-    "mapUrl": "https://www.google.com/maps/search/?api=1&query=211+Hornbill+Drive+Manhasset+NY",
     "redfinUrl": "https://www.redfin.com/NY/Manhasset/211-Hornbill-Dr-11030/home/20570517",
     "homeImageUrl": "https://ssl.cdn-redfin.com/photo/269/bigphoto/219/902219_6_0.webp"
   },
@@ -425,7 +393,6 @@
     "monthlyIncomeMax": 30000,
     "annualIncomeMin": 360000,
     "annualIncomeMax": 360000,
-    "mapUrl": "https://www.google.com/maps/search/?api=1&query=3806+Spirit+Lake+Cv+Austin+TX",
     "redfinUrl": "https://www.redfin.com/TX/Austin/3806-Spirit-Lake-Cv-78746/home/31249263",
     "homeImageUrl": "https://ssl.cdn-redfin.com/photo/92/bigphoto/899/1059899_37_S.webp"
   },
@@ -438,7 +405,6 @@
     "monthlyIncomeMax": 29000,
     "annualIncomeMin": 348000,
     "annualIncomeMax": 348000,
-    "mapUrl": "https://www.google.com/maps/search/?api=1&query=19813+Lakehurst+Loop+Spicewood+TX",
     "redfinUrl": "https://www.redfin.com/TX/Spicewood/19813-Lakehurst-Loop-78669/home/34251284",
     "homeImageUrl": "https://ssl.cdn-redfin.com/photo/92/bigphoto/926/2877926_3.webp"
   },
@@ -451,7 +417,6 @@
     "monthlyIncomeMax": 5800,
     "annualIncomeMin": 69600,
     "annualIncomeMax": 69600,
-    "mapUrl": "https://www.google.com/maps/search/?api=1&query=3507+Bee+Creek+Rd+Spicewood+TX",
     "redfinUrl": "https://www.redfin.com/TX/Spicewood/3507-Bee-Creek-Rd-78669/home/31264069",
     "homeImageUrl": "https://ssl.cdn-redfin.com/photo/92/bigphoto/406/4049406_31_B.webp"
   },
@@ -464,7 +429,6 @@
     "monthlyIncomeMax": 18500,
     "annualIncomeMin": 222000,
     "annualIncomeMax": 222000,
-    "mapUrl": "https://www.google.com/maps/search/?api=1&query=74+Swede+Springs+Boerne+TX",
     "redfinUrl": "https://www.redfin.com/TX/Boerne/74-Swede-Spgs-78006/home/58648405",
     "homeImageUrl": "https://ssl.cdn-redfin.com/photo/108/bigphoto/384/1909384_1.webp"
   }
