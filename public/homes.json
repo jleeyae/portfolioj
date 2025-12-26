@@ -397,6 +397,18 @@
     "homeImageUrl": "https://ssl.cdn-redfin.com/photo/269/bigphoto/181/848181_0.webp"
   },
   {
+    "id": "purchase-st",
+    "region": "New York · Great Neck+",
+    "title": "227 Dock Lane, Great Neck, NY 11024",
+    "price": "35000000",
+    "monthlyIncomeMin": 222000,
+    "monthlyIncomeMax": 222000,
+    "annualIncomeMin": 2700000,
+    "annualIncomeMax": 2700000,
+    "redfinUrl": "https://www.zillow.com/homedetails/227-Dock-Ln-Great-Neck-NY-11024/31065772_zpid/",
+    "homeImageUrl": "https://ap.rdcpix.com/002552a183d0acd104d6d00b62690e18l-b3316850499rd-w2048_h1536.webp"
+  },
+  {
     "id": "spirit-lake-austin",
     "region": "Texas · Austin",
     "title": "3806 Spirit Lake Cv, Austin, TX 78746",
