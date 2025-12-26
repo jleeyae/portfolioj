@@ -1,5 +1,17 @@
 [
   {
+    "id": "Modjeska-canyon",
+    "region": "California · Silverado",
+    "title": "28100 Modjeska Canyon Rd, Silverado, CA 92676",
+    "price": 5499000,
+    "monthlyIncomeMin": 34788,
+    "monthlyIncomeMax": 34788,
+    "annualIncomeMin": 417456,
+    "annualIncomeMax": 417456,
+    "redfinUrl": "https://www.redfin.com/CA/Silverado/28100-Modjeska-Canyon-Rd-92676/home/5119487",
+    "homeImageUrl": "https://ssl.cdn-redfin.com/photo/45/bigphoto/680/OC25150680_1.webp"
+  },
+  {
     "id": "triple-creek-ranch",
     "region": "Colorado · Silverthorne",
     "title": "1800 Triple Creek Ranch Rd, Silverthorne, CO 80498",
