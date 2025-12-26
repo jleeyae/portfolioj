@@ -392,7 +392,7 @@
     "monthlyIncomeMin": 55900,
     "monthlyIncomeMax": 55900,
     "annualIncomeMin": 670800,
-    "annualIncomeMax": 670800
+    "annualIncomeMax": 670800,
     "redfinUrl": "https://www.zillow.com/homedetails/2007-A-B-Purchase-St-Purchase-NY-10577/449980158_zpid/",
     "homeImageUrl": "https://ssl.cdn-redfin.com/photo/269/bigphoto/181/848181_0.webp"
   },
