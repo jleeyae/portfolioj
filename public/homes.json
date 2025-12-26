@@ -1,15 +1,27 @@
 [
-    {
+  {
     "id": "ranchos-palos-verdes",
     "region": "California · Ranchos Palos Verdes",
     "title": "3300 Palos Verdes Dr W, Rancho Palos Verdes, CA 90275",
-    "price": 13880000,
+     "price": 8750000,
     "monthlyIncomeMin": 115960,
     "monthlyIncomeMax": 115960,
     "annualIncomeMin": 1391520,
     "annualIncomeMax": 1391520,
     "redfinUrl": "https://www.redfin.com/CA/Rancho-Palos-Verdes/3300-Palos-Verdes-Dr-W-90275/home/7744638",
     "homeImageUrl": "https://ssl.cdn-redfin.com/photo/45/mbpaddedwide/938/genMid.WS25170938_38_0.webp"
+  },
+  {
+    "id": "redwood-city",
+    "region": "California · Redwood City",
+    "title": "16351 Skyline Blvd, Redwood City, CA 94062",
+    "price": 13880000,
+    "monthlyIncomeMin": 87800,
+    "monthlyIncomeMax": 87800,
+    "annualIncomeMin": 1053600,
+    "annualIncomeMax": 1053600,
+    "redfinUrl": "https://www.redfin.com/CA/Redwood-City/16351-Skyline-Blvd-94062/home/1463393",
+    "homeImageUrl": "https://ssl.cdn-redfin.com/photo/8/bigphoto/560/ML81991560_4.webp"
   },
   {
     "id": "Modjeska-canyon",
