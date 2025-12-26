@@ -429,4 +429,17 @@
     "redfinUrl": "https://www.redfin.com/TX/Boerne/74-Swede-Spgs-78006/home/58648405",
     "homeImageUrl": "https://ssl.cdn-redfin.com/photo/108/bigphoto/384/1909384_1.webp"
   }
+  {
+    "id": "north-shore",
+    "region": "New York · Manhasset",
+    "title": "211 Hornbill Drive, Manhasset, NY 11030",
+    "price": "$2500000",
+    "monthlyIncomeMin": 13900,
+    "monthlyIncomeMax": 13900,
+    "annualIncomeMin": 166800,
+    "annualIncomeMax": 166800,
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=211+Hornbill+Drive+Manhasset+NY",
+    "redfinUrl": "https://www.redfin.com/NY/Manhasset/211-Hornbill-Dr-11030/home/20570517",
+    "homeImageUrl": "https://ssl.cdn-redfin.com/photo/269/bigphoto/219/902219_6_0.webp"
+  }
 ]
