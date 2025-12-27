@@ -491,5 +491,17 @@
     "annualIncomeMax": 222000,
     "redfinUrl": "https://www.redfin.com/TX/Boerne/74-Swede-Spgs-78006/home/58648405",
     "homeImageUrl": "https://ssl.cdn-redfin.com/photo/108/bigphoto/384/1909384_1.webp"
+  },
+  {
+    "id": "Axiom Vancouver",
+    "region": "Washington · Vancouver",
+    "title": "11011 SE Evergreen Hwy, Vancouver, WA 98664",
+    "price": 5850000,
+    "monthlyIncomeMin": 44000,
+    "monthlyIncomeMax": 44000,
+    "annualIncomeMin": 528000,
+    "annualIncomeMax": 528000,
+    "redfinUrl": "https://www.redfin.com/WA/Vancouver/11011-SE-Evergreen-Hwy-98664/home/161128613",
+    "homeImageUrl": "https://ssl.cdn-redfin.com/photo/84/bigphoto/342/668198342_46_1.webp"
   }
 ]
