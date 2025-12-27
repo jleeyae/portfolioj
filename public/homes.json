@@ -503,5 +503,17 @@
     "annualIncomeMax": 528000,
     "redfinUrl": "https://www.redfin.com/WA/Vancouver/11011-SE-Evergreen-Hwy-98664/home/161128613",
     "homeImageUrl": "https://ssl.cdn-redfin.com/photo/84/bigphoto/342/668198342_46_1.webp"
+  },
+  {
+    "id": "Willamette River",
+    "region": "Oregon · Lake Oswego",
+    "title": "12850 Fielding Rd, Lake Oswego, OR 97034",
+    "price": 8900000,
+    "monthlyIncomeMin": 67000,
+    "monthlyIncomeMax": 67000,
+    "annualIncomeMin": 804000,
+    "annualIncomeMax": 804000,
+    "redfinUrl": "https://www.redfin.com/OR/Lake-Oswego/12850-Fielding-Rd-97034/home/26084170",
+    "homeImageUrl": "https://ssl.cdn-redfin.com/photo/84/bigphoto/959/693880959_6_0.webp"
   }
 ]
