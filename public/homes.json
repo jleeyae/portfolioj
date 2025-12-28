@@ -385,6 +385,30 @@
     "homeImageUrl": "https://ssl.cdn-redfin.com/photo/94/mbpaddedwide/149/genMid.4261149_4_0.webp"
   },
     {
+    "id": "new-hope",
+    "region": "Florida · Orlando",
+    "title": "6713 New Hope Rd, Orlando, FL 32824",
+    "price": "1700000",
+    "monthlyIncomeMin": 11805.5555556,
+    "monthlyIncomeMax": 11805.5555556,
+    "annualIncomeMin": 141666.666667,
+    "annualIncomeMax": 141666.666667,
+    "redfinUrl": "https://www.redfin.com/FL/Orlando/6713-New-Hope-Rd-32824/home/46921698",
+    "homeImageUrl": "https://ssl.cdn-redfin.com/photo/118/bigphoto/072/S5140072_0.webp"
+  },
+  {
+    "id": "lake-nona",
+    "region": "Florida · Lake Nona",
+    "title": "9131 Santorini Dr, Orlando, FL 32827",
+    "price": "3580000",
+    "monthlyIncomeMin": 298333.333333,
+    "monthlyIncomeMax": 298333.333333,
+    "annualIncomeMin": 24861.1111111,
+    "annualIncomeMax": 24861.1111111,
+    "redfinUrl": "https://www.redfin.com/FL/Orlando/6713-New-Hope-Rd-32824/home/46921698",
+    "homeImageUrl": "https://ssl.cdn-redfin.com/photo/118/bigphoto/072/S5140072_0.webp"
+  },
+  {
     "id": "saint-cloud",
     "region": "Florida · St. Cloud",
     "title": "5251 Carson St, Saint Cloud, FL 34771",
@@ -396,19 +420,7 @@
     "redfinUrl": "https://www.redfin.com/FL/Saint-Cloud/5251-Carson-St-34771/home/46488539",
     "homeImageUrl": "https://ssl.cdn-redfin.com/photo/118/bigphoto/726/O6332726_0.webp"
   },
-      {
-    "id": "new-hope",
-    "region": "Florida · Orlando",
-    "title": "5251 Carson St, Saint Cloud, FL 34771",
-    "price": "1700000",
-    "monthlyIncomeMin": 11805.5555556,
-    "monthlyIncomeMax": 11805.5555556,
-    "annualIncomeMin": 141666.666667,
-    "annualIncomeMax": 141666.666667,
-    "redfinUrl": "6713 New Hope Rd, Orlando, FL 32824",
-    "homeImageUrl": "https://ssl.cdn-redfin.com/photo/118/bigphoto/072/S5140072_0.webp"
-  },
-    {
+  {
     "id": "north-shore",
     "region": "New York · Great Neck",
     "title": "512 E Shore Rd, Great Neck, NY 11024",
