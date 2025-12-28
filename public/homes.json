@@ -1,5 +1,5 @@
 [
-  {
+{
     "id": "ranchos-palos-verdes",
     "region": "California · Ranchos Palos Verdes",
     "title": "3300 Palos Verdes Dr W, Rancho Palos Verdes, CA 90275",
@@ -384,17 +384,29 @@
     "redfinUrl": "https://www.redfin.com/CO/Bennett/48155-E-56th-Ave-80102/home/35008875",
     "homeImageUrl": "https://ssl.cdn-redfin.com/photo/94/bigphoto/149/4261149_4_0.webp"
   },
+  {
+    "id": "ranchos-palos-verdes",
+    "region": "California · Ranchos Palos Verdes",
+    "title": "3300 Palos Verdes Dr W, Rancho Palos Verdes, CA 90275",
+    "price": 13880000,
+    "monthlyIncomeMin": 87800,
+    "monthlyIncomeMax": 87800,
+    "annualIncomeMin": 1053600,
+    "annualIncomeMax": 1053600,
+    "redfinUrl": "https://www.redfin.com/CA/Rancho-Palos-Verdes/3300-Palos-Verdes-Dr-W-90275/home/7744638",
+    "homeImageUrl": "https://ssl.cdn-redfin.com/photo/45/mbpaddedwide/938/genMid.WS25170938_38_0.webp"
+  },
     {
-    "id": "north-shore",
-    "region": "New York · Manhasset",
-    "title": "211 Hornbill Drive, Manhasset, NY 11030",
-    "price": "2500000",
-    "monthlyIncomeMin": 13900,
-    "monthlyIncomeMax": 13900,
-    "annualIncomeMin": 166800,
-    "annualIncomeMax": 166800,
-    "redfinUrl": "https://www.redfin.com/NY/Manhasset/211-Hornbill-Dr-11030/home/20570517",
-    "homeImageUrl": "https://ssl.cdn-redfin.com/photo/269/bigphoto/219/902219_6_0.webp"
+    "id": "saint-cloud",
+    "region": "Florida · St. Cloud",
+    "title": "5251 Carson St, Saint Cloud, FL 34771",
+    "price": "3750000",
+    "monthlyIncomeMin": 26041.6666667,
+    "monthlyIncomeMax": 26041.6666667,
+    "annualIncomeMin": 312500,
+    "annualIncomeMax": 312500,
+    "redfinUrl": "https://www.redfin.com/FL/Saint-Cloud/5251-Carson-St-34771/home/46488539",
+    "homeImageUrl": "https://ssl.cdn-redfin.com/photo/118/bigphoto/726/O6332726_0.webp"
   },
     {
     "id": "north-shore",
