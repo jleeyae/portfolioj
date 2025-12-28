@@ -409,6 +409,18 @@
     "homeImageUrl": "https://ssl.cdn-redfin.com/photo/118/bigphoto/142/O6336142_67_2.webp"
   },
   {
+    "id": "lake-nona",
+    "region": "Florida · Lake Nona",
+    "title": "13136 Alderley Drive Dr, Orlando, FL 32832",
+    "price": "1989999",
+    "monthlyIncomeMin": 13819.4375,
+    "monthlyIncomeMax": 13819.4375,
+    "annualIncomeMin": 165833.25,
+    "annualIncomeMax": 165833.25,
+    "redfinUrl": "https://www.redfin.com/FL/Orlando/13136-Alderley-Dr-32832/home/144580281",
+    "homeImageUrl": "https://ssl.cdn-redfin.com/photo/118/bigphoto/413/S5126413_72_0.webp"
+  },
+  {
     "id": "saint-cloud",
     "region": "Florida · St. Cloud",
     "title": "5251 Carson St, Saint Cloud, FL 34771",
