@@ -384,18 +384,6 @@
     "redfinUrl": "https://www.redfin.com/CO/Bennett/48155-E-56th-Ave-80102/home/35008875",
     "homeImageUrl": "https://ssl.cdn-redfin.com/photo/94/bigphoto/149/4261149_4_0.webp"
   },
-  {
-    "id": "ranchos-palos-verdes",
-    "region": "California · Ranchos Palos Verdes",
-    "title": "3300 Palos Verdes Dr W, Rancho Palos Verdes, CA 90275",
-    "price": 13880000,
-    "monthlyIncomeMin": 87800,
-    "monthlyIncomeMax": 87800,
-    "annualIncomeMin": 1053600,
-    "annualIncomeMax": 1053600,
-    "redfinUrl": "https://www.redfin.com/CA/Rancho-Palos-Verdes/3300-Palos-Verdes-Dr-W-90275/home/7744638",
-    "homeImageUrl": "https://ssl.cdn-redfin.com/photo/45/mbpaddedwide/938/genMid.WS25170938_38_0.webp"
-  },
     {
     "id": "saint-cloud",
     "region": "Florida · St. Cloud",
