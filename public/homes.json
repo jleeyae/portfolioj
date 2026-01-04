@@ -180,6 +180,18 @@
     "homeImageUrl": "https://ssl.cdn-redfin.com/photo/92/bigphoto/706/2122706_U.jpg"
   },
   {
+    "id": "Sierra-Homes",
+    "region": "Texas · Austin",
+    "title": "210 Costa Bella Dr, Austin, TX 78734",
+    "price": 4125000,
+    "monthlyIncomeMin": 28645.8333333,
+    "monthlyIncomeMax": 28645.8333333,
+    "annualIncomeMin": 343750,
+    "annualIncomeMax": 343750,
+    "redfinUrl": "https://www.redfin.com/TX/Austin/210-Costa-Bella-Dr-78734/home/34252486",
+    "homeImageUrl": "https://ssl.cdn-redfin.com/photo/92/bigphoto/069/5438069_1.jpg"
+  },
+  {
     "id": "swede-springs-boerne",
     "region": "Texas · Boerne",
     "title": "74 Swede Springs, Boerne, TX 78006",
