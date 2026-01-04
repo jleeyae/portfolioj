@@ -204,6 +204,18 @@
     "homeImageUrl": "https://ssl.cdn-redfin.com/photo/108/bigphoto/940/1892940_2_3.jpg"
   },
   {
+    "id": "Helotes",
+    "region": "Texas · San Antonio",
+    "title": "438 Pueblo Pintado, Helotes, TX 78023",
+    "price": 1250000,
+    "monthlyIncomeMin": 8680.55555558,
+    "monthlyIncomeMax": 8680.55555558,
+    "annualIncomeMin": 104166.666667,
+    "annualIncomeMax": 104166.666667,
+    "redfinUrl": "https://www.redfin.com/TX/Helotes/438-Pueblo-Pintado-78023/home/48645762",
+    "homeImageUrl": "https://ssl.cdn-redfin.com/photo/108/bigphoto/923/1896923_29_2.jpg"
+  },
+  {
     "id": "lakehurst-spicewood",
     "region": "Texas · Spicewood",
     "title": "19813 & 19817 Lakehurst Loop, Spicewood, TX 78669",
