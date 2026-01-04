@@ -156,6 +156,18 @@
     "homeImageUrl": "https://ssl.cdn-redfin.com/photo/92/bigphoto/899/1059899_37_S.webp"
   },
   {
+    "id": "Seven-Oaks",
+    "region": "Texas · Austin",
+    "title": "457 Brandon Way, Austin, TX 78733",
+    "price": 5250000,
+    "monthlyIncomeMin": 36458.3333333,
+    "monthlyIncomeMax": 36458.3333333,
+    "annualIncomeMin": 437500,
+    "annualIncomeMax": 437500,
+    "redfinUrl": "https://www.redfin.com/TX/Austin/457-Brandon-Way-78733/home/31881321",
+    "homeImageUrl": "https://ssl.cdn-redfin.com/photo/92/bigphoto/796/8684796_31_5.jpg"
+  },
+  {
     "id": "swede-springs-boerne",
     "region": "Texas · Boerne",
     "title": "74 Swede Springs, Boerne, TX 78006",
