@@ -168,6 +168,18 @@
     "homeImageUrl": "https://ssl.cdn-redfin.com/photo/108/bigphoto/891/1925891_7_5.jpg"
   },
   {
+    "id": "Sanoma-Ranch",
+    "region": "Texas · San Antonio",
+    "title": "8250 Cruiseship Bay #801, San Antonio, TX 78255",
+    "price": 449000,
+    "monthlyIncomeMin": 3118.05555556,
+    "monthlyIncomeMax": 3118.05555556,
+    "annualIncomeMin": 37416.6666667,
+    "annualIncomeMax": 37416.6666667,
+    "redfinUrl": "https://www.redfin.com/TX/San-Antonio/8250-Cruiseship-Bay-78255/unit-801/home/48713249",
+    "homeImageUrl": "https://ssl.cdn-redfin.com/photo/108/bigphoto/243/1924243_0.jpg"
+  },
+  {
     "id": "lakehurst-spicewood",
     "region": "Texas · Spicewood",
     "title": "19813 & 19817 Lakehurst Loop, Spicewood, TX 78669",
