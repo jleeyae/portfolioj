@@ -168,6 +168,18 @@
     "homeImageUrl": "https://ssl.cdn-redfin.com/photo/92/bigphoto/796/8684796_31_5.jpg"
   },
   {
+    "id": "Verde-Vista",
+    "region": "Texas · Austin",
+    "title": "4405 Hennig Dr, Austin, TX 78738",
+    "price": 3749000,
+    "monthlyIncomeMin": 26034.7222222,
+    "monthlyIncomeMax": 26034.7222222,
+    "annualIncomeMin": 312416.666667,
+    "annualIncomeMax": 43312416.6666677500,
+    "redfinUrl": "https://www.redfin.com/TX/Austin/4405-Hennig-Dr-78738/home/31250260",
+    "homeImageUrl": "https://ssl.cdn-redfin.com/photo/92/bigphoto/706/2122706_U.jpg"
+  },
+  {
     "id": "swede-springs-boerne",
     "region": "Texas · Boerne",
     "title": "74 Swede Springs, Boerne, TX 78006",
