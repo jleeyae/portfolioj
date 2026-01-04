@@ -216,6 +216,18 @@
     "homeImageUrl": "https://ssl.cdn-redfin.com/photo/108/bigphoto/923/1896923_29_2.jpg"
   },
   {
+    "id": "Hill-Country-Village",
+    "region": "Texas · San Antonio",
+    "title": "104 S Tower Dr, San Antonio, TX 78232",
+    "price": 2775000,
+    "monthlyIncomeMin": 19270.8333333,
+    "monthlyIncomeMax": 19270.8333333,
+    "annualIncomeMin": 231250,
+    "annualIncomeMax": 231250,
+    "redfinUrl": "https://www.redfin.com/TX/San-Antonio/104-S-Tower-Dr-78232/home/48676862",
+    "homeImageUrl": "https://ssl.cdn-redfin.com/photo/108/bigphoto/584/1880584_9_0.jpg"
+  },
+  {
     "id": "lakehurst-spicewood",
     "region": "Texas · Spicewood",
     "title": "19813 & 19817 Lakehurst Loop, Spicewood, TX 78669",
