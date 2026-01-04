@@ -180,6 +180,18 @@
     "homeImageUrl": "https://ssl.cdn-redfin.com/photo/108/bigphoto/243/1924243_0.jpg"
   },
   {
+    "id": "Cielo-Vista",
+    "region": "Texas · San Antonio",
+    "title": "7903 Vanity Hl, San Antonio, TX 78256",
+    "price": 1125000,
+    "monthlyIncomeMin": 7812.5,
+    "monthlyIncomeMax": 7812.5,
+    "annualIncomeMin": 93750,
+    "annualIncomeMax": 93750,
+    "redfinUrl": "https://www.redfin.com/TX/San-Antonio/7903-Vanity-Hl-78256/home/110108401",
+    "homeImageUrl": "https://ssl.cdn-redfin.com/photo/108/bigphoto/793/1918793_32_3.jpg"
+  },
+  {
     "id": "lakehurst-spicewood",
     "region": "Texas · Spicewood",
     "title": "19813 & 19817 Lakehurst Loop, Spicewood, TX 78669",
