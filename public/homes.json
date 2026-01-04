@@ -156,6 +156,18 @@
     "homeImageUrl": "https://ssl.cdn-redfin.com/photo/92/bigphoto/899/1059899_37_S.webp"
   },
   {
+    "id": "Shavano",
+    "region": "Texas · San Antonio",
+    "title": "4169 Texas Elm, San Antonio, TX 78230-5842",
+    "price": 525000,
+    "monthlyIncomeMin": 3645.83333333,
+    "monthlyIncomeMax": 3645.83333333,
+    "annualIncomeMin": 43750,
+    "annualIncomeMax": 43750,
+    "redfinUrl": "https://www.redfin.com/TX/San-Antonio/4169-Texas-Elm-78230/unit-4169/home/49719089",
+    "homeImageUrl": "https://ssl.cdn-redfin.com/photo/108/bigphoto/891/1925891_7_5.jpg"
+  },
+  {
     "id": "lakehurst-spicewood",
     "region": "Texas · Spicewood",
     "title": "19813 & 19817 Lakehurst Loop, Spicewood, TX 78669",
