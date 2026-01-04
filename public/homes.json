@@ -192,6 +192,18 @@
     "homeImageUrl": "https://ssl.cdn-redfin.com/photo/108/bigphoto/793/1918793_32_3.jpg"
   },
   {
+    "id": "Stone-Oak",
+    "region": "Texas · San Antonio",
+    "title": "23510 Canyon Golf #101, San Antonio, TX 78258",
+    "price": 475000,
+    "monthlyIncomeMin": 3298.61111111,
+    "monthlyIncomeMax": 3298.61111111,
+    "annualIncomeMin": 39583.3333333,
+    "annualIncomeMax": 39583.3333333,
+    "redfinUrl": "https://www.redfin.com/TX/San-Antonio/23510-Canyon-Golf-Rd-78258/unit-101/home/48691058",
+    "homeImageUrl": "https://ssl.cdn-redfin.com/photo/108/bigphoto/940/1892940_2_3.jpg"
+  },
+  {
     "id": "lakehurst-spicewood",
     "region": "Texas · Spicewood",
     "title": "19813 & 19817 Lakehurst Loop, Spicewood, TX 78669",
