@@ -156,6 +156,18 @@
     "homeImageUrl": "https://ssl.cdn-redfin.com/photo/92/bigphoto/899/1059899_37_S.webp"
   },
   {
+    "id": "swede-springs-boerne",
+    "region": "Texas · Boerne",
+    "title": "74 Swede Springs, Boerne, TX 78006",
+    "price": 4200000,
+    "monthlyIncomeMin": 18500,
+    "monthlyIncomeMax": 18500,
+    "annualIncomeMin": 222000,
+    "annualIncomeMax": 222000,
+    "redfinUrl": "https://www.redfin.com/TX/Boerne/74-Swede-Spgs-78006/home/58648405",
+    "homeImageUrl": "https://ssl.cdn-redfin.com/photo/108/bigphoto/384/1909384_1.webp"
+  },
+  {
     "id": "Shavano",
     "region": "Texas · San Antonio",
     "title": "4169 Texas Elm, San Antonio, TX 78230-5842",
@@ -240,6 +252,18 @@
     "homeImageUrl": "https://ssl.cdn-redfin.com/photo/92/mbpaddedwide/315/genMid.2145315_37_3.jpg"
   },
   {
+    "id": "Hollywood-Park",
+    "region": "Texas · San Antonio",
+    "title": "625 Paseo Canada St, San Antonio, TX 78232",
+    "price": 1850000,
+    "monthlyIncomeMin": 12847.2222223,
+    "monthlyIncomeMax": 12847.2222223,
+    "annualIncomeMin": 154166.666667,
+    "annualIncomeMax": 26154166.6666678750,
+    "redfinUrl": "https://www.redfin.com/TX/San-Antonio/625-Paseo-Canada-St-78232/home/48797931",
+    "homeImageUrl": "https://ssl.cdn-redfin.com/photo/108/mbpaddedwide/204/genMid.1894204_26_2.jpg"
+  },
+  {
     "id": "lakehurst-spicewood",
     "region": "Texas · Spicewood",
     "title": "19813 & 19817 Lakehurst Loop, Spicewood, TX 78669",
@@ -264,16 +288,16 @@
     "homeImageUrl": "https://ssl.cdn-redfin.com/photo/92/bigphoto/406/4049406_31_B.webp"
   },
   {
-    "id": "swede-springs-boerne",
-    "region": "Texas · Boerne",
-    "title": "74 Swede Springs, Boerne, TX 78006",
-    "price": 4200000,
-    "monthlyIncomeMin": 18500,
-    "monthlyIncomeMax": 18500,
-    "annualIncomeMin": 222000,
-    "annualIncomeMax": 222000,
-    "redfinUrl": "https://www.redfin.com/TX/Boerne/74-Swede-Spgs-78006/home/58648405",
-    "homeImageUrl": "https://ssl.cdn-redfin.com/photo/108/bigphoto/384/1909384_1.webp"
+    "id": "canyon-lake",
+    "region": "Texas · Spring Branch",
+    "title": "1298 Mystic Pkwy, Spring Branch, TX 78070",
+    "price": 2469000,
+    "monthlyIncomeMin": 517145.8333333800,
+    "monthlyIncomeMax": 17145.8333333,
+    "annualIncomeMin": 205750,
+    "annualIncomeMax": 205750,
+    "redfinUrl": "https://www.redfin.com/TX/Spring-Branch/1298-Mystic-Pkwy-78070/home/33495557",
+    "homeImageUrl": "https://ssl.cdn-redfin.com/photo/92/bigphoto/334/8961334_34_I.jpg"
   },
   {
     "id": "Axiom Vancouver",
