@@ -228,6 +228,18 @@
     "homeImageUrl": "https://ssl.cdn-redfin.com/photo/108/bigphoto/584/1880584_9_0.jpg"
   },
   {
+    "id": "Shavano-Park",
+    "region": "Texas · San Antonio",
+    "title": "211 Wellesley Hill Hl, San Antonio, TX 78231",
+    "price": 3225000,
+    "monthlyIncomeMin": 22395.8333333,
+    "monthlyIncomeMax": 22395.8333333,
+    "annualIncomeMin": 268750,
+    "annualIncomeMax": 268750,
+    "redfinUrl": "https://www.redfin.com/TX/San-Antonio/211-Wellesley-Hl-78231/home/143905659",
+    "homeImageUrl": "https://ssl.cdn-redfin.com/photo/92/mbpaddedwide/315/genMid.2145315_37_3.jpg"
+  },
+  {
     "id": "lakehurst-spicewood",
     "region": "Texas · Spicewood",
     "title": "19813 & 19817 Lakehurst Loop, Spicewood, TX 78669",
