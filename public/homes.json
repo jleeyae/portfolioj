@@ -72,6 +72,18 @@
     "homeImageUrl": "https://ssl.cdn-redfin.com/photo/118/bigphoto/413/S5126413_72_0.webp"
   },
   {
+    "id": "lake-nona",
+    "region": "Florida · Lake Nona",
+    "title": "13949 Hahn Ln, Orlando, FL 32827",
+    "price": "769000",
+    "monthlyIncomeMin": 5340.27777777,
+    "monthlyIncomeMax": 5340.27777777,
+    "annualIncomeMin": 64083.3333333,
+    "annualIncomeMax": 64083.3333333,
+    "redfinUrl": "https://www.redfin.com/FL/Orlando/13949-Hahn-Ln-32827/home/52949902",
+    "homeImageUrl": "https://ssl.cdn-redfin.com/photo/118/bigphoto/635/O6354635_48_0.jpg"
+  },
+  {
     "id": "saint-cloud",
     "region": "Florida · St. Cloud",
     "title": "5251 Carson St, Saint Cloud, FL 34771",
@@ -142,6 +154,18 @@
     "annualIncomeMax": 804000,
     "redfinUrl": "https://www.redfin.com/OR/Lake-Oswego/12850-Fielding-Rd-97034/home/26084170",
     "homeImageUrl": "https://ssl.cdn-redfin.com/photo/84/bigphoto/959/693880959_6_0.webp"
+  },
+  {
+    "id": "Otter-Wood River",
+    "region": "Tennessee · Nashville",
+    "title": "31 Annandale, Nashville, TN 37215",
+    "price": 4500000,
+    "monthlyIncomeMin": 37500,
+    "monthlyIncomeMax": 37500,
+    "annualIncomeMin": 375000,
+    "annualIncomeMax": 375000,
+    "redfinUrl": "https://www.redfin.com/TN/Nashville/31-Annandale-37215/home/108028234",
+    "homeImageUrl": "https://ssl.cdn-redfin.com/photo/145/bigphoto/616/2931616_1.jpg"
   },
   {
     "id": "spirit-lake-austin",
@@ -334,6 +358,18 @@
     "annualIncomeMax": 205750,
     "redfinUrl": "https://www.redfin.com/TX/Spring-Branch/1298-Mystic-Pkwy-78070/home/33495557",
     "homeImageUrl": "https://ssl.cdn-redfin.com/photo/92/bigphoto/334/8961334_34_I.jpg"
+  },
+  {
+    "id": "Sierra-Homes",
+    "region": "Texas · Austin",
+    "title": "210 Costa Bella Dr, Austin, TX 78734",
+    "price": 4125000,
+    "monthlyIncomeMin": 28645.8333333,
+    "monthlyIncomeMax": 28645.8333333,
+    "annualIncomeMin": 343750,
+    "annualIncomeMax": 343750,
+    "redfinUrl": "https://www.redfin.com/TX/Austin/210-Costa-Bella-Dr-78734/home/34252486",
+    "homeImageUrl": "https://ssl.cdn-redfin.com/photo/92/bigphoto/937/2686937_A.jpg"
   },
   {
     "id": "Axiom Vancouver",
