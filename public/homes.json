@@ -1,16 +1,3 @@
-[
-  {
-    "id": "new-hope",
-    "region": "Florida · Lake Nona",
-    "title": "6713 New Hope Rd, Orlando, FL 32824",
-    "price": "1700000",
-    "monthlyIncomeMin": 11805.5555556,
-    "monthlyIncomeMax": 11805.5555556,
-    "annualIncomeMin": 141666.666667,
-    "annualIncomeMax": 141666.666667,
-    "redfinUrl": "https://www.redfin.com/FL/Orlando/6713-New-Hope-Rd-32824/home/46921698",
-    "homeImageUrl": "https://ssl.cdn-redfin.com/photo/118/bigphoto/072/S5140072_0.webp"
-  },
   {
     "id": "lake-nona",
     "region": "Florida · Lake Nona",
