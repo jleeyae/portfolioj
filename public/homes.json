@@ -48,6 +48,30 @@
     "homeImageUrl": "https://ssl.cdn-redfin.com/photo/118/bigphoto/635/O6354635_48_0.jpg"
   },
   {
+    "id": "lee-vista",
+    "region": "Florida · Lee Vista",
+    "title": "6920 Rosy Sky Ave, Orlando, FL 32829",
+    "price": "1090000",
+    "monthlyIncomeMin": 7569.44444444,
+    "monthlyIncomeMax": 7569.44444444,
+    "annualIncomeMin": 90833.3333333,
+    "annualIncomeMax": 90833.3333333,
+    "redfinUrl": "https://www.redfin.com/FL/Orlando/6920-Rosy-Sky-Ave-32829/home/193771693",
+    "homeImageUrl": "https://ssl.cdn-redfin.com/photo/118/bigphoto/337/S5141337_2_0.jpg"
+  },
+  {
+    "id": "lee-vista",
+    "region": "Florida · Lee Vista",
+    "title": "8173 Gamemaster Ave, Orlando, FL 32832",
+    "price": "1074990",
+    "monthlyIncomeMin": 7465.20833333,
+    "monthlyIncomeMax": 7465.20833333,
+    "annualIncomeMin": 89582.5,
+    "annualIncomeMax": 89582.5,
+    "redfinUrl": "https://www.redfin.com/FL/Orlando/8173-Gamemaster-Ave-32832/home/112771521",
+    "homeImageUrl": "https://ssl.cdn-redfin.com/photo/118/bigphoto/044/O6345044_36_1.jpg"
+  },
+  {
     "id": "saint-cloud",
     "region": "Florida · St. Cloud",
     "title": "5251 Carson St, Saint Cloud, FL 34771",
