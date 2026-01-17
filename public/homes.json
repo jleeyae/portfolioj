@@ -1,5 +1,17 @@
  [ 
   {
+    "id": "baldwin-park",
+    "region": "Florida · Baldwin Park",
+    "title": "1550 Lake Baldwin Ln, Orlando, FL 32814",
+    "price": "1228000",
+    "monthlyIncomeMin": 8527.77777775,
+    "monthlyIncomeMax": 8527.77777775,
+    "annualIncomeMin": 102333.333333,
+    "annualIncomeMax": 102333.333333,
+    "redfinUrl": "https://www.redfin.com/FL/Orlando/1550-Lake-Baldwin-Ln-32814/home/194523728",
+    "homeImageUrl": "https://ssl.cdn-redfin.com/photo/118/bigphoto/227/O6368227_0.jpgp"
+  },
+  {
     "id": "lake-nona",
     "region": "Florida · Lake Nona",
     "title": "13136 Alderley Drive Dr, Orlando, FL 32832",
