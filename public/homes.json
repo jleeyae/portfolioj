@@ -94,5 +94,17 @@
     "annualIncomeMax": 114583.333333,
     "redfinUrl": "https://www.redfin.com/FL/Winter-Park/2015-Summerfield-Rd-32792/home/46742034",
     "homeImageUrl": "https://ssl.cdn-redfin.com/photo/118/bigphoto/615/O6357615_1.jpg"
+  },
+  {
+    "id": "MILK-district",
+    "region": "Florida · Winter Park",
+    "title": "119 N Glenwood Ave, Orlando, FL 32803",
+    "price": "1299000",
+    "monthlyIncomeMin": 9020.83,
+    "monthlyIncomeMax": 9020.83,
+    "annualIncomeMin": 108250,
+    "annualIncomeMax": 108250,
+    "redfinUrl": "https://www.redfin.com/FL/Orlando/119-N-Glenwood-Ave-32803/home/46890658",
+    "homeImageUrl": "https://ssl.cdn-redfin.com/photo/118/bigphoto/262/O6365262_0.jpg"
   }
 ]
