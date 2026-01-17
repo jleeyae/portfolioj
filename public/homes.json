@@ -59,4 +59,16 @@
     "redfinUrl": "https://www.redfin.com/FL/Orlando/8173-Gamemaster-Ave-32832/home/112771521",
     "homeImageUrl": "https://ssl.cdn-redfin.com/photo/118/bigphoto/044/O6345044_36_1.jpg"
   }
+  {
+    "id": "st-cloud",
+    "region": "Florida · St. Cloud",
+    "title": "3211 Lakeshore Blvd, Saint Cloud, FL 34769",
+    "price": "1249900",
+    "monthlyIncomeMin": 8679.86111108,
+    "monthlyIncomeMax": 8679.86111108,
+    "annualIncomeMin": 104158.333333,
+    "annualIncomeMax": 104158.333333,
+    "redfinUrl": "https://www.redfin.com/FL/Saint-Cloud/3211-Lakeshore-Blvd-34769/home/54692737",
+    "homeImageUrl": "https://chatgpt.com/backend-api/estuary/content?id=file_000000006248722fb55f0668c467064c&ts=491280&p=fs&cid=1&sig=286a1e46c6cf17e8fbdf2ace311f01a0593ed6321acaa5f152c54a126b02389f&v=0"
+  }
 ]
