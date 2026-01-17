@@ -24,6 +24,18 @@
     "homeImageUrl": "https://ssl.cdn-redfin.com/photo/118/bigphoto/547/O6363547_0.jpg"
   },
   {
+    "id": "college-park",
+    "region": "Florida · College Park",
+    "title": "1018 Yates St, Orlando, FL 32804",
+    "price": "1370000",
+    "monthlyIncomeMin": 9513.88888892,
+    "monthlyIncomeMax": 9513.88888892,
+    "annualIncomeMin": 114166.666667,
+    "annualIncomeMax": 114166.666667,
+    "redfinUrl": "https://www.redfin.com/FL/Orlando/1018-Yates-St-32804/home/46777821",
+    "homeImageUrl": "https://ssl.cdn-redfin.com/photo/118/bigphoto/298/O6367298_43_0.jpg"
+  },
+  {
     "id": "doctor-phillips",
     "region": "Florida · Doctor Phillips",
     "title": "7386 Alpine Butterfly Ln, Orlando, FL 32819",
