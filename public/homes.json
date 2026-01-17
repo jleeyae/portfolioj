@@ -82,5 +82,17 @@
     "annualIncomeMax": 104158.333333,
     "redfinUrl": "https://www.redfin.com/FL/Saint-Cloud/3211-Lakeshore-Blvd-34769/home/54692737",
     "homeImageUrl": "/3211-front.png"
+  },
+  {
+    "id": "winter-park",
+    "region": "Florida · Winter Park",
+    "title": "2015 Summerfield Rd, Winter Park, FL 32792",
+    "price": "1375000",
+    "monthlyIncomeMin": 9548.61111108,
+    "monthlyIncomeMax": 9548.61111108,
+    "annualIncomeMin": 114583.333333,
+    "annualIncomeMax": 114583.333333,
+    "redfinUrl": "https://www.redfin.com/FL/Winter-Park/2015-Summerfield-Rd-32792/home/46742034",
+    "homeImageUrl": "https://ssl.cdn-redfin.com/photo/118/bigphoto/615/O6357615_1.jpg"
   }
 ]
