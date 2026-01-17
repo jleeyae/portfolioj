@@ -12,6 +12,18 @@
     "homeImageUrl": "https://ssl.cdn-redfin.com/photo/118/bigphoto/227/O6368227_0.jpgp"
   },
   {
+    "id": "baldwin-park",
+    "region": "Florida · Baldwin Park",
+    "title": "96 & 98 W Esther St, Orlando, FL 32806",
+    "price": "475000",
+    "monthlyIncomeMin": 3298.61111111,
+    "monthlyIncomeMax": 3298.61111111,
+    "annualIncomeMin": 39583.3333333,
+    "annualIncomeMax": 39583.3333333,
+    "redfinUrl": "https://www.redfin.com/FL/Orlando/96-W-Esther-St-32806/home/46693074",
+    "homeImageUrl": "https://ssl.cdn-redfin.com/photo/118/bigphoto/547/O6363547_0.jpg"
+  },
+  {
     "id": "lake-nona",
     "region": "Florida · Lake Nona",
     "title": "13136 Alderley Drive Dr, Orlando, FL 32832",
